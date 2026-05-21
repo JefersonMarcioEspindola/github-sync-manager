@@ -245,16 +245,24 @@
 	margin-bottom: 15px;
 }
 
-.gsm-action-bar .button span {
+.gsm-action-bar .button,
+.gsm-filter-bar .button {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.gsm-action-bar .button .dashicons,
+.gsm-filter-bar .button .dashicons {
 	font-size: 16px;
 	width: 16px;
 	height: 16px;
-	margin-top: 3px;
-	margin-right: 4px;
+	margin: 0;
+	color: inherit;
 }
 
 /* ========================
-   Table Cards
+   Table Cards (logs)
    ======================== */
 .gsm-table-card {
 	padding: 0 !important;
@@ -270,11 +278,133 @@
 	font-weight: 600;
 }
 
-.gsm-no-data-row td {
+.gsm-logs-table td:first-child {
+	white-space: nowrap;
+}
+
+/* ========================
+   Plugin Cards Grid
+   ======================== */
+.gsm-plugins-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	gap: 16px;
+}
+
+.gsm-plugin-card {
+	background: var(--gsm-bg);
+	border: 1px solid var(--gsm-border);
+	border-radius: 10px;
+	padding: 18px;
+	box-shadow: 0 1px 3px rgba(5, 5, 7, 0.06);
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gsm-plugin-card:hover {
+	border-color: var(--gsm-primary);
+	box-shadow: 0 4px 12px rgba(40, 89, 255, 0.1);
+}
+
+.gsm-plugin-card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 12px;
+	margin-bottom: 10px;
+}
+
+.gsm-plugin-card-title {
+	margin: 0 0 4px;
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--gsm-text);
+	line-height: 1.3;
+}
+
+.gsm-plugin-card-repo {
+	font-size: 12px;
+	color: var(--gsm-muted);
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+}
+
+.gsm-plugin-card-repo:hover {
+	color: var(--gsm-primary);
+}
+
+.gsm-plugin-card-repo .dashicons {
+	font-size: 13px;
+	width: 13px;
+	height: 13px;
+}
+
+.gsm-plugin-versions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 12px;
+	color: var(--gsm-muted);
+	margin-bottom: 8px;
+}
+
+.gsm-plugin-versions code {
+	font-size: 11px;
+	background: var(--gsm-surface);
+	padding: 1px 5px;
+	border-radius: 4px;
+}
+
+.gsm-versions-arrow {
+	color: var(--gsm-muted);
+}
+
+.gsm-plugin-card-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-bottom: 8px;
+}
+
+.gsm-activity-dots {
+	display: flex;
+	gap: 4px;
+	margin-bottom: 12px;
+}
+
+.gsm-activity-dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 2px;
+	cursor: default;
+}
+
+.gsm-dot-sucesso {
+	background: #00a32a;
+}
+
+.gsm-dot-erro {
+	background: #d63638;
+}
+
+.gsm-plugin-card-actions {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	margin-top: auto;
+	padding-top: 4px;
+}
+
+.gsm-no-plugins-msg {
 	text-align: center;
-	padding: 30px !important;
+	padding: 40px 20px;
 	color: var(--gsm-muted);
 	font-style: italic;
+	grid-column: 1 / -1;
 }
 
 /* ========================
@@ -423,6 +553,12 @@
 	color: #b28000;
 }
 
+.gsm-visibility-badge.gsm-public {
+	background: #eef2ff;
+	border-color: #c7d2fe;
+	color: var(--gsm-primary);
+}
+
 .gsm-repo-badges {
 	display: flex;
 	gap: 6px;
@@ -556,9 +692,6 @@
 /* ========================
    Logs
    ======================== */
-.gsm-logs-card {
-	padding: 0 !important;
-}
 
 .gsm-logs-table th {
 	font-weight: 600;

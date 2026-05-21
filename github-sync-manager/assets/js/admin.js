@@ -10,7 +10,7 @@ jQuery(document).ready(function($) {
 	
 	var $scanBtn            = $('#gsm-btn-scan-now');
 	var $scanSpinner        = $('#gsm-scan-spinner');
-	var $pluginsTableBody   = $('#gsm-plugins-table tbody');
+	var $pluginsCards       = $('#gsm-plugins-cards');
 	
 	var $reposContainer     = $('#gsm-repos-container');
 	var $reposSpinner       = $('#gsm-repos-spinner');
@@ -178,13 +178,10 @@ jQuery(document).ready(function($) {
 			var btnAttr  = repo.is_managed ? 'disabled' : 'data-repo="' + repo.full_name + '"';
 
 			var desc = repo.description ? repo.description : gsm_ajax.texts.no_desc;
-			var langBadge = repo.language ? '<span class="gsm-repo-lang">' + repo.language + '</span>' : '';
-
 			html += '<div class="gsm-repo-card" data-name="' + repo.name.toLowerCase() + '" data-fullname="' + repo.full_name.toLowerCase() + '">';
 			html += '  <div class="gsm-repo-card-header">';
 			html += '    <h3 class="gsm-repo-card-title">' + repo.name + '</h3>';
 			html += '    <div class="gsm-repo-badges">';
-			html += '      ' + langBadge;
 			html += '      <span class="gsm-visibility-badge ' + visibilityClass + '">' + visibilityLabel + '</span>';
 			html += '    </div>';
 			html += '  </div>';
@@ -605,9 +602,9 @@ jQuery(document).ready(function($) {
 	/* ---------------------------------------------------- */
 	/* 7. Stop Managing Plugin                             */
 	/* ---------------------------------------------------- */
-	$pluginsTableBody.on('click', '.gsm-btn-remove', function(e) {
+	$pluginsCards.on('click', '.gsm-btn-remove', function(e) {
 		e.preventDefault();
-		
+
 		var $btn = $(this);
 		var repo = $btn.data('repo');
 		if (!repo) return;
@@ -617,7 +614,7 @@ jQuery(document).ready(function($) {
 		}
 
 		$btn.prop('disabled', true);
-		var $row = $btn.closest('tr');
+		var $card = $btn.closest('.gsm-plugin-card');
 
 		$.ajax({
 			url: gsm_ajax.url,
@@ -629,13 +626,13 @@ jQuery(document).ready(function($) {
 			},
 			success: function(response) {
 				if (response.success) {
-					$row.fadeOut(300, function() {
+					$card.fadeOut(300, function() {
 						$(this).remove();
-						if ($pluginsTableBody.find('tr').length === 0) {
-							$pluginsTableBody.html('<tr class="gsm-no-data-row"><td colspan="7">' + gsm_ajax.texts.no_managed + '</td></tr>');
+						if ($pluginsCards.find('.gsm-plugin-card').length === 0) {
+							$pluginsCards.html('<p class="gsm-no-plugins-msg">' + gsm_ajax.texts.no_managed + '</p>');
 						}
 					});
-					
+
 					// Clear repo cache list
 					cachedRepos = [];
 				} else {
@@ -671,9 +668,9 @@ jQuery(document).ready(function($) {
 				$scanSpinner.removeClass('is-active');
 
 				if (response.success) {
-					// Update plugins table body HTML
+					// Update plugins cards HTML
 					if (response.data.table_html) {
-						$pluginsTableBody.html(response.data.table_html);
+						$pluginsCards.html(response.data.table_html);
 					}
 					// Update logs tab content
 					if (response.data.logs_html) {

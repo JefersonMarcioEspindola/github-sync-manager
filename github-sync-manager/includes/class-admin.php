@@ -210,23 +210,8 @@ class GSM_Admin {
 							<span class="spinner gsm-spinner" id="gsm-scan-spinner"></span>
 						</div>
 
-						<div class="gsm-card gsm-table-card">
-							<table class="wp-list-table widefat fixed striped table-view-list" id="gsm-plugins-table">
-								<thead>
-									<tr>
-										<th><?php esc_html_e( 'Plugin', 'github-sync-manager' ); ?></th>
-										<th><?php esc_html_e( 'Repositório GitHub', 'github-sync-manager' ); ?></th>
-										<th><?php esc_html_e( 'Versão Instalada', 'github-sync-manager' ); ?></th>
-										<th><?php esc_html_e( 'Versão mais Recente', 'github-sync-manager' ); ?></th>
-										<th><?php esc_html_e( 'Última Verificação', 'github-sync-manager' ); ?></th>
-										<th><?php esc_html_e( 'Status', 'github-sync-manager' ); ?></th>
-										<th><?php esc_html_e( 'Ações', 'github-sync-manager' ); ?></th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php self::render_plugins_table_body(); ?>
-								</tbody>
-							</table>
+						<div class="gsm-plugins-cards" id="gsm-plugins-cards">
+							<?php self::render_plugins_cards(); ?>
 						</div>
 					</div>
 
@@ -253,8 +238,8 @@ class GSM_Admin {
 
 					<!-- Tab content: Logs -->
 					<div id="gsm-tab-logs" class="gsm-tab-content">
-						<div class="gsm-card gsm-logs-card">
-							<div class="gsm-logs-container" id="gsm-logs-table-wrapper">
+						<div class="gsm-card gsm-table-card">
+							<div id="gsm-logs-table-wrapper">
 								<?php self::render_logs_table(); ?>
 							</div>
 						</div>
@@ -346,16 +331,16 @@ class GSM_Admin {
 	/**
 	 * Helper to render plugins table body rows.
 	 */
-	public static function render_plugins_table_body() {
+	public static function render_plugins_cards() {
 		$managed = get_option( GSM_Manager::OPTION_PLUGINS, array() );
 		if ( empty( $managed ) || ! is_array( $managed ) ) {
 			?>
-			<tr class="gsm-no-data-row">
-				<td colspan="7"><?php esc_html_e( 'Nenhum plugin gerenciado ainda. Acesse a aba "Adicionar Plugin" para começar.', 'github-sync-manager' ); ?></td>
-			</tr>
+			<p class="gsm-no-plugins-msg"><?php esc_html_e( 'Nenhum plugin gerenciado ainda. Acesse a aba "Adicionar Plugin" para começar.', 'github-sync-manager' ); ?></p>
 			<?php
 			return;
 		}
+
+		$all_logs = get_option( GSM_Manager::OPTION_LOGS, array() );
 
 		foreach ( $managed as $repo => $data ) {
 			$plugin_file = isset( $data['plugin_file'] ) ? $data['plugin_file'] : '';
@@ -373,7 +358,6 @@ class GSM_Admin {
 
 			$status         = isset( $data['status'] ) ? $data['status'] : 'atualizado';
 			$latest_version = isset( $data['latest_version'] ) ? $data['latest_version'] : $installed_version;
-			$last_checked   = isset( $data['last_checked'] ) ? $data['last_checked'] : '';
 			$error_message  = isset( $data['error_message'] ) ? $data['error_message'] : '';
 
 			$status_label = '';
@@ -399,48 +383,75 @@ class GSM_Admin {
 					break;
 			}
 
+			// Build activity dots from last 8 log entries for this repo
+			$repo_logs = array_filter( $all_logs, function( $l ) use ( $repo ) {
+				return isset( $l['repo'] ) && $l['repo'] === $repo;
+			} );
+			$repo_logs = array_slice( array_values( array_reverse( $repo_logs ) ), 0, 8 );
+
 			?>
-			<tr data-repo="<?php echo esc_attr( $repo ); ?>">
-				<td><strong><?php echo esc_html( $plugin_name ); ?></strong></td>
-				<td>
-					<div class="gsm-repo-cell">
-						<a href="<?php echo esc_url( 'https://github.com/' . $repo ); ?>" target="_blank" rel="noopener noreferrer">
-							<span class="dashicons dashicons-external"></span>
-							<?php echo esc_html( $repo ); ?>
+			<div class="gsm-plugin-card" data-repo="<?php echo esc_attr( $repo ); ?>">
+				<div class="gsm-plugin-card-header">
+					<div>
+						<h3 class="gsm-plugin-card-title"><?php echo esc_html( $plugin_name ); ?></h3>
+						<a class="gsm-plugin-card-repo" href="<?php echo esc_url( 'https://github.com/' . $repo ); ?>" target="_blank" rel="noopener noreferrer">
+							<span class="dashicons dashicons-external"></span><?php echo esc_html( $repo ); ?>
 						</a>
-						<?php if ( ! empty( $data['is_branch'] ) ) : ?>
-							<span class="gsm-branch-label" title="<?php esc_attr_e( 'Instalado diretamente de uma branch, sem releases no GitHub.', 'github-sync-manager' ); ?>">
-								<?php printf( esc_html__( 'Ramo: %s', 'github-sync-manager' ), esc_html( $data['branch_name'] ) ); ?>
-							</span>
-							<button type="button" class="button button-small gsm-btn-copy-prompt" data-repo="<?php echo esc_attr( $repo ); ?>" data-version="<?php echo esc_attr( $installed_version ); ?>" title="<?php esc_attr_e( 'Copiar prompt de IA para criar releases', 'github-sync-manager' ); ?>">
-								<span class="dashicons dashicons-clipboard"></span>
-								<?php esc_html_e( 'Prompt Release', 'github-sync-manager' ); ?>
-							</button>
-						<?php endif; ?>
-						<?php if ( ! empty( $data['subfolder'] ) ) : ?>
-							<span class="gsm-subfolder-label" title="<?php esc_attr_e( 'Pasta base configurada para este plugin.', 'github-sync-manager' ); ?>">
-								<?php printf( esc_html__( 'Pasta: %s', 'github-sync-manager' ), esc_html( $data['subfolder'] ) ); ?>
-							</span>
-						<?php endif; ?>
 					</div>
-				</td>
-				<td><code><?php echo esc_html( $installed_version ); ?></code></td>
-				<td><code><?php echo esc_html( $latest_version ); ?></code></td>
-				<td><?php echo esc_html( ! empty( $last_checked ) ? date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $last_checked ) ) : '-' ); ?></td>
-				<td>
 					<span class="gsm-status-badge <?php echo esc_attr( $status_class ); ?>">
 						<?php echo esc_html( $status_label ); ?>
+						<?php if ( 'erro' === $status && ! empty( $error_message ) ) : ?>
+							<span class="dashicons dashicons-editor-help gsm-tooltip-trigger" title="<?php echo esc_attr( $error_message ); ?>"></span>
+						<?php endif; ?>
 					</span>
-					<?php if ( 'erro' === $status && ! empty( $error_message ) ) : ?>
-						<span class="dashicons dashicons-editor-help gsm-tooltip-trigger" title="<?php echo esc_attr( $error_message ); ?>"></span>
+				</div>
+
+				<div class="gsm-plugin-versions">
+					<span><?php esc_html_e( 'Instalado:', 'github-sync-manager' ); ?> <code><?php echo esc_html( $installed_version ); ?></code></span>
+					<?php if ( $latest_version !== $installed_version ) : ?>
+						<span class="gsm-versions-arrow">→</span>
+						<span><?php esc_html_e( 'Disponível:', 'github-sync-manager' ); ?> <code><?php echo esc_html( $latest_version ); ?></code></span>
 					<?php endif; ?>
-				</td>
-				<td>
+				</div>
+
+				<?php if ( ! empty( $data['is_branch'] ) || ! empty( $data['subfolder'] ) ) : ?>
+				<div class="gsm-plugin-card-tags">
+					<?php if ( ! empty( $data['is_branch'] ) ) : ?>
+						<span class="gsm-branch-label" title="<?php esc_attr_e( 'Instalado diretamente de uma branch, sem releases no GitHub.', 'github-sync-manager' ); ?>">
+							<?php printf( esc_html__( 'Ramo: %s', 'github-sync-manager' ), esc_html( $data['branch_name'] ) ); ?>
+						</span>
+					<?php endif; ?>
+					<?php if ( ! empty( $data['subfolder'] ) ) : ?>
+						<span class="gsm-subfolder-label" title="<?php esc_attr_e( 'Pasta base configurada para este plugin.', 'github-sync-manager' ); ?>">
+							<?php printf( esc_html__( 'Pasta: %s', 'github-sync-manager' ), esc_html( $data['subfolder'] ) ); ?>
+						</span>
+					<?php endif; ?>
+				</div>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $repo_logs ) ) : ?>
+				<div class="gsm-activity-dots" title="<?php esc_attr_e( 'Atividade recente (mais recente à esquerda)', 'github-sync-manager' ); ?>">
+					<?php foreach ( $repo_logs as $log ) :
+						$dot_class = ( 'sucesso' === $log['result'] ) ? 'gsm-dot-sucesso' : 'gsm-dot-erro';
+						$dot_title = isset( $log['timestamp'] ) ? esc_attr( date_i18n( 'd/m/Y H:i', strtotime( $log['timestamp'] ) ) ) : '';
+					?>
+						<span class="gsm-activity-dot <?php echo esc_attr( $dot_class ); ?>" title="<?php echo $dot_title; ?>"></span>
+					<?php endforeach; ?>
+				</div>
+				<?php endif; ?>
+
+				<div class="gsm-plugin-card-actions">
+					<?php if ( ! empty( $data['is_branch'] ) ) : ?>
+						<button type="button" class="button button-small gsm-btn-copy-prompt" data-repo="<?php echo esc_attr( $repo ); ?>" data-version="<?php echo esc_attr( $installed_version ); ?>" title="<?php esc_attr_e( 'Copiar prompt de IA para criar releases', 'github-sync-manager' ); ?>">
+							<span class="dashicons dashicons-clipboard"></span>
+							<?php esc_html_e( 'Prompt Release', 'github-sync-manager' ); ?>
+						</button>
+					<?php endif; ?>
 					<button type="button" class="button button-link-delete gsm-btn-remove" data-repo="<?php echo esc_attr( $repo ); ?>">
 						<?php esc_html_e( 'Parar de gerenciar', 'github-sync-manager' ); ?>
 					</button>
-				</td>
-			</tr>
+				</div>
+			</div>
 			<?php
 		}
 	}
@@ -504,7 +515,7 @@ class GSM_Admin {
 					}
 					?>
 					<tr>
-						<td><code><?php echo esc_html( date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $log['timestamp'] ) ) ); ?></code></td>
+						<td><code><?php echo esc_html( date_i18n( 'd/m/Y H:i', strtotime( $log['timestamp'] ) ) ); ?></code></td>
 						<td><strong><?php echo esc_html( $log['repo'] ); ?></strong></td>
 						<td><span class="gsm-log-action-tag"><?php echo esc_html( mb_strtoupper( $action_label, 'UTF-8' ) ); ?></span></td>
 						<td><span class="gsm-status-badge <?php echo esc_attr( $res_class ); ?>"><?php echo esc_html( $result_label ); ?></span></td>
@@ -983,7 +994,7 @@ class GSM_Admin {
 
 		// Capture rendered HTML of table body and logs
 		ob_start();
-		self::render_plugins_table_body();
+		self::render_plugins_cards();
 		$table_html = ob_get_clean();
 
 		ob_start();
