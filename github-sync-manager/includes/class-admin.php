@@ -204,7 +204,7 @@ class GSM_Admin {
 					<div id="gsm-tab-plugins" class="gsm-tab-content gsm-tab-active">
 						<div class="gsm-action-bar">
 							<button type="button" class="button button-primary" id="gsm-btn-scan-now">
-								<span class="dashicons dashicons-update"></span>
+								<span class="dashicons dashicons-search"></span>
 								<?php esc_html_e( 'Verificar atualizações agora', 'github-sync-manager' ); ?>
 							</button>
 							<span class="spinner gsm-spinner" id="gsm-scan-spinner"></span>
@@ -225,7 +225,7 @@ class GSM_Admin {
 						<div class="gsm-filter-bar">
 							<input type="text" id="gsm-repo-search" placeholder="<?php esc_attr_e( 'Buscar repositório por nome...', 'github-sync-manager' ); ?>" autocomplete="off" />
 							<button type="button" class="button" id="gsm-btn-reload-repos">
-								<span class="dashicons dashicons-image-rotate"></span>
+								<span class="dashicons dashicons-update"></span>
 								<?php esc_html_e( 'Recarregar Repositórios', 'github-sync-manager' ); ?>
 							</button>
 							<span class="spinner gsm-spinner" id="gsm-repos-spinner"></span>
@@ -340,8 +340,6 @@ class GSM_Admin {
 			return;
 		}
 
-		$all_logs = get_option( GSM_Manager::OPTION_LOGS, array() );
-
 		foreach ( $managed as $repo => $data ) {
 			$plugin_file = isset( $data['plugin_file'] ) ? $data['plugin_file'] : '';
 			$plugin_name = dirname( $plugin_file );
@@ -358,6 +356,7 @@ class GSM_Admin {
 
 			$status         = isset( $data['status'] ) ? $data['status'] : 'atualizado';
 			$latest_version = isset( $data['latest_version'] ) ? $data['latest_version'] : $installed_version;
+			$last_checked   = isset( $data['last_checked'] ) ? $data['last_checked'] : '';
 			$error_message  = isset( $data['error_message'] ) ? $data['error_message'] : '';
 
 			$status_label = '';
@@ -382,12 +381,6 @@ class GSM_Admin {
 					$status_class = 'gsm-status-error';
 					break;
 			}
-
-			// Build activity dots from last 8 log entries for this repo
-			$repo_logs = array_filter( $all_logs, function( $l ) use ( $repo ) {
-				return isset( $l['repo'] ) && $l['repo'] === $repo;
-			} );
-			$repo_logs = array_slice( array_values( array_reverse( $repo_logs ) ), 0, 8 );
 
 			?>
 			<div class="gsm-plugin-card" data-repo="<?php echo esc_attr( $repo ); ?>">
@@ -429,15 +422,11 @@ class GSM_Admin {
 				</div>
 				<?php endif; ?>
 
-				<?php if ( ! empty( $repo_logs ) ) : ?>
-				<div class="gsm-activity-dots" title="<?php esc_attr_e( 'Atividade recente (mais recente à esquerda)', 'github-sync-manager' ); ?>">
-					<?php foreach ( $repo_logs as $log ) :
-						$dot_class = ( 'sucesso' === $log['result'] ) ? 'gsm-dot-sucesso' : 'gsm-dot-erro';
-						$dot_title = isset( $log['timestamp'] ) ? esc_attr( date_i18n( 'd/m/Y H:i', strtotime( $log['timestamp'] ) ) ) : '';
-					?>
-						<span class="gsm-activity-dot <?php echo esc_attr( $dot_class ); ?>" title="<?php echo $dot_title; ?>"></span>
-					<?php endforeach; ?>
-				</div>
+				<?php if ( ! empty( $last_checked ) ) : ?>
+				<p class="gsm-plugin-last-checked">
+					<span class="dashicons dashicons-clock"></span>
+					<?php printf( esc_html__( 'Última verificação: %s', 'github-sync-manager' ), esc_html( date_i18n( 'd/m/Y H:i', strtotime( $last_checked ) ) ) ); ?>
+				</p>
 				<?php endif; ?>
 
 				<div class="gsm-plugin-card-actions">

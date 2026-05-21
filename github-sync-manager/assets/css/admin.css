@@ -58,7 +58,7 @@
 	align-items: center;
 	gap: 12px;
 	background: var(--gsm-surface);
-	padding: 8px 15px;
+	padding: 8px 24px 8px 8px;
 	border-radius: 30px;
 	border: 1px solid var(--gsm-border);
 }
@@ -286,9 +286,9 @@
    Plugin Cards Grid
    ======================== */
 .gsm-plugins-cards {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-	gap: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 }
 
 .gsm-plugin-card {
@@ -370,25 +370,19 @@
 	margin-bottom: 8px;
 }
 
-.gsm-activity-dots {
+.gsm-plugin-last-checked {
 	display: flex;
+	align-items: center;
 	gap: 4px;
-	margin-bottom: 12px;
+	font-size: 11px;
+	color: var(--gsm-muted);
+	margin: 0 0 10px;
 }
 
-.gsm-activity-dot {
-	width: 10px;
-	height: 10px;
-	border-radius: 2px;
-	cursor: default;
-}
-
-.gsm-dot-sucesso {
-	background: #00a32a;
-}
-
-.gsm-dot-erro {
-	background: #d63638;
+.gsm-plugin-last-checked .dashicons {
+	font-size: 13px;
+	width: 13px;
+	height: 13px;
 }
 
 .gsm-plugin-card-actions {
