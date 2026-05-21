@@ -102,6 +102,7 @@ class GSM_Manager {
 			if ( ! wp_mkdir_p( $dir_path ) ) {
 				return new WP_Error(
 					'gsm_dir_creation_failed',
+					/* translators: %s: directory name */
 					sprintf( __( 'Falha ao criar o diretório seguro: %s.', 'github-sync-manager' ), $subfolder )
 				);
 			}
@@ -134,6 +135,14 @@ class GSM_Manager {
 			return;
 		}
 
+		global $wp_filesystem;
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		if ( empty( $wp_filesystem ) ) {
+			WP_Filesystem();
+		}
+
 		$files = new RecursiveIteratorIterator(
 			new RecursiveDirectoryIterator( $dir_path, RecursiveDirectoryIterator::SKIP_DOTS ),
 			RecursiveIteratorIterator::CHILD_FIRST
@@ -145,9 +154,9 @@ class GSM_Manager {
 				continue; // Keep the security files
 			}
 			if ( $fileinfo->isDir() ) {
-				@rmdir( $path );
+				$wp_filesystem->rmdir( $path );
 			} else {
-				@unlink( $path );
+				wp_delete_file( $path );
 			}
 		}
 	}
@@ -196,7 +205,7 @@ class GSM_Manager {
 					if ( $file->isDir() ) {
 						self::delete_directory_recursive( $path );
 					} else {
-						@unlink( $path );
+						wp_delete_file( $path );
 					}
 				}
 			}
@@ -212,6 +221,15 @@ class GSM_Manager {
 		if ( ! is_dir( $dir ) ) {
 			return;
 		}
+
+		global $wp_filesystem;
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		if ( empty( $wp_filesystem ) ) {
+			WP_Filesystem();
+		}
+
 		$files = new RecursiveIteratorIterator(
 			new RecursiveDirectoryIterator( $dir, RecursiveDirectoryIterator::SKIP_DOTS ),
 			RecursiveIteratorIterator::CHILD_FIRST
@@ -219,11 +237,11 @@ class GSM_Manager {
 		foreach ( $files as $fileinfo ) {
 			$path = $fileinfo->getRealPath();
 			if ( $fileinfo->isDir() ) {
-				@rmdir( $path );
+				$wp_filesystem->rmdir( $path );
 			} else {
-				@unlink( $path );
+				wp_delete_file( $path );
 			}
 		}
-		@rmdir( $dir );
+		$wp_filesystem->rmdir( $dir );
 	}
 }

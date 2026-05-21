@@ -42,10 +42,6 @@ class GSM_Updater {
 	 * Register update hooks.
 	 */
 	public static function init() {
-		// Inject updates into the WordPress update transient
-		add_filter( 'pre_set_site_transient_update_plugins', array( __CLASS__, 'check_updates' ) );
-		add_filter( 'site_transient_update_plugins', array( __CLASS__, 'check_updates' ) );
-
 		// Intercept ZIP download
 		add_filter( 'upgrader_pre_download', array( __CLASS__, 'upgrader_pre_download' ), 10, 4 );
 
@@ -113,7 +109,6 @@ class GSM_Updater {
 			$installed_version = ! empty( $file_data['Version'] ) ? $file_data['Version'] : '0.0.0';
 
 			// Get releases from API (cached for 1 hour)
-			parts:
 			$parts = explode( '/', $repo_slug );
 			if ( count( $parts ) !== 2 ) {
 				continue;
@@ -242,6 +237,7 @@ class GSM_Updater {
 				! empty( self::$currently_installing_repo ) ? self::$currently_installing_repo : 'sistema',
 				'download',
 				'erro',
+				/* translators: %s: error message */
 				sprintf( __( 'Falha ao baixar o pacote do GitHub: %s', 'github-sync-manager' ), $tmp_file->get_error_message() )
 			);
 			return $tmp_file;
@@ -250,7 +246,7 @@ class GSM_Updater {
 		// Validate ZIP archive
 		$validation = self::validate_plugin_zip( $tmp_file );
 		if ( is_wp_error( $validation ) ) {
-			@unlink( $tmp_file );
+			wp_delete_file( $tmp_file );
 			GSM_Manager::log(
 				! empty( self::$currently_installing_repo ) ? self::$currently_installing_repo : 'sistema',
 				'validacao_zip',
@@ -369,6 +365,7 @@ class GSM_Updater {
 			if ( ! is_dir( $search_dir ) ) {
 				return new WP_Error(
 					'gsm_subfolder_not_found',
+					/* translators: %s: subfolder path */
 					sprintf( __( 'O subdiretório especificado "%s" não foi encontrado no repositório.', 'github-sync-manager' ), $subfolder )
 				);
 			}
@@ -425,9 +422,17 @@ class GSM_Updater {
 			GSM_Manager::delete_directory_recursive( $corrected_source );
 		}
 
+		global $wp_filesystem;
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		if ( empty( $wp_filesystem ) ) {
+			WP_Filesystem();
+		}
+
 		if ( $plugin_root_dir !== $source_path ) {
 			// Plugin is nested inside a subdirectory. Move the subdirectory to the target destination.
-			if ( ! rename( $plugin_root_dir, $corrected_source ) ) {
+			if ( ! $wp_filesystem->move( $plugin_root_dir, $corrected_source ) ) {
 				return new WP_Error(
 					'gsm_rename_nested_failed',
 					__( 'Falha ao renomear o subdiretório do plugin para o slug canônico.', 'github-sync-manager' )
@@ -436,7 +441,7 @@ class GSM_Updater {
 		} else {
 			// Plugin is at the root. Rename the root source folder.
 			if ( $source_path !== $corrected_source ) {
-				if ( ! rename( $source_path, $corrected_source ) ) {
+				if ( ! $wp_filesystem->move( $source_path, $corrected_source ) ) {
 					return new WP_Error(
 						'gsm_rename_failed',
 						__( 'Falha ao renomear o diretório temporário do plugin para o slug canônico.', 'github-sync-manager' )

@@ -209,6 +209,7 @@ class GSM_GitHub_API {
 			}
 			return new WP_Error(
 				'gsm_repo_access_error',
+				/* translators: %d: HTTP status code */
 				sprintf( __( 'Erro ao acessar o repositório (%d).', 'github-sync-manager' ), $status_code )
 			);
 		}
@@ -254,6 +255,7 @@ class GSM_GitHub_API {
 		if ( 200 !== $status_code ) {
 			return new WP_Error(
 				'gsm_releases_failed',
+				/* translators: %d: HTTP status code */
 				sprintf( __( 'Falha ao buscar as releases do repositório (%d).', 'github-sync-manager' ), $status_code )
 			);
 		}
@@ -306,7 +308,8 @@ class GSM_GitHub_API {
 				$releases[] = array(
 					'id'           => 'branch_' . $default_branch,
 					'tag_name'     => $version,
-					'name'         => sprintf( __( 'Ramo Principal (%s)', 'github-sync-manager' ), $default_branch ),
+					/* translators: %s: branch name */
+				'name'         => sprintf( __( 'Ramo Principal (%s)', 'github-sync-manager' ), $default_branch ),
 					'body'         => __( 'Instalado diretamente da branch principal do GitHub (sem releases).', 'github-sync-manager' ),
 					'published_at' => current_time( 'mysql' ),
 					'zipball_url'  => sprintf( '%s/repos/%s/%s/zipball/%s', self::API_URL, rawurlencode( $owner ), rawurlencode( $repo ), rawurlencode( $default_branch ) ),
@@ -344,6 +347,7 @@ class GSM_GitHub_API {
 
 		$status_code = wp_remote_retrieve_response_code( $response );
 		if ( 200 !== $status_code ) {
+			/* translators: %d: HTTP status code */
 			return new WP_Error( 'gsm_api_default_branch_failed', sprintf( __( 'Falha ao buscar detalhes da branch padrão (%d).', 'github-sync-manager' ), $status_code ) );
 		}
 
@@ -374,7 +378,8 @@ class GSM_GitHub_API {
 				$owner . '/' . $repo,
 				'buscar_conteudo_raiz',
 				'erro',
-				sprintf( __( 'Erro de comunicação ao listar raiz da branch %s: %s', 'github-sync-manager' ), $branch, $response->get_error_message() )
+				/* translators: 1: branch name, 2: error message */
+				sprintf( __( 'Erro de comunicação ao listar raiz da branch %1$s: %2$s', 'github-sync-manager' ), $branch, $response->get_error_message() )
 			);
 			return $response;
 		}
@@ -385,8 +390,10 @@ class GSM_GitHub_API {
 				$owner . '/' . $repo,
 				'buscar_conteudo_raiz',
 				'erro',
-				sprintf( __( 'Falha HTTP %d ao listar raiz da branch %s.', 'github-sync-manager' ), $status_code, $branch )
+				/* translators: 1: HTTP status code, 2: branch name */
+				sprintf( __( 'Falha HTTP %1$d ao listar raiz da branch %2$s.', 'github-sync-manager' ), $status_code, $branch )
 			);
+			/* translators: %d: HTTP status code */
 			return new WP_Error( 'gsm_api_contents_failed', sprintf( __( 'Falha ao listar arquivos do repositório (%d).', 'github-sync-manager' ), $status_code ) );
 		}
 
@@ -396,6 +403,7 @@ class GSM_GitHub_API {
 				$owner . '/' . $repo,
 				'buscar_conteudo_raiz',
 				'erro',
+				/* translators: %s: branch name */
 				sprintf( __( 'Resposta inválida retornada para a raiz da branch %s.', 'github-sync-manager' ), $branch )
 			);
 			return new WP_Error( 'gsm_api_invalid_contents', __( 'Estrutura de arquivos inválida no repositório.', 'github-sync-manager' ) );
@@ -465,7 +473,8 @@ class GSM_GitHub_API {
 						$owner . '/' . $repo,
 						'escanear_subpasta',
 						'erro',
-						sprintf( __( 'Erro de comunicação ao listar subpasta %s: %s', 'github-sync-manager' ), $subdir_path, $subdir_response->get_error_message() )
+						/* translators: 1: subfolder path, 2: error message */
+						sprintf( __( 'Erro de comunicação ao listar subpasta %1$s: %2$s', 'github-sync-manager' ), $subdir_path, $subdir_response->get_error_message() )
 					);
 					continue;
 				}
@@ -476,7 +485,8 @@ class GSM_GitHub_API {
 						$owner . '/' . $repo,
 						'escanear_subpasta',
 						'erro',
-						sprintf( __( 'Falha HTTP %d ao listar subpasta %s.', 'github-sync-manager' ), $subdir_status, $subdir_path )
+						/* translators: 1: HTTP status code, 2: subfolder path */
+						sprintf( __( 'Falha HTTP %1$d ao listar subpasta %2$s.', 'github-sync-manager' ), $subdir_status, $subdir_path )
 					);
 					continue;
 				}
@@ -487,6 +497,7 @@ class GSM_GitHub_API {
 						$owner . '/' . $repo,
 						'escanear_subpasta',
 						'erro',
+						/* translators: %s: subfolder path */
 						sprintf( __( 'Dados inválidos retornados para subpasta %s.', 'github-sync-manager' ), $subdir_path )
 					);
 					continue;
@@ -530,7 +541,8 @@ class GSM_GitHub_API {
 				$owner . '/' . $repo,
 				'obter_cabecalho_arquivo',
 				'erro',
-				sprintf( __( 'Erro de comunicação ao obter arquivo %s: %s', 'github-sync-manager' ), $path, $response->get_error_message() )
+				/* translators: 1: file path, 2: error message */
+				sprintf( __( 'Erro de comunicação ao obter arquivo %1$s: %2$s', 'github-sync-manager' ), $path, $response->get_error_message() )
 			);
 			return false;
 		}
@@ -541,7 +553,8 @@ class GSM_GitHub_API {
 				$owner . '/' . $repo,
 				'obter_cabecalho_arquivo',
 				'erro',
-				sprintf( __( 'Falha HTTP %d ao obter arquivo %s.', 'github-sync-manager' ), $status_code, $path )
+				/* translators: 1: HTTP status code, 2: file path */
+				sprintf( __( 'Falha HTTP %1$d ao obter arquivo %2$s.', 'github-sync-manager' ), $status_code, $path )
 			);
 			return false;
 		}
@@ -552,6 +565,7 @@ class GSM_GitHub_API {
 				$owner . '/' . $repo,
 				'obter_cabecalho_arquivo',
 				'erro',
+				/* translators: %s: file path */
 				sprintf( __( 'Conteúdo inválido ou formato inesperado para o arquivo %s.', 'github-sync-manager' ), $path )
 			);
 			return false;
@@ -657,6 +671,7 @@ class GSM_GitHub_API {
 		if ( 200 !== $status_code ) {
 			return new WP_Error(
 				'gsm_tree_failed',
+				/* translators: %d: HTTP status code */
 				sprintf( __( 'Falha ao buscar a estrutura de pastas do repositório (%d).', 'github-sync-manager' ), $status_code )
 			);
 		}
@@ -708,6 +723,7 @@ class GSM_GitHub_API {
 
 		$status_code = wp_remote_retrieve_response_code( $response );
 		if ( 200 !== $status_code ) {
+			/* translators: %d: HTTP status code */
 			return new WP_Error( 'gsm_api_contents_failed', sprintf( __( 'Falha ao listar arquivos do repositório (%d).', 'github-sync-manager' ), $status_code ) );
 		}
 

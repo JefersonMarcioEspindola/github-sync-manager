@@ -3,7 +3,7 @@ Contributors: JefersonMarcioEspindola
 Tags: github, plugin updater, private plugins, github releases, self-hosted
 Requires at least: 5.8
 Tested up to: 6.8
-Stable tag: 0.0.15
+Stable tag: 0.0.16
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -72,6 +72,15 @@ The only external communication is with the GitHub API (`api.github.com`) using 
 3. Activity log showing install and update history.
 
 == Changelog ==
+
+= 0.0.16 =
+* Removed hooks into WordPress update transients to comply with WordPress.org plugin guidelines.
+* Replaced all direct PHP filesystem calls (`rename`, `@unlink`, `@rmdir`) with WordPress Filesystem API equivalents.
+* Added missing `/* translators: */` comments to all i18n strings containing placeholders.
+* Fixed unordered sprintf placeholders (`%s, %s` → `%1$s, %2$s`) across all files.
+* Fixed missing `wp_unslash()` on `$_POST['locale']` in the locale-save AJAX handler.
+* Wrapped `error_log()` call inside a `WP_DEBUG` check.
+* Removed deprecated `load_plugin_textdomain()` call (auto-loaded since WordPress 4.6).
 
 = 0.0.15 =
 * Bundled Lucide icon library locally to comply with WordPress.org guidelines (no external CDN).
@@ -146,6 +155,9 @@ The only external communication is with the GitHub API (`api.github.com`) using 
 * Initial release with AES-256-GCM encryption, GitHub API manager, automatic WP-Cron checker, and admin dashboard.
 
 == Upgrade Notice ==
+
+= 0.0.16 =
+WordPress.org compliance release. Removes native update-transient injection (updates are still tracked in the GitHub Sync dashboard). All filesystem operations now use the WordPress Filesystem API.
 
 = 0.0.15 =
 Bundled Lucide icons locally — no behavior changes, just a compliance fix.

@@ -94,7 +94,9 @@ class GSM_Admin {
 				'installing'            => __( 'Baixando e instalando...', 'github-sync-manager' ),
 				'searching'             => __( 'Pesquisando repositórios...', 'github-sync-manager' ),
 				'comm_fail'             => __( 'Falha na comunicação.', 'github-sync-manager' ),
+				/* translators: %s: repository name */
 				'confirm_install'       => __( 'Deseja baixar e instalar o plugin do repositório %s?', 'github-sync-manager' ),
+				/* translators: %s: error message */
 				'install_error'         => __( 'Erro na Instalação: %s', 'github-sync-manager' ),
 				'install_fail'          => __( 'Falha na comunicação de rede ao tentar instalar o plugin.', 'github-sync-manager' ),
 				'remove_error'          => __( 'Erro ao excluir gerenciamento.', 'github-sync-manager' ),
@@ -108,24 +110,32 @@ class GSM_Admin {
 				'already_managed'       => __( 'Já Gerenciado', 'github-sync-manager' ),
 				'install_btn'           => __( 'Instalar Plugin', 'github-sync-manager' ),
 				'no_desc'               => __( 'Sem descrição no repositório.', 'github-sync-manager' ),
+				/* translators: %s: date and time */
 				'updated_lbl'           => __( 'Atualizado: %s', 'github-sync-manager' ),
 				'private_lbl'           => __( 'Privado', 'github-sync-manager' ),
 				'public_lbl'            => __( 'Público', 'github-sync-manager' ),
 				'no_managed'            => __( 'Nenhum plugin gerenciado ainda. Acesse a aba "Adicionar Plugin" para começar.', 'github-sync-manager' ),
 				'confirm_disconnect'    => __( 'Tem certeza de que deseja desconectar sua conta GitHub? Os plugins continuarão instalados, mas não receberão notificações de atualização.', 'github-sync-manager' ),
-				'confirm_prompt'        => __( 'Aja como um desenvolvedor experiente em WordPress e Git. Meu repositório do plugin \'%s\' não possui releases publicadas no GitHub. Crie um guia passo a passo conciso em Markdown para eu publicar a release \'v%s\' desse plugin, explicando como gerar o arquivo ZIP correto (apenas a pasta do plugin, sem os arquivos de versionamento do Git) e como criar a Release no GitHub usando a interface web ou GitHub CLI. Inclua boas práticas de versionamento SemVer.', 'github-sync-manager' ),
+				/* translators: 1: repository name, 2: version number */
+				'confirm_prompt'        => __( 'Aja como um desenvolvedor experiente em WordPress e Git. Meu repositório do plugin \'%1$s\' não possui releases publicadas no GitHub. Crie um guia passo a passo conciso em Markdown para eu publicar a release \'v%2$s\' desse plugin, explicando como gerar o arquivo ZIP correto (apenas a pasta do plugin, sem os arquivos de versionamento do Git) e como criar a Release no GitHub usando a interface web ou GitHub CLI. Inclua boas práticas de versionamento SemVer.', 'github-sync-manager' ),
 				'req_failed'            => __( 'Falha na requisição. Verifique sua conexão de rede.', 'github-sync-manager' ),
+				/* translators: %s: repository name */
 				'force_update_confirm'  => __( 'Isso irá baixar e reinstalar a última versão do repositório %s, sobrescrevendo a versão atual. Continuar?', 'github-sync-manager' ),
+				/* translators: %s: version number */
 				'force_update_ok'       => __( 'Plugin reinstalado com sucesso! (Versão %s)', 'github-sync-manager' ),
+				/* translators: %s: error message */
 				'force_update_err'      => __( 'Erro ao reinstalar: %s', 'github-sync-manager' ),
 				'force_update_fail'     => __( 'Falha na comunicação ao tentar reinstalar.', 'github-sync-manager' ),
 				'force_update_btn'      => __( 'Atualizar', 'github-sync-manager' ),
 				'force_updating'        => __( 'Reinstalando...', 'github-sync-manager' ),
-				'install_success_title' => __( '✅ Plugin Instalado com Sucesso!', 'github-sync-manager' ),
+				'install_success_title' => __( '&#x2705; Plugin Instalado com Sucesso!', 'github-sync-manager' ),
+				/* translators: 1: plugin name, 2: version number */
 				'install_success_msg'   => __( 'O plugin <strong>%1$s</strong> (Versão %2$s) foi baixado e gravado localmente.', 'github-sync-manager' ),
 				'activate_btn'          => __( 'Ativar Plugin Agora', 'github-sync-manager' ),
+				/* translators: %s: error message */
 				'scan_error'            => __( 'Erro ao verificar: %s', 'github-sync-manager' ),
 				'checking_repo'         => __( 'Verificando estrutura do repositório...', 'github-sync-manager' ),
+				/* translators: 1: plugin name, 2: version number */
 				'plugin_detected'       => __( 'Plugin <strong>%1$s</strong> (Versão %2$s) detectado automaticamente.', 'github-sync-manager' ),
 				'plugin_not_detected'   => __( 'Nenhum plugin WordPress válido foi encontrado automaticamente. Selecione a pasta base e a origem abaixo para instalar.', 'github-sync-manager' ),
 				'advanced_options'      => __( 'Opções Avançadas', 'github-sync-manager' ),
@@ -273,7 +283,8 @@ class GSM_Admin {
 												<img src="<?php echo esc_url( $connected_user['avatar_url'] ); ?>" class="gsm-profile-avatar" alt="Avatar" />
 												<div>
 													<strong>@<?php echo esc_html( $connected_user['username'] ); ?></strong>
-													<p class="description"><?php printf( esc_html__( 'Tipo de Token: %s', 'github-sync-manager' ), esc_html( ucfirst( $connected_user['token_type'] ) ) ); ?></p>
+													<?php /* translators: %s: token type */ ?>
+					<p class="description"><?php printf( esc_html__( 'Tipo de Token: %s', 'github-sync-manager' ), esc_html( ucfirst( $connected_user['token_type'] ) ) ); ?></p>
 												</div>
 											</div>
 										</td>
@@ -426,12 +437,18 @@ class GSM_Admin {
 				<div class="gsm-plugin-card-tags">
 					<?php if ( ! empty( $data['is_branch'] ) ) : ?>
 						<span class="gsm-branch-label" title="<?php esc_attr_e( 'Instalado diretamente de uma branch, sem releases no GitHub.', 'github-sync-manager' ); ?>">
-							<?php printf( esc_html__( 'Ramo: %s', 'github-sync-manager' ), esc_html( $data['branch_name'] ) ); ?>
+							<?php
+							/* translators: %s: branch name */
+							printf( esc_html__( 'Ramo: %s', 'github-sync-manager' ), esc_html( $data['branch_name'] ) );
+							?>
 						</span>
 					<?php endif; ?>
 					<?php if ( ! empty( $data['subfolder'] ) ) : ?>
 						<span class="gsm-subfolder-label" title="<?php esc_attr_e( 'Pasta base configurada para este plugin.', 'github-sync-manager' ); ?>">
-							<?php printf( esc_html__( 'Pasta: %s', 'github-sync-manager' ), esc_html( $data['subfolder'] ) ); ?>
+							<?php
+							/* translators: %s: subfolder path */
+							printf( esc_html__( 'Pasta: %s', 'github-sync-manager' ), esc_html( $data['subfolder'] ) );
+							?>
 						</span>
 					<?php endif; ?>
 				</div>
@@ -440,7 +457,10 @@ class GSM_Admin {
 				<?php if ( ! empty( $last_checked ) ) : ?>
 				<p class="gsm-plugin-last-checked">
 					<i data-lucide="clock" class="gsm-icon"></i>
-					<?php printf( esc_html__( 'Última verificação: %s', 'github-sync-manager' ), esc_html( date_i18n( 'd/m/Y H:i', strtotime( $last_checked ) ) ) ); ?>
+					<?php
+					/* translators: %s: date and time */
+					printf( esc_html__( 'Última verificação: %s', 'github-sync-manager' ), esc_html( date_i18n( 'd/m/Y H:i', strtotime( $last_checked ) ) ) );
+					?>
 				</p>
 				<?php endif; ?>
 
@@ -567,6 +587,7 @@ class GSM_Admin {
 		update_option( GSM_Manager::OPTION_TOKEN, $encrypted );
 		update_option( GSM_Manager::OPTION_USER, $validation ); // Autoload = yes for general connected status is fine since it's small
 
+		/* translators: %s: GitHub username */
 		GSM_Manager::log( 'sistema', 'conexao', 'sucesso', sprintf( __( 'Conta conectada com sucesso (@%s).', 'github-sync-manager' ), $validation['username'] ) );
 
 		wp_send_json_success( array(
@@ -773,7 +794,10 @@ class GSM_Admin {
 			if ( ! $result ) {
 				$skin_messages = method_exists( $skin, 'get_upgrade_messages' ) ? $skin->get_upgrade_messages() : array();
 				$detail        = ! empty( $skin_messages ) ? implode( ' ', array_slice( $skin_messages, -3 ) ) : '';
-				error_log( 'GSM Install Failed. Repo: ' . $repo_slug . ' | Skin: ' . implode( ' | ', $skin_messages ) );
+				if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+					// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+					error_log( 'GSM Install Failed. Repo: ' . $repo_slug . ' | Skin: ' . implode( ' | ', $skin_messages ) );
+				}
 				wp_send_json_error( array(
 					'message' => __( 'A instalação do plugin falhou. Se o problema persistir, adicione define(\'FS_METHOD\', \'direct\'); ao wp-config.php antes do require_once ABSPATH.', 'github-sync-manager' ) . ( $detail ? ' ' . $detail : '' ),
 				) );
@@ -856,6 +880,7 @@ class GSM_Admin {
 				$repo_slug,
 				'instalacao',
 				'sucesso',
+				/* translators: %s: version number */
 				sprintf( __( 'Plugin instalado com sucesso (Versão %s).', 'github-sync-manager' ), $latest_version )
 			);
 
@@ -1136,6 +1161,7 @@ class GSM_Admin {
 			$repo_slug,
 			'atualizacao',
 			'sucesso',
+			/* translators: %s: version number */
 			sprintf( __( 'Plugin reinstalado com sucesso via força (Versão %s).', 'github-sync-manager' ), $latest_version )
 		);
 
@@ -1148,6 +1174,7 @@ class GSM_Admin {
 		$logs_html = ob_get_clean();
 
 		wp_send_json_success( array(
+			/* translators: %s: version number */
 			'message'    => sprintf( __( 'Plugin reinstalado com sucesso! (Versão %s)', 'github-sync-manager' ), $latest_version ),
 			'table_html' => $cards_html,
 			'logs_html'  => $logs_html,
@@ -1164,7 +1191,7 @@ class GSM_Admin {
 			wp_send_json_error( array( 'message' => __( 'Você não tem permissão para realizar esta ação.', 'github-sync-manager' ) ) );
 		}
 
-		$locale = isset( $_POST['locale'] ) ? sanitize_text_field( $_POST['locale'] ) : 'pt_BR';
+		$locale = isset( $_POST['locale'] ) ? sanitize_text_field( wp_unslash( $_POST['locale'] ) ) : 'pt_BR';
 
 		if ( ! in_array( $locale, array( 'pt_BR', 'en_US', 'es_ES' ), true ) ) {
 			wp_send_json_error( array( 'message' => __( 'Idioma inválido.', 'github-sync-manager' ) ) );
@@ -1266,6 +1293,7 @@ class GSM_Admin {
 			}
 		}
 		if ( ! $has_default_branch ) {
+			/* translators: %s: branch name */
 			$sources[] = array(
 				'name'        => sprintf( __( 'Ramo: %s', 'github-sync-manager' ), $default_branch ),
 				'ref'         => $default_branch,

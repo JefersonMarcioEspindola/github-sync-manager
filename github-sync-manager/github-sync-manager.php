@@ -3,7 +3,7 @@
  * Plugin Name: GitHub Sync Manager
  * Plugin URI: https://github.com/JefersonMarcioEspindola/github-sync-manager
  * Description: Permite ao administrador do site instalar e manter atualizados outros plugins WordPress hospedados em repositórios do GitHub, públicos ou privados, usando as releases como fonte de verdade.
- * Version: 0.0.15
+ * Version: 0.0.16
  * Author: Jeferson Espindola
  * Author URI: https://github.com/JefersonMarcioEspindola/github-sync-manager
  * Text Domain: github-sync-manager
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Constant Definitions
  */
-define( 'GSM_VERSION', '0.0.15' );
+define( 'GSM_VERSION', '0.0.16' );
 define( 'GSM_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GSM_FILE', __FILE__ );
 
@@ -46,9 +46,6 @@ spl_autoload_register( function( $class_name ) {
  * Core Initialization Function
  */
 function gsm_init() {
-	// Load text domain for translations
-	load_plugin_textdomain( 'github-sync-manager', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-
 	// Initialize core components
 	GSM_Updater::init();
 
