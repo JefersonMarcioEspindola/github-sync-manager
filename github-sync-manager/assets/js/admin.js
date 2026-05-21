@@ -326,6 +326,7 @@ jQuery(document).ready(function($) {
 
 					bodyHtml += '<div class="gsm-modal-options" style="' + (optionsVisible ? '' : 'display: none;') + '">';
 					
+					// ── Source select (origin) ──────────────────────────────
 					bodyHtml += '  <div class="gsm-modal-field">';
 					bodyHtml += '    <label for="gsm-modal-ref">' + gsm_ajax.texts.select_source + '</label>';
 					bodyHtml += '    <select id="gsm-modal-ref">';
@@ -342,28 +343,85 @@ jQuery(document).ready(function($) {
 					bodyHtml += '    </select>';
 					bodyHtml += '  </div>';
 
+					// ── Custom Folder Tree Picker ────────────────────────────
+					var folders   = data.folders || [];
+					var defPath   = data.default_path || '';
+
 					bodyHtml += '  <div class="gsm-modal-field">';
-					bodyHtml += '    <label for="gsm-modal-subfolder">' + gsm_ajax.texts.select_folder + '</label>';
-					bodyHtml += '    <select id="gsm-modal-subfolder">';
-					bodyHtml += '      <option value=""' + (data.default_path === '' ? ' selected' : '') + '>📁 ' + gsm_ajax.texts.root_folder + '</option>';
-					if (data.folders && data.folders.length > 0) {
-						$.each(data.folders, function(idx, folder) {
-							var selectedAttr = (data.default_path === folder) ? ' selected' : '';
-							bodyHtml += '<option value="' + folder + '"' + selectedAttr + '>📁 ' + folder + '</option>';
+					bodyHtml += '    <label>' + gsm_ajax.texts.select_folder + '</label>';
+					bodyHtml += '    <input type="hidden" id="gsm-modal-subfolder" value="' + defPath + '">';
+
+					// Trigger button (shows current selection)
+					var triggerLabel = defPath ? ('📁 ' + defPath) : ('📁 ' + gsm_ajax.texts.root_folder);
+					bodyHtml += '    <div class="gsm-folder-picker">';
+					bodyHtml += '      <button type="button" class="gsm-folder-trigger" aria-expanded="false">';
+					bodyHtml += '        <span class="gsm-folder-trigger-label">' + triggerLabel + '</span>';
+					bodyHtml += '        <span class="gsm-folder-trigger-chevron dashicons dashicons-arrow-down-alt2"></span>';
+					bodyHtml += '      </button>';
+
+					// Dropdown tree panel
+					bodyHtml += '      <div class="gsm-folder-dropdown" style="display:none;">';
+					bodyHtml += '        <ul class="gsm-folder-tree">';
+
+					// Root option
+					var rootSel = (defPath === '') ? ' gsm-folder-item--selected' : '';
+					bodyHtml += '          <li class="gsm-folder-item gsm-folder-item--root' + rootSel + '" data-value="">';
+					bodyHtml += '            <span class="gsm-fi-icon">📂</span>';
+					bodyHtml += '            <span class="gsm-fi-name">' + gsm_ajax.texts.root_folder + '</span>';
+					if (defPath === '') { bodyHtml += '<span class="gsm-fi-check dashicons dashicons-yes"></span>'; }
+					bodyHtml += '          </li>';
+
+					// Build tree from flat paths
+					var tree = {};
+					$.each(folders, function(i, path) {
+						var parts = path.split('/');
+						var node = tree;
+						$.each(parts, function(j, part) {
+							if (!node[part]) { node[part] = { __path: parts.slice(0, j+1).join('/'), __children: {} }; }
+							node = node[part].__children;
 						});
+					});
+
+					function renderTree(node, depth) {
+						var html = '';
+						$.each(node, function(name, obj) {
+							var path = obj.__path;
+							var indent = depth;
+							var isSel = (defPath === path) ? ' gsm-folder-item--selected' : '';
+							var checkIcon = (defPath === path) ? '<span class="gsm-fi-check dashicons dashicons-yes"></span>' : '';
+							html += '<li class="gsm-folder-item' + isSel + '" data-value="' + path + '" data-depth="' + indent + '">';
+							// connector lines via CSS + depth class
+							for (var d = 0; d < indent; d++) {
+								html += '<span class="gsm-fi-indent"></span>';
+							}
+							html += '<span class="gsm-fi-connector"></span>';
+							html += '<span class="gsm-fi-icon">📁</span>';
+							html += '<span class="gsm-fi-name">' + name + '</span>';
+							html += checkIcon;
+							html += '</li>';
+							html += renderTree(obj.__children, depth + 1);
+						});
+						return html;
 					}
-					bodyHtml += '    </select>';
+
+					bodyHtml += renderTree(tree, 0);
+					bodyHtml += '        </ul>';
+					bodyHtml += '      </div>'; // .gsm-folder-dropdown
+					bodyHtml += '    </div>'; // .gsm-folder-picker
+
+					// Info box
 					bodyHtml += '    <div class="gsm-info-box">';
 					bodyHtml += '      <span class="dashicons dashicons-info"></span>';
 					bodyHtml += '      <p class="gsm-field-description">' + gsm_ajax.texts.select_folder_desc + '</p>';
 					bodyHtml += '    </div>';
 					bodyHtml += '  </div>';
 
-					bodyHtml += '</div>';
+					bodyHtml += '</div>'; // .gsm-modal-options
 
 					$modalBody.html(bodyHtml);
 					$modalFooter.find('.gsm-modal-btn-install').prop('disabled', false);
 
+					// ── Toggle advanced panel ──────────────────────────────
 					$modalBody.find('.gsm-toggle-advanced-link').on('click', function(e) {
 						e.preventDefault();
 						var $link = $(this);
@@ -379,10 +437,71 @@ jQuery(document).ready(function($) {
 						});
 					});
 
+					// ── Origin select change → reload verify ───────────────
 					$modalBody.find('#gsm-modal-ref').on('change', function() {
 						var selectedRef = $(this).val();
 						verifyRepo(repo, selectedRef);
 					});
+
+					// ── Folder tree picker logic ───────────────────────────
+					$modalBody.on('click', '.gsm-folder-trigger', function(e) {
+						e.stopPropagation();
+						var $trigger  = $(this);
+						var $picker   = $trigger.closest('.gsm-folder-picker');
+						var $dropdown = $picker.find('.gsm-folder-dropdown');
+						var isOpen    = $trigger.attr('aria-expanded') === 'true';
+
+						// Close all other open pickers first
+						$('.gsm-folder-dropdown').not($dropdown).slideUp(150);
+						$('.gsm-folder-trigger[aria-expanded="true"]').not($trigger)
+							.attr('aria-expanded', 'false')
+							.find('.gsm-folder-trigger-chevron')
+							.removeClass('gsm-chevron-up');
+
+						if (isOpen) {
+							$dropdown.slideUp(150);
+							$trigger.attr('aria-expanded', 'false');
+							$trigger.find('.gsm-folder-trigger-chevron').removeClass('gsm-chevron-up');
+						} else {
+							$dropdown.slideDown(180);
+							$trigger.attr('aria-expanded', 'true');
+							$trigger.find('.gsm-folder-trigger-chevron').addClass('gsm-chevron-up');
+						}
+					});
+
+					$modalBody.on('click', '.gsm-folder-item', function(e) {
+						e.stopPropagation();
+						var $item    = $(this);
+						var newValue = $item.data('value');
+						var $picker  = $item.closest('.gsm-folder-picker');
+
+						// Update hidden input
+						$picker.closest('.gsm-modal-field').find('#gsm-modal-subfolder').val(newValue);
+
+						// Update selected state
+						$picker.find('.gsm-folder-item').removeClass('gsm-folder-item--selected')
+							.find('.gsm-fi-check').remove();
+						$item.addClass('gsm-folder-item--selected')
+							.append('<span class="gsm-fi-check dashicons dashicons-yes"></span>');
+
+						// Update trigger label
+						var label = newValue ? ('📁 ' + newValue) : ('📁 ' + gsm_ajax.texts.root_folder);
+						$picker.find('.gsm-folder-trigger-label').text(label);
+
+						// Close dropdown
+						$picker.find('.gsm-folder-dropdown').slideUp(150);
+						$picker.find('.gsm-folder-trigger').attr('aria-expanded', 'false')
+							.find('.gsm-folder-trigger-chevron').removeClass('gsm-chevron-up');
+					});
+
+					// Close picker when clicking outside
+					$(document).off('click.gsmFolderPicker').on('click.gsmFolderPicker', function() {
+						$('.gsm-folder-dropdown:visible').slideUp(150);
+						$('.gsm-folder-trigger[aria-expanded="true"]')
+							.attr('aria-expanded', 'false')
+							.find('.gsm-folder-trigger-chevron').removeClass('gsm-chevron-up');
+					});
+
 				} else {
 					$modalBody.html('<div class="gsm-error-message">' + response.data.message + '</div>');
 				}
@@ -392,6 +511,7 @@ jQuery(document).ready(function($) {
 			}
 		});
 	}
+
 
 	$reposContainer.on('click', '.gsm-btn-install', function(e) {
 		e.preventDefault();
