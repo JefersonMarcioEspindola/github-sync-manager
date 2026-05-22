@@ -142,7 +142,9 @@ class GSM_GitHub_API {
 			return new WP_Error( 'gsm_api_invalid_response', __( 'Dados de repositórios inválidos.', 'sync-manager-for-github' ) );
 		}
 
-		$repos = array();
+		$repos          = array();
+		$pending_checks = array(); // Repos needing secondary language check
+
 		foreach ( $body as $repo ) {
 			$language = isset( $repo['language'] ) ? $repo['language'] : '';
 			$name     = isset( $repo['name'] ) ? $repo['name'] : '';
@@ -150,7 +152,7 @@ class GSM_GitHub_API {
 
 			$is_php = ( ! empty( $language ) && strcasecmp( $language, 'php' ) === 0 );
 
-			// Detect plugin indicators
+			// Detect plugin indicators from name/description.
 			$search_text = strtolower( $name . ' ' . $desc );
 			$is_wordpress_related = ( strpos( $search_text, 'wordpress' ) !== false || strpos( $search_text, 'wp-plugin' ) !== false || strpos( $search_text, 'wp-' ) !== false );
 
@@ -175,10 +177,88 @@ class GSM_GitHub_API {
 					'owner'       => isset( $repo['owner']['login'] ) ? $repo['owner']['login'] : '',
 					'language'    => $language,
 				);
+			} elseif ( ! empty( $language ) ) {
+				// Primary language is not PHP and no keyword match.
+				// Queue for secondary check via the Languages API.
+				$pending_checks[] = $repo;
+			}
+		}
+
+		// Secondary check: use the Languages API to detect PHP presence.
+		// Only check up to 30 repos to avoid excessive API calls.
+		$pending_checks = array_slice( $pending_checks, 0, 30 );
+
+		foreach ( $pending_checks as $repo ) {
+			$owner = isset( $repo['owner']['login'] ) ? $repo['owner']['login'] : '';
+			if ( empty( $owner ) ) {
+				continue;
+			}
+
+			$php_pct = $this->get_repo_php_percentage( $owner, $repo['name'] );
+
+			if ( $php_pct >= 5.0 ) {
+				$repos[] = array(
+					'id'          => $repo['id'],
+					'name'        => $repo['name'],
+					'full_name'   => $repo['full_name'],
+					'description' => $repo['description'],
+					'private'     => (bool) $repo['private'],
+					'updated_at'  => $repo['updated_at'],
+					'html_url'    => $repo['html_url'],
+					'owner'       => $owner,
+					'language'    => isset( $repo['language'] ) ? $repo['language'] : '',
+				);
 			}
 		}
 
 		return $repos;
+	}
+
+	/**
+	 * Returns the percentage of PHP in a repository using the GitHub Languages API.
+	 *
+	 * The Languages API returns an object mapping language names to bytes of code,
+	 * e.g. {"CSS": 15000, "PHP": 7500}. We calculate what percentage PHP represents.
+	 *
+	 * @param string $owner Repo owner.
+	 * @param string $repo  Repo name.
+	 * @return float PHP percentage (0.0 – 100.0), or 0.0 on failure.
+	 */
+	private function get_repo_php_percentage( $owner, $repo ) {
+		$url  = sprintf( '%s/repos/%s/%s/languages', self::API_URL, rawurlencode( $owner ), rawurlencode( $repo ) );
+		$args = $this->get_request_args();
+
+		$response = wp_remote_get( $url, $args );
+
+		if ( is_wp_error( $response ) ) {
+			return 0.0;
+		}
+
+		$status_code = wp_remote_retrieve_response_code( $response );
+		if ( 200 !== $status_code ) {
+			return 0.0;
+		}
+
+		$languages = json_decode( wp_remote_retrieve_body( $response ), true );
+		if ( ! is_array( $languages ) || empty( $languages ) ) {
+			return 0.0;
+		}
+
+		$total_bytes = array_sum( $languages );
+		if ( $total_bytes <= 0 ) {
+			return 0.0;
+		}
+
+		// Check for PHP (case-insensitive key lookup).
+		$php_bytes = 0;
+		foreach ( $languages as $lang => $bytes ) {
+			if ( strcasecmp( $lang, 'PHP' ) === 0 ) {
+				$php_bytes = (int) $bytes;
+				break;
+			}
+		}
+
+		return ( $php_bytes / $total_bytes ) * 100.0;
 	}
 
 	/**

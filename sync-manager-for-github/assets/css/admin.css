@@ -68,6 +68,7 @@
 
 .gsm-title {
 	margin: 0 !important;
+	padding: 0 !important;
 	font-size: 23px;
 	font-weight: 600;
 	display: flex;
@@ -84,9 +85,9 @@
 }
 
 .gsm-header-logo {
-	width: 40px;
-	height: 40px;
-	border-radius: 6px;
+	width: 58px;
+	height: 58px;
+	border-radius: 12px;
 	object-fit: contain;
 	flex-shrink: 0;
 }
@@ -532,7 +533,7 @@
    ======================== */
 .gsm-repos-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	grid-template-columns: repeat(3, 1fr);
 	gap: 20px;
 }
 
@@ -645,7 +646,7 @@
 	border-color: var(--gsm-border) !important;
 	background: var(--gsm-surface) !important;
 	cursor: pointer;
-	border-radius: 3px;
+	border-radius: 8px;
 }
 
 .gsm-btn-copy-prompt:hover {
@@ -877,7 +878,7 @@
 	background: var(--gsm-primary) !important;
 	border-color: var(--gsm-primary) !important;
 	color: #fff !important;
-	border-radius: 6px !important;
+	border-radius: 8px !important;
 	font-weight: 600 !important;
 	transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s !important;
 }
@@ -892,7 +893,7 @@
 .gsm-modal-footer .button:not(.button-primary) {
 	border-color: var(--gsm-border) !important;
 	color: var(--gsm-muted) !important;
-	border-radius: 6px !important;
+	border-radius: 8px !important;
 }
 
 .gsm-modal-footer .button:not(.button-primary):hover {
@@ -1085,7 +1086,7 @@
 	line-height: 38px !important;
 	font-size: 14px !important;
 	font-weight: 600 !important;
-	border-radius: 6px !important;
+	border-radius: 8px !important;
 	text-decoration: none !important;
 	background: var(--gsm-primary) !important;
 	border-color: var(--gsm-primary) !important;
@@ -1166,7 +1167,7 @@
 	color: var(--gsm-text);
 	background: var(--gsm-bg);
 	border: 1px solid var(--gsm-border);
-	border-radius: 6px;
+	border-radius: 8px;
 	cursor: pointer;
 	transition: border-color 0.2s, box-shadow 0.2s;
 	text-align: left;
@@ -1348,3 +1349,43 @@
 	margin-left: auto;
 	flex-shrink: 0;
 }
+
+/* ========================
+   Responsive
+   ======================== */
+@media (max-width: 1024px) {
+	.gsm-repos-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 600px) {
+	.gsm-repos-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.gsm-filter-bar {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	#gsm-repo-search {
+		width: 100%;
+	}
+}
+
+/* Enforce 8px border-radius on all plugin buttons */
+.gsm-wrap .button,
+.gsm-wrap .button-primary,
+.gsm-wrap .button-secondary,
+.gsm-wrap button,
+.gsm-wrap input[type="submit"],
+.gsm-wrap input[type="button"],
+.gsm-modal-wrapper .button,
+.gsm-modal-wrapper .button-primary,
+.gsm-modal-wrapper button,
+.gsm-modal-wrapper a.button,
+.gsm-modal-wrapper a.button-primary {
+	border-radius: 8px !important;
+}
+

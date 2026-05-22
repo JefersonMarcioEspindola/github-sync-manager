@@ -3,7 +3,7 @@ Contributors: JefersonMarcioEspindola
 Tags: github, plugin updater, private plugins, github releases, self-hosted
 Requires at least: 5.8
 Tested up to: 7.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -72,6 +72,11 @@ The only external communication is with the GitHub API (`api.github.com`) using 
 3. Activity log showing install and update history.
 
 == Changelog ==
+
+= 1.0.1 =
+* Fixed language/translation autoloading issue by calling load_plugin_textdomain() explicitly.
+* Enforced consistent 8px border-radius on all plugin buttons for a cohesive, modern UI.
+* Fixed repository filtering logic to support plugins with non-PHP main languages (e.g., CSS styling plugins) if they contain PHP code.
 
 = 1.0.0 =
 * First stable release.
@@ -165,6 +170,9 @@ The only external communication is with the GitHub API (`api.github.com`) using 
 * Initial release with AES-256-GCM encryption, GitHub API manager, automatic WP-Cron checker, and admin dashboard.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Minor fix version that resolves language translation loading, button border-radius visual consistency, and repository language filtering logic.
 
 = 1.0.0 =
 First stable release. Renamed plugin slug to sync-manager-for-github — please reinstall if upgrading from a pre-1.0 version.
