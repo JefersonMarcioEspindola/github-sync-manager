@@ -1080,10 +1080,11 @@
 }
 
 .gsm-modal-btn-activate {
-	display: inline-block !important;
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
 	padding: 0 24px !important;
 	height: 40px !important;
-	line-height: 38px !important;
 	font-size: 14px !important;
 	font-weight: 600 !important;
 	border-radius: 8px !important;
@@ -1092,11 +1093,13 @@
 	border-color: var(--gsm-primary) !important;
 	color: #fff !important;
 	transition: background-color 0.2s !important;
+	text-align: center;
 }
 
 .gsm-modal-btn-activate:hover {
 	background: var(--gsm-primary-hov) !important;
 	border-color: var(--gsm-primary-hov) !important;
+	color: #fff !important;
 }
 
 /* ========================
@@ -1387,5 +1390,27 @@
 .gsm-modal-wrapper a.button,
 .gsm-modal-wrapper a.button-primary {
 	border-radius: 8px !important;
+}
+
+/* Enforce plugin primary button colors to avoid external theme/builder overrides (like Bricks) */
+.gsm-wrap .button-primary,
+.gsm-modal-wrapper .button-primary,
+.gsm-modal-wrapper a.button-primary {
+	background: var(--gsm-primary) !important;
+	border-color: var(--gsm-primary) !important;
+	color: #fff !important;
+	text-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.gsm-wrap .button-primary:hover,
+.gsm-wrap .button-primary:focus,
+.gsm-modal-wrapper .button-primary:hover,
+.gsm-modal-wrapper .button-primary:focus,
+.gsm-modal-wrapper a.button-primary:hover,
+.gsm-modal-wrapper a.button-primary:focus {
+	background: var(--gsm-primary-hov) !important;
+	border-color: var(--gsm-primary-hov) !important;
+	color: #fff !important;
 }
 

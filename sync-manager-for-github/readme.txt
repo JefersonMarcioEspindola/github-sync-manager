@@ -3,7 +3,7 @@ Contributors: JefersonMarcioEspindola
 Tags: github, plugin updater, private plugins, github releases, self-hosted
 Requires at least: 5.8
 Tested up to: 7.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -72,6 +72,10 @@ The only external communication is with the GitHub API (`api.github.com`) using 
 3. Activity log showing install and update history.
 
 == Changelog ==
+
+= 1.0.3 =
+* Centered the text on the "Activate Plugin Now" button.
+* Enforced custom primary button colors inside the plugin pages and modals to prevent external page builders (like Bricks) from overriding the button styling.
 
 = 1.0.2 =
 * Fixed plugin installation folder detection logic to prevent capturing unrelated plugins.
