@@ -1,4 +1,4 @@
-# Sync Manager for GitHub
+# CodeSync Manager for GitHub
 
 [English](#english) | [Português](#português)
 
@@ -6,7 +6,7 @@
 
 ## English
 
-**Sync Manager for GitHub** is an open-source WordPress plugin developed to simplify the distribution, installation, and update of other plugins hosted in public or private GitHub repositories, using repository **Releases** or **Branches** as the single source of truth (*Source of Truth*).
+**CodeSync Manager for GitHub** is an open-source WordPress plugin developed to simplify the distribution, installation, and update of other plugins hosted in public or private GitHub repositories, using repository **Releases** or **Branches** as the single source of truth (*Source of Truth*).
 
 The main use case is the quick distribution of tailor-made or active-development plugins: when you publish a new release (or push to a branch) on GitHub, WordPress automatically detects and lists the update on the native Plugins screen, identical to official WordPress.org plugins.
 
@@ -37,7 +37,7 @@ The main use case is the quick distribution of tailor-made or active-development
 ### 📂 Directory Structure
 
 ```text
-├── sync-manager-for-github/          # Core plugin directory
+├── codesync-manager-for-github/          # Core plugin directory
 │   ├── assets/
 │   │   ├── css/admin.css             # CSS styles and modal styles
 │   │   └── js/admin.js               # Tab logic and AJAX handler
@@ -48,18 +48,18 @@ The main use case is the quick distribution of tailor-made or active-development
 │   │   ├── class-manager.php         # DB, directory check, and logger
 │   │   └── class-updater.php         # Native WordPress update hooks integration
 │   ├── languages/                    # Translation binary MO catalogs (PT, EN, ES)
-│   ├── sync-manager-for-github.php   # Main entrypoint file
+│   ├── codesync-manager-for-github.php   # Main entrypoint file
 │   └── readme.txt                    # WordPress.org plugin directory readme documentation
 │
 └── releases/                         # Packaged zip release archives
-    └── sync-manager-for-github-v1.0.0.zip
+    └── codesync-manager-for-github-v1.0.6.zip
 ```
 
 ---
 
 ### 💾 Installation & Setup
 
-1. Navigate to the `releases/` directory and download the latest version ZIP (`v1.0.0`).
+1. Navigate to the `releases/` directory and download the latest version ZIP (`v1.0.6`).
 2. Inside your WordPress admin panel, go to **Plugins > Add New > Upload Plugin** and select the ZIP file.
 3. Activate the plugin.
 4. Go to the new **GitHub Sync** menu item in your WordPress sidebar.
@@ -69,7 +69,7 @@ The main use case is the quick distribution of tailor-made or active-development
 
 ## Português
 
-O **Sync Manager for GitHub** é um plugin WordPress open-source desenvolvido para simplificar a distribuição, instalação e atualização de outros plugins hospedados em repositórios do GitHub (públicos ou privados), utilizando as **Releases** ou **Branches** do repositório como fonte de verdade (*Source of Truth*).
+O **CodeSync Manager for GitHub** é um plugin WordPress open-source desenvolvido para simplificar a distribuição, instalação e atualização de outros plugins hospedados em repositórios do GitHub (públicos ou privados), utilizando as **Releases** ou **Branches** do repositório como fonte de verdade (*Source of Truth*).
 
 O caso de uso central é a distribuição ágil de plugins sob medida ou em desenvolvimento ativo: o desenvolvedor publica uma nova release (ou faz commit em um ramo) no GitHub, e o WordPress automaticamente identifica e exibe a atualização disponível na tela padrão de Plugins, exatamente como ocorre com plugins hospedados no diretório oficial do WordPress.org.
 
@@ -100,7 +100,7 @@ O caso de uso central é a distribuição ágil de plugins sob medida ou em dese
 ### 📂 Estrutura de Pastas do Repositório
 
 ```text
-├── sync-manager-for-github/          # Código principal do plugin
+├── codesync-manager-for-github/          # Código principal do plugin
 │   ├── assets/
 │   │   ├── css/admin.css             # Estilos customizados e modal premium
 │   │   └── js/admin.js               # Lógica de abas, busca e chamadas AJAX do modal
@@ -111,18 +111,18 @@ O caso de uso central é a distribuição ágil de plugins sob medida ou em dese
 │   │   ├── class-manager.php         # Controle de banco de dados, diretórios e logs
 │   │   └── class-updater.php         # Acoplamento de atualizações nativas do WordPress
 │   ├── languages/                    # Arquivos binários (.mo) de traduções (PT, EN, ES)
-│   ├── sync-manager-for-github.php   # Arquivo principal do plugin
+│   ├── codesync-manager-for-github.php   # Arquivo principal do plugin
 │   └── readme.txt                    # Documentação para o repositório WordPress.org
 │
 └── releases/                         # Pasta de distribuição contendo os pacotes ZIP
-    └── sync-manager-for-github-v1.0.0.zip
+    └── codesync-manager-for-github-v1.0.6.zip
 ```
 
 ---
 
 ### 💾 Instalação e Configuração
 
-1. Acesse a pasta `releases/` deste repositório e baixe o arquivo `.zip` da versão mais recente (`v0.0.7`).
+1. Acesse a pasta `releases/` deste repositório e baixe o arquivo `.zip` da versão mais recente (`v1.0.6`).
 2. No painel do seu WordPress, vá em **Plugins > Adicionar Novo > Enviar Plugin** e envie o arquivo ZIP.
 3. Ative o plugin.
 4. Acesse o menu **GitHub Sync** no painel lateral do WordPress.
