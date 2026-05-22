@@ -3,7 +3,7 @@
  * Plugin Name: Sync Manager for GitHub
  * Plugin URI: https://github.com/JefersonMarcioEspindola/sync-manager-for-github
  * Description: A developer tool to manage, install, and auto-update custom WordPress plugins hosted on GitHub. Connect via a Personal Access Token and use GitHub releases as the source of truth for versioning — no manual ZIP uploads needed.
- * Version: 0.0.16
+ * Version: 1.0.0
  * Author: Jeferson Espindola
  * Author URI: https://github.com/JefersonMarcioEspindola/sync-manager-for-github
  * Text Domain: sync-manager-for-github
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Constant Definitions
  */
-define( 'GSM_VERSION', '0.0.16' );
+define( 'GSM_VERSION', '1.0.0' );
 define( 'GSM_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GSM_FILE', __FILE__ );
 

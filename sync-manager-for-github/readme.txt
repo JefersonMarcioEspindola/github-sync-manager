@@ -3,7 +3,7 @@ Contributors: JefersonMarcioEspindola
 Tags: github, plugin updater, private plugins, github releases, self-hosted
 Requires at least: 5.8
 Tested up to: 7.0
-Stable tag: 0.0.16
+Stable tag: 1.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -72,6 +72,16 @@ The only external communication is with the GitHub API (`api.github.com`) using 
 3. Activity log showing install and update history.
 
 == Changelog ==
+
+= 1.0.0 =
+* First stable release.
+* Renamed plugin to "Sync Manager for GitHub" for WordPress.org compliance.
+* Renamed plugin slug to sync-manager-for-github.
+* Added plugin logo to admin header.
+* Fixed plugin name/version detection for subfolder-based plugins — now self-heals wrong stored references.
+* Removed Prompt Release button from plugin cards.
+* Updated plugin description to English, developer-focused copy.
+* Full WordPress.org Plugin Check compliance (zero errors).
 
 = 0.0.16 =
 * Removed hooks into WordPress update transients to comply with WordPress.org plugin guidelines.
@@ -155,6 +165,9 @@ The only external communication is with the GitHub API (`api.github.com`) using 
 * Initial release with AES-256-GCM encryption, GitHub API manager, automatic WP-Cron checker, and admin dashboard.
 
 == Upgrade Notice ==
+
+= 1.0.0 =
+First stable release. Renamed plugin slug to sync-manager-for-github — please reinstall if upgrading from a pre-1.0 version.
 
 = 0.0.16 =
 WordPress.org compliance release. Removes native update-transient injection (updates are still tracked in the GitHub Sync dashboard). All filesystem operations now use the WordPress Filesystem API.
