@@ -34,7 +34,7 @@ spl_autoload_register( function( $class_name ) {
 		return;
 	}
 
-	$file_name = 'class-' . strtolower( str_replace( '_', '-', substr( $class_name, 4 ) ) ) . '.php';
+	$file_name = 'class-' . strtolower( str_replace( '_', '-', substr( $class_name, 9 ) ) ) . '.php';
 	$file_path = CODESYNC_PATH . 'includes/' . $file_name;
 
 	if ( file_exists( $file_path ) ) {
