@@ -227,6 +227,7 @@ jQuery(document).ready(function($) {
 	var $modalFooter = $modal.find('.codesync-modal-footer');
 	var installRepo = '';
 	var installIsDone = false;
+	var installIsUpdate = false;
 
 	function hideModal() {
 		$modal.removeClass('codesync-modal-open');
@@ -310,6 +311,7 @@ jQuery(document).ready(function($) {
 					}
 
 					var optionsVisible = !data.found;
+					installIsUpdate = data.found;
 					if (isSwitching) {
 						optionsVisible = $modalBody.find('.codesync-modal-options').is(':visible');
 					}
@@ -569,13 +571,21 @@ jQuery(document).ready(function($) {
 					var doneHtml = '';
 					doneHtml += '<div class="codesync-modal-done">';
 					doneHtml += '  <div class="codesync-modal-done-icon">✓</div>';
-					doneHtml += '  <h4>' + codesync_ajax.texts.install_success_title + '</h4>';
-					doneHtml += '  <p>' + codesync_ajax.texts.install_success_msg.replace('%1$s', response.data.plugin_name).replace('%2$s', response.data.version) + '</p>';
-					doneHtml += '  <p><a href="' + response.data.activate_url + '" class="button button-primary button-hero codesync-modal-btn-activate">' + codesync_ajax.texts.activate_btn + '</a></p>';
+					if (installIsUpdate) {
+						doneHtml += '  <h4>' + (codesync_ajax.texts.sync_success_title || '&#x2705; Sincronizado com Sucesso!') + '</h4>';
+						doneHtml += '  <p>' + (codesync_ajax.texts.sync_success_msg || 'O plugin <strong>%1$s</strong> já estava instalado e agora está sendo gerenciado pelo CodeSync Manager (Versão %2$s).').replace('%1$s', response.data.plugin_name).replace('%2$s', response.data.version) + '</p>';
+					} else {
+						doneHtml += '  <h4>' + codesync_ajax.texts.install_success_title + '</h4>';
+						doneHtml += '  <p>' + codesync_ajax.texts.install_success_msg.replace('%1$s', response.data.plugin_name).replace('%2$s', response.data.version) + '</p>';
+					}
 					doneHtml += '</div>';
 
 					$modalBody.html(doneHtml);
-					$modalFooter.html('<button type="button" class="button codesync-modal-btn-close-done">' + codesync_ajax.texts.close_btn + '</button>');
+					var footerHtml = '<button type="button" class="button codesync-modal-btn-close-done">' + codesync_ajax.texts.close_btn + '</button>';
+					if (response.data.activate_url) {
+						footerHtml += '<a href="' + response.data.activate_url + '" class="button button-primary codesync-modal-btn-activate">' + codesync_ajax.texts.activate_btn + '</a>';
+					}
+					$modalFooter.html(footerHtml);
 				} else {
 					$modalBody.html('<div class="codesync-error-message">' + codesync_ajax.texts.install_error.replace('%s', response.data.message) + '</div>');
 					

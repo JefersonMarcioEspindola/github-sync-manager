@@ -3,7 +3,7 @@ Contributors: JefersonMarcioEspindola, jefersonespindola
 Tags: github, plugin updater, private plugins, github releases, self-hosted
 Requires at least: 5.8
 Tested up to: 7.0
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -84,6 +84,10 @@ This service is provided by GitHub, Inc.
 3. Activity log showing install and update history.
 
 == Changelog ==
+
+= 1.1.3 =
+* Enhancement: Improved UI/UX of the installation modal by repositioning the activation button to the footer.
+* Enhancement: Added a dynamic success message that informs the user when a plugin is synchronized rather than freshly installed.
 
 = 1.1.2 =
 * Hotfix: Synchronized all HTML classes and IDs across PHP and CSS with the new `codesync-` prefix layout structure.

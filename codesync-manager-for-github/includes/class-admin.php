@@ -128,6 +128,9 @@ class CODESYNC_Admin {
 				'force_update_fail'     => __( 'Falha na comunicação ao tentar reinstalar.', 'codesync-manager-for-github' ),
 				'force_update_btn'      => __( 'Atualizar', 'codesync-manager-for-github' ),
 				'force_updating'        => __( 'Reinstalando...', 'codesync-manager-for-github' ),
+				'sync_success_title'    => __( '&#x2705; Plugin Sincronizado com Sucesso!', 'codesync-manager-for-github' ),
+				/* translators: 1: plugin name, 2: version number */
+				'sync_success_msg'      => __( 'O plugin <strong>%1$s</strong> já estava instalado no seu WordPress. O código foi atualizado e agora está sincronizado e sendo gerenciado (Versão %2$s).', 'codesync-manager-for-github' ),
 				'install_success_title' => __( '&#x2705; Plugin Instalado com Sucesso!', 'codesync-manager-for-github' ),
 				/* translators: 1: plugin name, 2: version number */
 				'install_success_msg'   => __( 'O plugin <strong>%1$s</strong> (Versão %2$s) foi baixado e gravado localmente.', 'codesync-manager-for-github' ),
