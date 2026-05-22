@@ -59,7 +59,7 @@ The main use case is the quick distribution of tailor-made or active-development
 
 ### 💾 Installation & Setup
 
-1. Navigate to the `releases/` directory and download the latest version ZIP (`v1.1.0`).
+1. Navigate to the `releases/` directory and download the latest version ZIP (`v1.1.1`).
 2. Inside your WordPress admin panel, go to **Plugins > Add New > Upload Plugin** and select the ZIP file.
 3. Activate the plugin.
 4. Go to the new **GitHub Sync** menu item in your WordPress sidebar.
@@ -122,7 +122,7 @@ O caso de uso central é a distribuição ágil de plugins sob medida ou em dese
 
 ### 💾 Instalação e Configuração
 
-1. Acesse a pasta `releases/` deste repositório e baixe o arquivo `.zip` da versão mais recente (`v1.1.0`).
+1. Acesse a pasta `releases/` deste repositório e baixe o arquivo `.zip` da versão mais recente (`v1.1.1`).
 2. No painel do seu WordPress, vá em **Plugins > Adicionar Novo > Enviar Plugin** e envie o arquivo ZIP.
 3. Ative o plugin.
 4. Acesse o menu **GitHub Sync** no painel lateral do WordPress.

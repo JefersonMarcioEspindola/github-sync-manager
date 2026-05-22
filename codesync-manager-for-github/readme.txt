@@ -3,7 +3,7 @@ Contributors: JefersonMarcioEspindola, jefersonespindola
 Tags: github, plugin updater, private plugins, github releases, self-hosted
 Requires at least: 5.8
 Tested up to: 7.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -84,6 +84,9 @@ This service is provided by GitHub, Inc.
 3. Activity log showing install and update history.
 
 == Changelog ==
+
+= 1.1.1 =
+* Hotfix: Updated javascript and css assets with the new CODESYNC_ prefixes to fix broken admin interactions.
 
 = 1.1.0 =
 * Hotfix: Corrected autoloader string offset parsing for the new CODESYNC_ prefix.

@@ -4,42 +4,42 @@
 jQuery(document).ready(function($) {
 
 	// Cached DOM elements
-	var $connectForm        = $('#gsm-connect-form');
-	var $connectSpinner     = $connectForm.find('.gsm-spinner');
-	var $connectError       = $connectForm.find('.gsm-error-message');
+	var $connectForm        = $('#codesync-connect-form');
+	var $connectSpinner     = $connectForm.find('.codesync-spinner');
+	var $connectError       = $connectForm.find('.codesync-error-message');
 	
-	var $scanBtn            = $('#gsm-btn-scan-now');
-	var $scanSpinner        = $('#gsm-scan-spinner');
-	var $pluginsCards       = $('#gsm-plugins-cards');
+	var $scanBtn            = $('#codesync-btn-scan-now');
+	var $scanSpinner        = $('#codesync-scan-spinner');
+	var $pluginsCards       = $('#codesync-plugins-cards');
 	
-	var $reposContainer     = $('#gsm-repos-container');
-	var $reposSpinner       = $('#gsm-repos-spinner');
-	var $searchField        = $('#gsm-repo-search');
-	var $reloadReposBtn     = $('#gsm-btn-reload-repos');
+	var $reposContainer     = $('#codesync-repos-container');
+	var $reposSpinner       = $('#codesync-repos-spinner');
+	var $searchField        = $('#codesync-repo-search');
+	var $reloadReposBtn     = $('#codesync-btn-reload-repos');
 	
-	var $disconnectBtn      = $('#gsm-btn-disconnect');
-	var $disconnectSpinner  = $('#gsm-disconnect-spinner');
+	var $disconnectBtn      = $('#codesync-btn-disconnect');
+	var $disconnectSpinner  = $('#codesync-disconnect-spinner');
 
 	var cachedRepos         = []; // Store repositories lists for live filtering
 
 	/* ---------------------------------------------------- */
 	/* 1. Admin Tab Navigation                              */
 	/* ---------------------------------------------------- */
-	$('.gsm-tabs-nav a').on('click', function(e) {
+	$('.codesync-tabs-nav a').on('click', function(e) {
 		e.preventDefault();
 		
 		var targetTab = $(this).attr('href');
 		
 		// Nav active state
-		$('.gsm-tabs-nav a').removeClass('nav-tab-active');
+		$('.codesync-tabs-nav a').removeClass('nav-tab-active');
 		$(this).addClass('nav-tab-active');
 		
 		// Tab content active state
-		$('.gsm-tab-content').removeClass('gsm-tab-active');
-		$(targetTab).addClass('gsm-tab-active');
+		$('.codesync-tab-content').removeClass('codesync-tab-active');
+		$(targetTab).addClass('codesync-tab-active');
 
 		// If clicking the Add Tab, pull fresh list of repos
-		if (targetTab === '#gsm-tab-add' && cachedRepos.length === 0) {
+		if (targetTab === '#codesync-tab-add' && cachedRepos.length === 0) {
 			loadGitHubRepositories();
 		}
 	});
@@ -50,7 +50,7 @@ jQuery(document).ready(function($) {
 	$connectForm.on('submit', function(e) {
 		e.preventDefault();
 		
-		var token = $('#gsm_pat_token').val().trim();
+		var token = $('#codesync_pat_token').val().trim();
 		if (!token) return;
 
 		$connectSpinner.addClass('is-active');
@@ -58,11 +58,11 @@ jQuery(document).ready(function($) {
 		$connectForm.find('button[type="submit"]').prop('disabled', true);
 
 		$.ajax({
-			url: gsm_ajax.url,
+			url: codesync_ajax.url,
 			type: 'POST',
 			data: {
-				action: 'gsm_connect_account',
-				nonce: gsm_ajax.nonce,
+				action: 'codesync_connect_account',
+				nonce: codesync_ajax.nonce,
 				token: token
 			},
 			success: function(response) {
@@ -77,7 +77,7 @@ jQuery(document).ready(function($) {
 			},
 			error: function() {
 				$connectSpinner.removeClass('is-active');
-				$connectError.text(gsm_ajax.texts.req_failed).fadeIn();
+				$connectError.text(codesync_ajax.texts.req_failed).fadeIn();
 				$connectForm.find('button[type="submit"]').prop('disabled', false);
 			}
 		});
@@ -89,7 +89,7 @@ jQuery(document).ready(function($) {
 	$disconnectBtn.on('click', function(e) {
 		e.preventDefault();
 
-		if (!confirm(gsm_ajax.texts.confirm_disconnect)) {
+		if (!confirm(codesync_ajax.texts.confirm_disconnect)) {
 			return;
 		}
 
@@ -97,11 +97,11 @@ jQuery(document).ready(function($) {
 		$disconnectBtn.prop('disabled', true);
 
 		$.ajax({
-			url: gsm_ajax.url,
+			url: codesync_ajax.url,
 			type: 'POST',
 			data: {
-				action: 'gsm_disconnect_account',
-				nonce: gsm_ajax.nonce
+				action: 'codesync_disconnect_account',
+				nonce: codesync_ajax.nonce
 			},
 			success: function(response) {
 				$disconnectSpinner.removeClass('is-active');
@@ -114,7 +114,7 @@ jQuery(document).ready(function($) {
 			},
 			error: function() {
 				$disconnectSpinner.removeClass('is-active');
-				alert(gsm_ajax.texts.comm_fail);
+				alert(codesync_ajax.texts.comm_fail);
 				$disconnectBtn.prop('disabled', false);
 			}
 		});
@@ -125,16 +125,16 @@ jQuery(document).ready(function($) {
 	/* ---------------------------------------------------- */
 	function loadGitHubRepositories() {
 		$reposSpinner.addClass('is-active');
-		$reposContainer.html('<p class="description">' + gsm_ajax.texts.loading_repos + '</p>');
+		$reposContainer.html('<p class="description">' + codesync_ajax.texts.loading_repos + '</p>');
 		$searchField.val('').prop('disabled', true);
 
 		$.ajax({
-			url: gsm_ajax.url,
+			url: codesync_ajax.url,
 			type: 'POST',
 			data: {
-				action: 'gsm_add_plugin',
+				action: 'codesync_add_plugin',
 				action_type: 'list',
-				nonce: gsm_ajax.nonce
+				nonce: codesync_ajax.nonce
 			},
 			success: function(response) {
 				$reposSpinner.removeClass('is-active');
@@ -144,13 +144,13 @@ jQuery(document).ready(function($) {
 					cachedRepos = response.data.repos;
 					renderRepositories(cachedRepos);
 				} else {
-					$reposContainer.html('<p class="gsm-error-message">' + response.data.message + '</p>');
+					$reposContainer.html('<p class="codesync-error-message">' + response.data.message + '</p>');
 				}
 			},
 			error: function() {
 				$reposSpinner.removeClass('is-active');
 				$searchField.prop('disabled', false);
-				$reposContainer.html('<p class="gsm-error-message">' + gsm_ajax.texts.repos_load_error + '</p>');
+				$reposContainer.html('<p class="codesync-error-message">' + codesync_ajax.texts.repos_load_error + '</p>');
 			}
 		});
 	}
@@ -163,31 +163,31 @@ jQuery(document).ready(function($) {
 	// Render the list/grid of repositories
 	function renderRepositories(repos) {
 		if (repos.length === 0) {
-			$reposContainer.html('<p class="description">' + gsm_ajax.texts.no_repos_found + '</p>');
+			$reposContainer.html('<p class="description">' + codesync_ajax.texts.no_repos_found + '</p>');
 			return;
 		}
 
 		var html = '';
 		$.each(repos, function(idx, repo) {
-			var visibilityClass = repo.private ? 'gsm-private' : 'gsm-public';
-			var visibilityLabel = repo.private ? gsm_ajax.texts.private_lbl : gsm_ajax.texts.public_lbl;
+			var visibilityClass = repo.private ? 'codesync-private' : 'codesync-public';
+			var visibilityLabel = repo.private ? codesync_ajax.texts.private_lbl : codesync_ajax.texts.public_lbl;
 			var lastUpdated = new Date(repo.updated_at).toLocaleDateString();
 
-			var btnLabel = repo.is_managed ? gsm_ajax.texts.already_managed : gsm_ajax.texts.install_btn;
-			var btnClass = repo.is_managed ? 'button-disabled' : 'button-primary gsm-btn-install';
+			var btnLabel = repo.is_managed ? codesync_ajax.texts.already_managed : codesync_ajax.texts.install_btn;
+			var btnClass = repo.is_managed ? 'button-disabled' : 'button-primary codesync-btn-install';
 			var btnAttr  = repo.is_managed ? 'disabled' : 'data-repo="' + repo.full_name + '"';
 
-			var desc = repo.description ? repo.description : gsm_ajax.texts.no_desc;
-			html += '<div class="gsm-repo-card" data-name="' + repo.name.toLowerCase() + '" data-fullname="' + repo.full_name.toLowerCase() + '">';
-			html += '  <div class="gsm-repo-card-header">';
-			html += '    <h3 class="gsm-repo-card-title">' + repo.name + '</h3>';
-			html += '    <div class="gsm-repo-badges">';
-			html += '      <span class="gsm-visibility-badge ' + visibilityClass + '">' + visibilityLabel + '</span>';
+			var desc = repo.description ? repo.description : codesync_ajax.texts.no_desc;
+			html += '<div class="codesync-repo-card" data-name="' + repo.name.toLowerCase() + '" data-fullname="' + repo.full_name.toLowerCase() + '">';
+			html += '  <div class="codesync-repo-card-header">';
+			html += '    <h3 class="codesync-repo-card-title">' + repo.name + '</h3>';
+			html += '    <div class="codesync-repo-badges">';
+			html += '      <span class="codesync-visibility-badge ' + visibilityClass + '">' + visibilityLabel + '</span>';
 			html += '    </div>';
 			html += '  </div>';
-			html += '  <p class="gsm-repo-desc" title="' + desc + '">' + desc + '</p>';
-			html += '  <div class="gsm-repo-footer">';
-			html += '    <span class="gsm-repo-date">' + gsm_ajax.texts.updated_lbl.replace('%s', lastUpdated) + '</span>';
+			html += '  <p class="codesync-repo-desc" title="' + desc + '">' + desc + '</p>';
+			html += '  <div class="codesync-repo-footer">';
+			html += '    <span class="codesync-repo-date">' + codesync_ajax.texts.updated_lbl.replace('%s', lastUpdated) + '</span>';
 			html += '    <button type="button" class="button button-small ' + btnClass + '" ' + btnAttr + '>' + btnLabel + '</button>';
 			html += '  </div>';
 			html += '</div>';
@@ -202,14 +202,14 @@ jQuery(document).ready(function($) {
 	$searchField.on('input', function() {
 		var query = $(this).val().toLowerCase().trim();
 		if (!query) {
-			$('.gsm-repo-card').show();
+			$('.codesync-repo-card').show();
 			return;
 		}
 
-		$('.gsm-repo-card').each(function() {
+		$('.codesync-repo-card').each(function() {
 			var name     = $(this).data('name');
 			var fullname = $(this).data('fullname');
-			var desc     = $(this).find('.gsm-repo-desc').text().toLowerCase();
+			var desc     = $(this).find('.codesync-repo-desc').text().toLowerCase();
 
 			if (name.indexOf(query) !== -1 || fullname.indexOf(query) !== -1 || desc.indexOf(query) !== -1) {
 				$(this).show();
@@ -222,14 +222,14 @@ jQuery(document).ready(function($) {
 	/* ---------------------------------------------------- */
 	/* 6. Programmatic Installation                         */
 	/* ---------------------------------------------------- */
-	var $modal = $('#gsm-install-modal');
-	var $modalBody = $modal.find('.gsm-modal-body');
-	var $modalFooter = $modal.find('.gsm-modal-footer');
+	var $modal = $('#codesync-install-modal');
+	var $modalBody = $modal.find('.codesync-modal-body');
+	var $modalFooter = $modal.find('.codesync-modal-footer');
 	var installRepo = '';
 	var installIsDone = false;
 
 	function hideModal() {
-		$modal.removeClass('gsm-modal-open');
+		$modal.removeClass('codesync-modal-open');
 		setTimeout(function() {
 			$modal.hide();
 			if (installIsDone) {
@@ -238,56 +238,56 @@ jQuery(document).ready(function($) {
 		}, 250);
 	}
 
-	$modal.find('.gsm-modal-close').on('click', function(e) {
+	$modal.find('.codesync-modal-close').on('click', function(e) {
 		e.preventDefault();
 		hideModal();
 	});
 
-	$modal.find('.gsm-modal-backdrop').on('click', function() {
+	$modal.find('.codesync-modal-backdrop').on('click', function() {
 		hideModal();
 	});
 
-	$modal.on('click', '.gsm-modal-btn-cancel', function(e) {
+	$modal.on('click', '.codesync-modal-btn-cancel', function(e) {
 		e.preventDefault();
 		hideModal();
 	});
 
-	$modal.on('click', '.gsm-modal-btn-close-done', function(e) {
+	$modal.on('click', '.codesync-modal-btn-close-done', function(e) {
 		e.preventDefault();
 		hideModal();
 	});
 
 	$(document).on('keydown', function(e) {
-		if (e.key === 'Escape' && $modal.hasClass('gsm-modal-open')) {
+		if (e.key === 'Escape' && $modal.hasClass('codesync-modal-open')) {
 			hideModal();
 		}
 	});
 
 	function verifyRepo(repo, ref) {
-		var $btnInstall = $modal.find('.gsm-modal-btn-install');
+		var $btnInstall = $modal.find('.codesync-modal-btn-install');
 		$btnInstall.prop('disabled', true);
 		
 		var isSwitching = !!ref;
 		if (isSwitching) {
 			$modalBody.find('select, input, button').prop('disabled', true);
-			$modalBody.find('.gsm-modal-options').css('opacity', '0.5');
+			$modalBody.find('.codesync-modal-options').css('opacity', '0.5');
 		} else {
 			$modalBody.html(
-				'<div class="gsm-modal-loading">' +
-				'  <div class="gsm-modal-spinner"></div>' +
-				'  <p>' + gsm_ajax.texts.checking_repo + '</p>' +
+				'<div class="codesync-modal-loading">' +
+				'  <div class="codesync-modal-spinner"></div>' +
+				'  <p>' + codesync_ajax.texts.checking_repo + '</p>' +
 				'</div>'
 			);
 		}
 
 		$.ajax({
-			url: gsm_ajax.url,
+			url: codesync_ajax.url,
 			type: 'POST',
 			data: {
-				action: 'gsm_verify_repo',
+				action: 'codesync_verify_repo',
 				repo: repo,
 				ref: ref || '',
-				nonce: gsm_ajax.nonce
+				nonce: codesync_ajax.nonce
 			},
 			success: function(response) {
 				if (response.success) {
@@ -295,38 +295,38 @@ jQuery(document).ready(function($) {
 					var bodyHtml = '';
 
 					if (data.found) {
-						var bannerText = gsm_ajax.texts.plugin_detected
+						var bannerText = codesync_ajax.texts.plugin_detected
 							.replace('%1$s', data.plugin_name)
 							.replace('%2$s', data.version);
-						bodyHtml += '<div class="gsm-modal-success-banner">';
-						bodyHtml += '  <i data-lucide="check-circle" class="gsm-icon"></i>';
+						bodyHtml += '<div class="codesync-modal-success-banner">';
+						bodyHtml += '  <i data-lucide="check-circle" class="codesync-icon"></i>';
 						bodyHtml += '  <p>' + bannerText + '</p>';
 						bodyHtml += '</div>';
 					} else {
-						bodyHtml += '<div class="gsm-modal-warning-banner">';
-						bodyHtml += '  <i data-lucide="triangle-alert" class="gsm-icon"></i>';
-						bodyHtml += '  <p>' + gsm_ajax.texts.plugin_not_detected + '</p>';
+						bodyHtml += '<div class="codesync-modal-warning-banner">';
+						bodyHtml += '  <i data-lucide="triangle-alert" class="codesync-icon"></i>';
+						bodyHtml += '  <p>' + codesync_ajax.texts.plugin_not_detected + '</p>';
 						bodyHtml += '</div>';
 					}
 
 					var optionsVisible = !data.found;
 					if (isSwitching) {
-						optionsVisible = $modalBody.find('.gsm-modal-options').is(':visible');
+						optionsVisible = $modalBody.find('.codesync-modal-options').is(':visible');
 					}
 
-					bodyHtml += '<div class="gsm-modal-advanced-toggle">';
-					bodyHtml += '  <a href="#" class="gsm-toggle-advanced-link">';
-					bodyHtml += '    ' + gsm_ajax.texts.advanced_options + ' ';
-					bodyHtml += '    <i data-lucide="chevron-down" class="gsm-icon gsm-toggle-chevron' + (optionsVisible ? ' gsm-rotated' : '') + '"></i>';
+					bodyHtml += '<div class="codesync-modal-advanced-toggle">';
+					bodyHtml += '  <a href="#" class="codesync-toggle-advanced-link">';
+					bodyHtml += '    ' + codesync_ajax.texts.advanced_options + ' ';
+					bodyHtml += '    <i data-lucide="chevron-down" class="codesync-icon codesync-toggle-chevron' + (optionsVisible ? ' codesync-rotated' : '') + '"></i>';
 					bodyHtml += '  </a>';
 					bodyHtml += '</div>';
 
-					bodyHtml += '<div class="gsm-modal-options" style="' + (optionsVisible ? '' : 'display: none;') + '">';
+					bodyHtml += '<div class="codesync-modal-options" style="' + (optionsVisible ? '' : 'display: none;') + '">';
 					
 					// ── Source select (origin) ──────────────────────────────
-					bodyHtml += '  <div class="gsm-modal-field">';
-					bodyHtml += '    <label for="gsm-modal-ref">' + gsm_ajax.texts.select_source + '</label>';
-					bodyHtml += '    <select id="gsm-modal-ref">';
+					bodyHtml += '  <div class="codesync-modal-field">';
+					bodyHtml += '    <label for="codesync-modal-ref">' + codesync_ajax.texts.select_source + '</label>';
+					bodyHtml += '    <select id="codesync-modal-ref">';
 					if (data.sources && data.sources.length > 0) {
 						$.each(data.sources, function(idx, src) {
 							var isSelected = (ref && src.ref === ref) || (!ref && (src.ref === data.default_branch || idx === 0));
@@ -344,26 +344,26 @@ jQuery(document).ready(function($) {
 					var folders   = data.folders || [];
 					var defPath   = data.default_path || '';
 
-					bodyHtml += '  <div class="gsm-modal-field">';
-					bodyHtml += '    <label>' + gsm_ajax.texts.select_folder + '</label>';
-					bodyHtml += '    <input type="hidden" id="gsm-modal-subfolder" value="' + defPath + '">';
+					bodyHtml += '  <div class="codesync-modal-field">';
+					bodyHtml += '    <label>' + codesync_ajax.texts.select_folder + '</label>';
+					bodyHtml += '    <input type="hidden" id="codesync-modal-subfolder" value="' + defPath + '">';
 
 					// Trigger button (shows current selection)
-					var triggerLabel = defPath ? ('📁 ' + defPath) : ('📁 ' + gsm_ajax.texts.root_folder);
-					bodyHtml += '    <div class="gsm-folder-picker">';
-					bodyHtml += '      <button type="button" class="gsm-folder-trigger" aria-expanded="false">';
-					bodyHtml += '        <span class="gsm-folder-trigger-label">' + triggerLabel + '</span>';
-					bodyHtml += '        <i data-lucide="chevron-down" class="gsm-icon gsm-folder-trigger-chevron"></i>';
+					var triggerLabel = defPath ? ('📁 ' + defPath) : ('📁 ' + codesync_ajax.texts.root_folder);
+					bodyHtml += '    <div class="codesync-folder-picker">';
+					bodyHtml += '      <button type="button" class="codesync-folder-trigger" aria-expanded="false">';
+					bodyHtml += '        <span class="codesync-folder-trigger-label">' + triggerLabel + '</span>';
+					bodyHtml += '        <i data-lucide="chevron-down" class="codesync-icon codesync-folder-trigger-chevron"></i>';
 					bodyHtml += '      </button>';
 
 					var treeItemsHtml = '';
 
 					// Root option
-					var rootSel = (defPath === '') ? ' gsm-folder-item--selected' : '';
-					treeItemsHtml += '<li class="gsm-folder-item gsm-folder-item--root' + rootSel + '" data-value="">';
-					treeItemsHtml += '  <span class="gsm-fi-icon">📂</span>';
-					treeItemsHtml += '  <span class="gsm-fi-name">' + gsm_ajax.texts.root_folder + '</span>';
-					if (defPath === '') { treeItemsHtml += '<i data-lucide="check" class="gsm-icon gsm-fi-check"></i>'; }
+					var rootSel = (defPath === '') ? ' codesync-folder-item--selected' : '';
+					treeItemsHtml += '<li class="codesync-folder-item codesync-folder-item--root' + rootSel + '" data-value="">';
+					treeItemsHtml += '  <span class="codesync-fi-icon">📂</span>';
+					treeItemsHtml += '  <span class="codesync-fi-name">' + codesync_ajax.texts.root_folder + '</span>';
+					if (defPath === '') { treeItemsHtml += '<i data-lucide="check" class="codesync-icon codesync-fi-check"></i>'; }
 					treeItemsHtml += '</li>';
 
 					// Build tree from flat paths
@@ -382,15 +382,15 @@ jQuery(document).ready(function($) {
 						$.each(node, function(name, obj) {
 							var path = obj.__path;
 							var indent = depth;
-							var isSel = (defPath === path) ? ' gsm-folder-item--selected' : '';
-							var checkIcon = (defPath === path) ? '<i data-lucide="check" class="gsm-icon gsm-fi-check"></i>' : '';
-							html += '<li class="gsm-folder-item' + isSel + '" data-value="' + path + '" data-depth="' + indent + '">';
+							var isSel = (defPath === path) ? ' codesync-folder-item--selected' : '';
+							var checkIcon = (defPath === path) ? '<i data-lucide="check" class="codesync-icon codesync-fi-check"></i>' : '';
+							html += '<li class="codesync-folder-item' + isSel + '" data-value="' + path + '" data-depth="' + indent + '">';
 							for (var d = 0; d < indent; d++) {
-								html += '<span class="gsm-fi-indent"></span>';
+								html += '<span class="codesync-fi-indent"></span>';
 							}
-							html += '<span class="gsm-fi-connector"></span>';
-							html += '<span class="gsm-fi-icon">📁</span>';
-							html += '<span class="gsm-fi-name">' + name + '</span>';
+							html += '<span class="codesync-fi-connector"></span>';
+							html += '<span class="codesync-fi-icon">📁</span>';
+							html += '<span class="codesync-fi-name">' + name + '</span>';
 							html += checkIcon;
 							html += '</li>';
 							html += renderTree(obj.__children, depth + 1);
@@ -400,117 +400,117 @@ jQuery(document).ready(function($) {
 
 					treeItemsHtml += renderTree(tree, 0);
 
-					bodyHtml += '      <div class="gsm-folder-dropdown" style="display:none;">';
-					bodyHtml += '        <ul class="gsm-folder-tree">' + treeItemsHtml + '</ul>';
+					bodyHtml += '      <div class="codesync-folder-dropdown" style="display:none;">';
+					bodyHtml += '        <ul class="codesync-folder-tree">' + treeItemsHtml + '</ul>';
 					bodyHtml += '      </div>';
-					bodyHtml += '    </div>'; // .gsm-folder-picker
+					bodyHtml += '    </div>'; // .codesync-folder-picker
 
 
 					// Info box
-					bodyHtml += '    <div class="gsm-info-box">';
-					bodyHtml += '      <i data-lucide="info" class="gsm-icon"></i>';
-					bodyHtml += '      <p class="gsm-field-description">' + gsm_ajax.texts.select_folder_desc + '</p>';
+					bodyHtml += '    <div class="codesync-info-box">';
+					bodyHtml += '      <i data-lucide="info" class="codesync-icon"></i>';
+					bodyHtml += '      <p class="codesync-field-description">' + codesync_ajax.texts.select_folder_desc + '</p>';
 					bodyHtml += '    </div>';
 					bodyHtml += '  </div>';
 
-					bodyHtml += '</div>'; // .gsm-modal-options
+					bodyHtml += '</div>'; // .codesync-modal-options
 
 					$modalBody.html(bodyHtml);
 					lucide.createIcons({ nodes: [$modalBody[0]] });
-					$modalFooter.find('.gsm-modal-btn-install').prop('disabled', false);
+					$modalFooter.find('.codesync-modal-btn-install').prop('disabled', false);
 
 					// ── Toggle advanced panel ──────────────────────────────
-					$modalBody.find('.gsm-toggle-advanced-link').on('click', function(e) {
+					$modalBody.find('.codesync-toggle-advanced-link').on('click', function(e) {
 						e.preventDefault();
 						var $link = $(this);
-						var $optionsPanel = $modalBody.find('.gsm-modal-options');
-						var $icon = $link.find('.gsm-toggle-chevron');
+						var $optionsPanel = $modalBody.find('.codesync-modal-options');
+						var $icon = $link.find('.codesync-toggle-chevron');
 
 						$optionsPanel.slideToggle(200, function() {
-							$icon.toggleClass('gsm-rotated', $optionsPanel.is(':visible'));
+							$icon.toggleClass('codesync-rotated', $optionsPanel.is(':visible'));
 						});
 					});
 
 					// ── Origin select change → reload verify ───────────────
-					$modalBody.find('#gsm-modal-ref').on('change', function() {
+					$modalBody.find('#codesync-modal-ref').on('change', function() {
 						var selectedRef = $(this).val();
-						$('.gsm-folder-dropdown').hide();
-						$('.gsm-folder-trigger').attr('aria-expanded', 'false')
-							.find('.gsm-folder-trigger-chevron').removeClass('gsm-chevron-up');
+						$('.codesync-folder-dropdown').hide();
+						$('.codesync-folder-trigger').attr('aria-expanded', 'false')
+							.find('.codesync-folder-trigger-chevron').removeClass('codesync-chevron-up');
 						verifyRepo(repo, selectedRef);
 					});
 
 				} else {
-					$modalBody.html('<div class="gsm-error-message">' + response.data.message + '</div>');
+					$modalBody.html('<div class="codesync-error-message">' + response.data.message + '</div>');
 				}
 			},
 			error: function() {
-				$modalBody.html('<div class="gsm-error-message">' + gsm_ajax.texts.scan_fail + '</div>');
+				$modalBody.html('<div class="codesync-error-message">' + codesync_ajax.texts.scan_fail + '</div>');
 			}
 		});
 	}
 
 	// Close inline dropdown when clicking outside the picker
 	$(document).on('click.gsmFolderClose', function(e) {
-		if (!$(e.target).closest('.gsm-folder-picker').length) {
-			$('.gsm-folder-dropdown').hide();
-			$('.gsm-folder-trigger').attr('aria-expanded', 'false')
-				.find('.gsm-folder-trigger-chevron').removeClass('gsm-chevron-up');
+		if (!$(e.target).closest('.codesync-folder-picker').length) {
+			$('.codesync-folder-dropdown').hide();
+			$('.codesync-folder-trigger').attr('aria-expanded', 'false')
+				.find('.codesync-folder-trigger-chevron').removeClass('codesync-chevron-up');
 		}
 	});
 
 	// Toggle inline dropdown on trigger click
-	$modal.on('click', '.gsm-folder-trigger', function(e) {
+	$modal.on('click', '.codesync-folder-trigger', function(e) {
 		e.stopPropagation();
 		var $trigger  = $(this);
-		var $picker   = $trigger.closest('.gsm-folder-picker');
-		var $dropdown = $picker.find('.gsm-folder-dropdown');
+		var $picker   = $trigger.closest('.codesync-folder-picker');
+		var $dropdown = $picker.find('.codesync-folder-dropdown');
 		var isOpen    = $trigger.attr('aria-expanded') === 'true';
 
 		if (isOpen) {
 			$dropdown.hide();
 			$trigger.attr('aria-expanded', 'false')
-				.find('.gsm-folder-trigger-chevron').removeClass('gsm-chevron-up');
+				.find('.codesync-folder-trigger-chevron').removeClass('codesync-chevron-up');
 		} else {
 			$dropdown.show();
 			$trigger.attr('aria-expanded', 'true')
-				.find('.gsm-folder-trigger-chevron').addClass('gsm-chevron-up');
+				.find('.codesync-folder-trigger-chevron').addClass('codesync-chevron-up');
 		}
 	});
 
 	// Select folder item from inline dropdown
-	$modal.on('click', '.gsm-folder-item', function(e) {
+	$modal.on('click', '.codesync-folder-item', function(e) {
 		e.stopPropagation();
 		var $item    = $(this);
 		var newValue = $item.data('value');
-		var $picker  = $item.closest('.gsm-folder-picker');
-		var $trigger = $picker.find('.gsm-folder-trigger');
+		var $picker  = $item.closest('.codesync-folder-picker');
+		var $trigger = $picker.find('.codesync-folder-trigger');
 
-		$modalBody.find('#gsm-modal-subfolder').val(newValue);
+		$modalBody.find('#codesync-modal-subfolder').val(newValue);
 
-		$picker.find('.gsm-folder-item').removeClass('gsm-folder-item--selected')
-			.find('.gsm-fi-check').remove();
-		$item.addClass('gsm-folder-item--selected')
-			.append('<i data-lucide="check" class="gsm-icon gsm-fi-check"></i>');
+		$picker.find('.codesync-folder-item').removeClass('codesync-folder-item--selected')
+			.find('.codesync-fi-check').remove();
+		$item.addClass('codesync-folder-item--selected')
+			.append('<i data-lucide="check" class="codesync-icon codesync-fi-check"></i>');
 		lucide.createIcons({ nodes: [$item[0]] });
 
-		var label = newValue ? ('📁 ' + newValue) : ('📁 ' + gsm_ajax.texts.root_folder);
-		$trigger.find('.gsm-folder-trigger-label').text(label);
+		var label = newValue ? ('📁 ' + newValue) : ('📁 ' + codesync_ajax.texts.root_folder);
+		$trigger.find('.codesync-folder-trigger-label').text(label);
 
-		$picker.find('.gsm-folder-dropdown').hide();
+		$picker.find('.codesync-folder-dropdown').hide();
 		$trigger.attr('aria-expanded', 'false')
-			.find('.gsm-folder-trigger-chevron').removeClass('gsm-chevron-up');
+			.find('.codesync-folder-trigger-chevron').removeClass('codesync-chevron-up');
 	});
 
 	// Close dropdown when modal closes
-	$modal.on('click', '.gsm-modal-close, .gsm-modal-btn-cancel, .gsm-modal-btn-close-done', function() {
-		$('.gsm-folder-dropdown').hide();
-		$('.gsm-folder-trigger').attr('aria-expanded', 'false')
-			.find('.gsm-folder-trigger-chevron').removeClass('gsm-chevron-up');
+	$modal.on('click', '.codesync-modal-close, .codesync-modal-btn-cancel, .codesync-modal-btn-close-done', function() {
+		$('.codesync-folder-dropdown').hide();
+		$('.codesync-folder-trigger').attr('aria-expanded', 'false')
+			.find('.codesync-folder-trigger-chevron').removeClass('codesync-chevron-up');
 	});
 
 
-	$reposContainer.on('click', '.gsm-btn-install', function(e) {
+	$reposContainer.on('click', '.codesync-btn-install', function(e) {
 		e.preventDefault();
 		
 		var repo = $(this).data('repo');
@@ -520,78 +520,78 @@ jQuery(document).ready(function($) {
 		installIsDone = false;
 
 		$modalFooter.html(
-			'<button type="button" class="button gsm-modal-btn-cancel">' + gsm_ajax.texts.close_btn + '</button>' +
-			'<button type="button" class="button button-primary gsm-modal-btn-install" disabled>' + gsm_ajax.texts.install_btn + '</button>'
+			'<button type="button" class="button codesync-modal-btn-cancel">' + codesync_ajax.texts.close_btn + '</button>' +
+			'<button type="button" class="button button-primary codesync-modal-btn-install" disabled>' + codesync_ajax.texts.install_btn + '</button>'
 		);
 
 		$modal.show();
 		$modal[0].offsetHeight; // Trigger reflow for transition
-		$modal.addClass('gsm-modal-open');
+		$modal.addClass('codesync-modal-open');
 
 		verifyRepo(repo);
 	});
 
-	$modal.on('click', '.gsm-modal-btn-install', function(e) {
+	$modal.on('click', '.codesync-modal-btn-install', function(e) {
 		e.preventDefault();
 		
 		var $btn = $(this);
 		$btn.prop('disabled', true);
-		$modal.find('.gsm-modal-btn-cancel').prop('disabled', true);
-		$modal.find('.gsm-modal-close').css('pointer-events', 'none');
+		$modal.find('.codesync-modal-btn-cancel').prop('disabled', true);
+		$modal.find('.codesync-modal-close').css('pointer-events', 'none');
 
-		var selectedRef = $('#gsm-modal-ref').val() || '';
-		var selectedSubfolder = $('#gsm-modal-subfolder').val() || '';
+		var selectedRef = $('#codesync-modal-ref').val() || '';
+		var selectedSubfolder = $('#codesync-modal-subfolder').val() || '';
 
 		$modalBody.html(
-			'<div class="gsm-modal-installing">' +
-			'  <div class="gsm-modal-spinner"></div>' +
-			'  <p>' + gsm_ajax.texts.installing + '</p>' +
+			'<div class="codesync-modal-installing">' +
+			'  <div class="codesync-modal-spinner"></div>' +
+			'  <p>' + codesync_ajax.texts.installing + '</p>' +
 			'</div>'
 		);
 
 		$.ajax({
-			url: gsm_ajax.url,
+			url: codesync_ajax.url,
 			type: 'POST',
 			data: {
-				action: 'gsm_add_plugin',
+				action: 'codesync_add_plugin',
 				action_type: 'install',
 				repo: installRepo,
 				ref: selectedRef,
 				subfolder: selectedSubfolder,
-				nonce: gsm_ajax.nonce
+				nonce: codesync_ajax.nonce
 			},
 			success: function(response) {
-				$modal.find('.gsm-modal-close').css('pointer-events', 'auto');
+				$modal.find('.codesync-modal-close').css('pointer-events', 'auto');
 				if (response.success) {
 					installIsDone = true;
 					cachedRepos = [];
 
 					var doneHtml = '';
-					doneHtml += '<div class="gsm-modal-done">';
-					doneHtml += '  <div class="gsm-modal-done-icon">✓</div>';
-					doneHtml += '  <h4>' + gsm_ajax.texts.install_success_title + '</h4>';
-					doneHtml += '  <p>' + gsm_ajax.texts.install_success_msg.replace('%1$s', response.data.plugin_name).replace('%2$s', response.data.version) + '</p>';
-					doneHtml += '  <p><a href="' + response.data.activate_url + '" class="button button-primary button-hero gsm-modal-btn-activate">' + gsm_ajax.texts.activate_btn + '</a></p>';
+					doneHtml += '<div class="codesync-modal-done">';
+					doneHtml += '  <div class="codesync-modal-done-icon">✓</div>';
+					doneHtml += '  <h4>' + codesync_ajax.texts.install_success_title + '</h4>';
+					doneHtml += '  <p>' + codesync_ajax.texts.install_success_msg.replace('%1$s', response.data.plugin_name).replace('%2$s', response.data.version) + '</p>';
+					doneHtml += '  <p><a href="' + response.data.activate_url + '" class="button button-primary button-hero codesync-modal-btn-activate">' + codesync_ajax.texts.activate_btn + '</a></p>';
 					doneHtml += '</div>';
 
 					$modalBody.html(doneHtml);
-					$modalFooter.html('<button type="button" class="button gsm-modal-btn-close-done">' + gsm_ajax.texts.close_btn + '</button>');
+					$modalFooter.html('<button type="button" class="button codesync-modal-btn-close-done">' + codesync_ajax.texts.close_btn + '</button>');
 				} else {
-					$modalBody.html('<div class="gsm-error-message">' + gsm_ajax.texts.install_error.replace('%s', response.data.message) + '</div>');
+					$modalBody.html('<div class="codesync-error-message">' + codesync_ajax.texts.install_error.replace('%s', response.data.message) + '</div>');
 					
 					$modalFooter.html(
-						'<button type="button" class="button gsm-modal-btn-cancel">' + gsm_ajax.texts.close_btn + '</button>' +
-						'<button type="button" class="button button-primary gsm-modal-btn-install">' + gsm_ajax.texts.install_btn + '</button>'
+						'<button type="button" class="button codesync-modal-btn-cancel">' + codesync_ajax.texts.close_btn + '</button>' +
+						'<button type="button" class="button button-primary codesync-modal-btn-install">' + codesync_ajax.texts.install_btn + '</button>'
 					);
 				}
 			},
 			error: function() {
-				$modal.find('.gsm-modal-close').css('pointer-events', 'auto');
-				$modalBody.html('<div class="gsm-error-message">' + gsm_ajax.texts.install_fail + '</div>');
+				$modal.find('.codesync-modal-close').css('pointer-events', 'auto');
+				$modalBody.html('<div class="codesync-error-message">' + codesync_ajax.texts.install_fail + '</div>');
 				
 				$modalFooter.html(
-					'<button type="button" class="button gsm-modal-btn-cancel">' + gsm_ajax.texts.close_btn + '</button>' +
-					'<button type="button" class="button button-primary gsm-modal-btn-install">' + gsm_ajax.texts.install_btn + '</button>'
+					'<button type="button" class="button codesync-modal-btn-cancel">' + codesync_ajax.texts.close_btn + '</button>' +
+					'<button type="button" class="button button-primary codesync-modal-btn-install">' + codesync_ajax.texts.install_btn + '</button>'
 				);
 			}
 		});
@@ -600,34 +600,34 @@ jQuery(document).ready(function($) {
 	/* ---------------------------------------------------- */
 	/* 7. Stop Managing Plugin                             */
 	/* ---------------------------------------------------- */
-	$pluginsCards.on('click', '.gsm-btn-remove', function(e) {
+	$pluginsCards.on('click', '.codesync-btn-remove', function(e) {
 		e.preventDefault();
 
 		var $btn = $(this);
 		var repo = $btn.data('repo');
 		if (!repo) return;
 
-		if (!confirm(gsm_ajax.texts.confirm_stop)) {
+		if (!confirm(codesync_ajax.texts.confirm_stop)) {
 			return;
 		}
 
 		$btn.prop('disabled', true);
-		var $card = $btn.closest('.gsm-plugin-card');
+		var $card = $btn.closest('.codesync-plugin-card');
 
 		$.ajax({
-			url: gsm_ajax.url,
+			url: codesync_ajax.url,
 			type: 'POST',
 			data: {
-				action: 'gsm_remove_plugin',
+				action: 'codesync_remove_plugin',
 				repo: repo,
-				nonce: gsm_ajax.nonce
+				nonce: codesync_ajax.nonce
 			},
 			success: function(response) {
 				if (response.success) {
 					$card.fadeOut(300, function() {
 						$(this).remove();
-						if ($pluginsCards.find('.gsm-plugin-card').length === 0) {
-							$pluginsCards.html('<p class="gsm-no-plugins-msg">' + gsm_ajax.texts.no_managed + '</p>');
+						if ($pluginsCards.find('.codesync-plugin-card').length === 0) {
+							$pluginsCards.html('<p class="codesync-no-plugins-msg">' + codesync_ajax.texts.no_managed + '</p>');
 						}
 					});
 
@@ -639,7 +639,7 @@ jQuery(document).ready(function($) {
 				}
 			},
 			error: function() {
-				alert(gsm_ajax.texts.remove_error);
+				alert(codesync_ajax.texts.remove_error);
 				$btn.prop('disabled', false);
 			}
 		});
@@ -648,27 +648,27 @@ jQuery(document).ready(function($) {
 	/* ---------------------------------------------------- */
 	/* 8. Force Update Plugin                               */
 	/* ---------------------------------------------------- */
-	$pluginsCards.on('click', '.gsm-btn-force-update', function(e) {
+	$pluginsCards.on('click', '.codesync-btn-force-update', function(e) {
 		e.preventDefault();
 
 		var $btn  = $(this);
 		var repo  = $btn.data('repo');
 		if (!repo) return;
 
-		if (!confirm(gsm_ajax.texts.force_update_confirm.replace('%s', repo))) {
+		if (!confirm(codesync_ajax.texts.force_update_confirm.replace('%s', repo))) {
 			return;
 		}
 
 		var origLabel = $btn.html();
-		$btn.prop('disabled', true).html('<i data-lucide="loader-circle" class="gsm-icon gsm-spin"></i> ' + gsm_ajax.texts.force_updating);
+		$btn.prop('disabled', true).html('<i data-lucide="loader-circle" class="codesync-icon codesync-spin"></i> ' + codesync_ajax.texts.force_updating);
 
 		$.ajax({
-			url: gsm_ajax.url,
+			url: codesync_ajax.url,
 			type: 'POST',
 			data: {
-				action: 'gsm_force_update',
+				action: 'codesync_force_update',
 				repo: repo,
-				nonce: gsm_ajax.nonce
+				nonce: codesync_ajax.nonce
 			},
 			success: function(response) {
 				$btn.prop('disabled', false).html(origLabel);
@@ -678,16 +678,16 @@ jQuery(document).ready(function($) {
 						lucide.createIcons({ nodes: [$pluginsCards[0]] });
 					}
 					if (response.data.logs_html) {
-						$('#gsm-logs-table-wrapper').html(response.data.logs_html);
+						$('#codesync-logs-table-wrapper').html(response.data.logs_html);
 					}
 					alert(response.data.message);
 				} else {
-					alert(gsm_ajax.texts.force_update_err.replace('%s', response.data.message));
+					alert(codesync_ajax.texts.force_update_err.replace('%s', response.data.message));
 				}
 			},
 			error: function() {
 				$btn.prop('disabled', false).html(origLabel);
-				alert(gsm_ajax.texts.force_update_fail);
+				alert(codesync_ajax.texts.force_update_fail);
 			}
 		});
 	});
@@ -702,11 +702,11 @@ jQuery(document).ready(function($) {
 		$scanSpinner.addClass('is-active');
 
 		$.ajax({
-			url: gsm_ajax.url,
+			url: codesync_ajax.url,
 			type: 'POST',
 			data: {
-				action: 'gsm_check_updates',
-				nonce: gsm_ajax.nonce
+				action: 'codesync_check_updates',
+				nonce: codesync_ajax.nonce
 			},
 			success: function(response) {
 				$scanBtn.prop('disabled', false).removeClass('updating');
@@ -720,18 +720,18 @@ jQuery(document).ready(function($) {
 					}
 					// Update logs tab content
 					if (response.data.logs_html) {
-						$('#gsm-logs-table-wrapper').html(response.data.logs_html);
+						$('#codesync-logs-table-wrapper').html(response.data.logs_html);
 					}
 
 					alert(response.data.message);
 				} else {
-					alert(gsm_ajax.texts.scan_error.replace('%s', response.data.message));
+					alert(codesync_ajax.texts.scan_error.replace('%s', response.data.message));
 				}
 			},
 			error: function() {
 				$scanBtn.prop('disabled', false).removeClass('updating');
 				$scanSpinner.removeClass('is-active');
-				alert(gsm_ajax.texts.scan_fail);
+				alert(codesync_ajax.texts.scan_fail);
 			}
 		});
 	});
@@ -739,18 +739,18 @@ jQuery(document).ready(function($) {
 	/* ---------------------------------------------------- */
 	/* 9. Save Language Setting                            */
 	/* ---------------------------------------------------- */
-	$(document).on('change', '#gsm_locale', function() {
+	$(document).on('change', '#codesync_locale', function() {
 		var selectedLocale = $(this).val();
 		var $select = $(this);
 		$select.prop('disabled', true);
 		
 		$.ajax({
-			url: gsm_ajax.url,
+			url: codesync_ajax.url,
 			type: 'POST',
 			data: {
-				action: 'gsm_save_locale',
+				action: 'codesync_save_locale',
 				locale: selectedLocale,
-				nonce: gsm_ajax.nonce
+				nonce: codesync_ajax.nonce
 			},
 			success: function(response) {
 				$select.prop('disabled', false);
@@ -762,7 +762,7 @@ jQuery(document).ready(function($) {
 			},
 			error: function() {
 				$select.prop('disabled', false);
-				alert(gsm_ajax.texts.save_locale_error);
+				alert(codesync_ajax.texts.save_locale_error);
 			}
 		});
 	});
