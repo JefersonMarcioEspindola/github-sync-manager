@@ -198,8 +198,8 @@ class GSM_Admin {
 						<div class="gsm-help-box">
 							<p><strong><?php esc_html_e( 'Qual tipo de token criar?', 'sync-manager-for-github' ); ?></strong></p>
 							<ul>
-								<li><strong>Classic PAT:</strong> <?php esc_html_e( 'Crie um token com o escopo ', 'sync-manager-for-github' ); ?><code>repo</code> (<?php esc_html_e( 'para repositórios privados e públicos', 'sync-manager-for-github' ); ?>) <?php esc_html_e( 'ou ', 'sync-manager-for-github' ); ?><code>public_repo</code> (<?php esc_html_e( 'somente para públicos', 'sync-manager-for-github' ); ?>).</li>
-								<li><strong>Fine-Grained PAT (Novo):</strong> <?php esc_html_e( 'Selecione permissão de leitura e gravação para "Contents" e "Metadata" nos repositórios que deseja gerenciar.', 'sync-manager-for-github' ); ?></li>
+								<li><strong><?php esc_html_e( 'Classic PAT:', 'sync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Crie um token com o escopo ', 'sync-manager-for-github' ); ?><code>repo</code> (<?php esc_html_e( 'para repositórios privados e públicos', 'sync-manager-for-github' ); ?>) <?php esc_html_e( 'ou ', 'sync-manager-for-github' ); ?><code>public_repo</code> (<?php esc_html_e( 'somente para públicos', 'sync-manager-for-github' ); ?>).</li>
+								<li><strong><?php esc_html_e( 'Fine-Grained PAT (Novo):', 'sync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Selecione permissão de leitura e gravação para "Contents" e "Metadata" nos repositórios que deseja gerenciar.', 'sync-manager-for-github' ); ?></li>
 							</ul>
 							<p>👉 <a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Clique aqui para criar seu Token no GitHub', 'sync-manager-for-github' ); ?></a></p>
 						</div>

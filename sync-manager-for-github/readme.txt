@@ -3,7 +3,7 @@ Contributors: JefersonMarcioEspindola
 Tags: github, plugin updater, private plugins, github releases, self-hosted
 Requires at least: 5.8
 Tested up to: 7.0
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -72,6 +72,9 @@ The only external communication is with the GitHub API (`api.github.com`) using 
 3. Activity log showing install and update history.
 
 == Changelog ==
+
+= 1.0.4 =
+* Fixed translation issue for Classic PAT and Fine-Grained PAT labels when running in English locale.
 
 = 1.0.3 =
 * Centered the text on the "Activate Plugin Now" button.
@@ -178,6 +181,9 @@ The only external communication is with the GitHub API (`api.github.com`) using 
 * Initial release with AES-256-GCM encryption, GitHub API manager, automatic WP-Cron checker, and admin dashboard.
 
 == Upgrade Notice ==
+
+= 1.0.4 =
+Fixed translation issue for Classic PAT and Fine-Grained PAT labels in English mode.
 
 = 1.0.1 =
 Minor fix version that resolves language translation loading, button border-radius visual consistency, and repository language filtering logic.
