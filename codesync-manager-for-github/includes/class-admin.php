@@ -371,28 +371,49 @@ class CODESYNC_Admin {
 					<button type="button" class="codesync-modal-close" aria-label="<?php esc_attr_e( 'Close', 'codesync-manager-for-github' ); ?>">&times;</button>
 				</div>
 				<div class="codesync-modal-body">
-					<p><?php esc_html_e( 'Configure a Webhook on GitHub (under repository Settings > Webhooks) to be notified of updates instantly.', 'codesync-manager-for-github' ); ?></p>
-					<p>👉 <a href="https://github.com" id="codesync-webhook-direct-link" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Click here to go to Webhooks settings on GitHub', 'codesync-manager-for-github' ); ?></a></p>
+					<div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 10px; margin-bottom: 15px; font-size: 13px; color: #92400e;">
+						<strong><?php esc_html_e( 'Note:', 'codesync-manager-for-github' ); ?></strong> <?php esc_html_e( 'You can only configure webhooks if you are the repository owner or have admin access.', 'codesync-manager-for-github' ); ?>
+					</div>
+
+					<p><?php esc_html_e( 'Follow these steps to configure a Webhook and receive updates instantly:', 'codesync-manager-for-github' ); ?></p>
 					
-					<div class="codesync-form-group">
-						<label><strong><?php esc_html_e( 'Payload URL:', 'codesync-manager-for-github' ); ?></strong></label>
-						<div style="display:flex;gap:10px;">
-							<input type="text" readonly value="<?php echo esc_url( get_rest_url( null, 'codesync/v1/webhook' ) ); ?>" id="codesync-webhook-url" />
-							<button type="button" class="button codesync-btn-copy" data-target="#codesync-webhook-url"><i data-lucide="copy" class="codesync-icon"></i></button>
+					<div style="margin-bottom: 15px;">
+						<strong><?php esc_html_e( 'Step 1:', 'codesync-manager-for-github' ); ?></strong> 👉 <a href="https://github.com" id="codesync-webhook-direct-link" target="_blank" rel="noopener noreferrer" style="font-weight:600; text-decoration:underline;"><?php esc_html_e( 'Go to Webhooks settings on GitHub', 'codesync-manager-for-github' ); ?></a> <?php esc_html_e( 'and click "Add webhook".', 'codesync-manager-for-github' ); ?>
+					</div>
+
+					<div style="margin-bottom: 15px; padding-left: 10px; border-left: 2px solid #e2e8f0;">
+						<div class="codesync-form-group" style="margin-bottom: 10px;">
+							<label><strong><?php esc_html_e( 'Payload URL:', 'codesync-manager-for-github' ); ?></strong></label>
+							<div style="display:flex;gap:10px;">
+								<input type="text" readonly value="<?php echo esc_url( get_rest_url( null, 'codesync/v1/webhook' ) ); ?>" id="codesync-webhook-url" />
+								<button type="button" class="button codesync-btn-copy" data-target="#codesync-webhook-url"><i data-lucide="copy" class="codesync-icon"></i></button>
+							</div>
+						</div>
+
+						<p style="margin-bottom: 10px;"><strong><?php esc_html_e( 'Content type:', 'codesync-manager-for-github' ); ?></strong> <code style="padding: 3px 6px; background:#f1f5f9;">application/json</code></p>
+
+						<div class="codesync-form-group" style="margin-bottom: 10px;">
+							<label><strong><?php esc_html_e( 'Secret:', 'codesync-manager-for-github' ); ?></strong></label>
+							<div style="display:flex;gap:10px;">
+								<input type="password" readonly value="<?php echo esc_attr( class_exists('CODESYNC_Webhook') ? CODESYNC_Webhook::get_or_create_secret() : '' ); ?>" id="codesync-webhook-secret" />
+								<button type="button" class="button codesync-btn-toggle-visibility" data-target="#codesync-webhook-secret"><i data-lucide="eye" class="codesync-icon"></i></button>
+								<button type="button" class="button codesync-btn-copy" data-target="#codesync-webhook-secret"><i data-lucide="copy" class="codesync-icon"></i></button>
+							</div>
 						</div>
 					</div>
 
-					<div class="codesync-form-group">
-						<label><strong><?php esc_html_e( 'Secret:', 'codesync-manager-for-github' ); ?></strong></label>
-						<div style="display:flex;gap:10px;">
-							<input type="password" readonly value="<?php echo esc_attr( class_exists('CODESYNC_Webhook') ? CODESYNC_Webhook::get_or_create_secret() : '' ); ?>" id="codesync-webhook-secret" />
-							<button type="button" class="button codesync-btn-toggle-visibility" data-target="#codesync-webhook-secret"><i data-lucide="eye" class="codesync-icon"></i></button>
-							<button type="button" class="button codesync-btn-copy" data-target="#codesync-webhook-secret"><i data-lucide="copy" class="codesync-icon"></i></button>
-						</div>
+					<div style="margin-bottom: 15px;">
+						<strong><?php esc_html_e( 'Step 2:', 'codesync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Under "Which events would you like to trigger this webhook?", select:', 'codesync-manager-for-github' ); ?>
+						<ul style="list-style-type: disc; margin-left: 20px; margin-top: 5px; color: #475569;">
+							<li><em><?php esc_html_e( '"Let me select individual events."', 'codesync-manager-for-github' ); ?></em></li>
+							<li><?php esc_html_e( 'Check', 'codesync-manager-for-github' ); ?> <strong>Pushes</strong> <?php esc_html_e( 'and', 'codesync-manager-for-github' ); ?> <strong>Releases</strong>.</li>
+							<li><?php esc_html_e( 'Uncheck everything else.', 'codesync-manager-for-github' ); ?></li>
+						</ul>
 					</div>
 
-					<p><strong><?php esc_html_e( 'Content type:', 'codesync-manager-for-github' ); ?></strong> <code>application/json</code></p>
-					<p><strong><?php esc_html_e( 'Events:', 'codesync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Select "Let me select individual events" and check', 'codesync-manager-for-github' ); ?> <strong>Pushes</strong> <?php esc_html_e( 'and', 'codesync-manager-for-github' ); ?> <strong>Releases</strong>.</p>
+					<div style="margin-bottom: 15px;">
+						<strong><?php esc_html_e( 'Step 3:', 'codesync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Click "Add webhook" at the bottom of the page.', 'codesync-manager-for-github' ); ?>
+					</div>
 				</div>
 				<div class="codesync-modal-footer" style="display:flex; justify-content:space-between; align-items:center;">
 					<button type="button" class="button codesync-modal-btn-cancel"><?php esc_html_e( 'Close', 'codesync-manager-for-github' ); ?></button>
@@ -550,12 +571,19 @@ class CODESYNC_Admin {
 							<i data-lucide="external-link" class="codesync-icon"></i><?php echo esc_html( $repo ); ?>
 						</a>
 					</div>
-					<span class="codesync-status-badge <?php echo esc_attr( $status_class ); ?>">
-						<?php echo esc_html( $status_label ); ?>
-						<?php if ( 'erro' === $status && ! empty( $error_message ) ) : ?>
-							<i data-lucide="help-circle" class="codesync-icon codesync-tooltip-trigger" title="<?php echo esc_attr( $error_message ); ?>"></i>
+					<div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+						<span class="codesync-status-badge <?php echo esc_attr( $status_class ); ?>">
+							<?php echo esc_html( $status_label ); ?>
+							<?php if ( 'erro' === $status && ! empty( $error_message ) ) : ?>
+								<i data-lucide="help-circle" class="codesync-icon codesync-tooltip-trigger" title="<?php echo esc_attr( $error_message ); ?>"></i>
+							<?php endif; ?>
+						</span>
+						<?php if ( get_option( 'codesync_webhook_ping_' . $repo ) ) : ?>
+							<span style="display:inline-flex; align-items:center; background:#ecfdf5; color:#059669; border:1px solid #a7f3d0; padding:2px 8px; border-radius:9999px; font-size:11px; font-weight:600;" title="<?php esc_attr_e( 'Receiving real-time updates from GitHub', 'codesync-manager-for-github' ); ?>">
+								<i data-lucide="radio" style="width:12px;height:12px;margin-right:4px;"></i> <?php esc_html_e( 'Webhook Active', 'codesync-manager-for-github' ); ?>
+							</span>
 						<?php endif; ?>
-					</span>
+					</div>
 				</div>
 
 				<div class="codesync-plugin-versions">
