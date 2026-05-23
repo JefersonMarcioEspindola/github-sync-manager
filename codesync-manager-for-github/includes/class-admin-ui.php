@@ -355,12 +355,12 @@ class CODESYNC_Admin_UI {
 				<div class="codesync-modal-body">
 					<!-- Conteúdo dinâmico via JS -->
 				</div>
-				<div class="codesync-modal-footer" style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
-					<div>
+				<div class="codesync-modal-footer" style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px; align-items:center;">
+					<div class="codesync-modal-footer-left" style="display:flex; gap:8px; align-items:center;">
+						<button type="button" class="button codesync-modal-btn-cancel"><?php esc_html_e( 'Cancel', 'codesync-manager-for-github' ); ?></button>
 						<button type="button" class="button codesync-btn-copy-md" style="display:none;"><i data-lucide="copy" class="codesync-icon" style="width:14px;height:14px;"></i> <?php esc_html_e( 'Copy Markdown', 'codesync-manager-for-github' ); ?></button>
 					</div>
-					<div>
-						<button type="button" class="button codesync-modal-btn-cancel"><?php esc_html_e( 'Cancel', 'codesync-manager-for-github' ); ?></button>
+					<div class="codesync-modal-footer-right" style="display:flex; gap:8px; align-items:center;">
 						<button type="button" class="button button-primary codesync-modal-btn-install codesync-btn-confirm-install" style="display:none;"><?php esc_html_e( 'Confirm Installation', 'codesync-manager-for-github' ); ?></button>
 						<button type="button" class="button button-primary codesync-modal-btn-install codesync-btn-force-install" style="display:none; background:#ef4444; border-color:#dc2626; text-shadow:none;"><?php esc_html_e( 'Install Anyway', 'codesync-manager-for-github' ); ?></button>
 					</div>

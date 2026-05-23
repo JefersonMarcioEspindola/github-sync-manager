@@ -460,7 +460,7 @@ jQuery(document).ready(function($) {
 						
 						// Add a Check Plugin button if it doesn't exist
 						if ($modalFooter.find('.codesync-btn-check-plugin').length === 0) {
-							$('<button type="button" class="button codesync-btn-check-plugin" style="margin-right:10px;">' + codesync_ajax.texts.check_plugin_optional + '</button>').insertBefore($modalFooter.find('.codesync-btn-confirm-install'));
+							$('<button type="button" class="button codesync-btn-check-plugin">' + codesync_ajax.texts.check_plugin_optional + '</button>').appendTo($modalFooter.find('.codesync-modal-footer-left'));
 						} else {
 							$modalFooter.find('.codesync-btn-check-plugin').show();
 						}
