@@ -867,6 +867,13 @@ class CODESYNC_Admin_AJAX {
 
 		$plugin_dir_path = WP_PLUGIN_DIR . '/' . $plugin_folder;
 
+		// Capture the current installed version before overwriting it.
+		$blocked_version = '';
+		if ( ! empty( $plugin_file ) && file_exists( WP_PLUGIN_DIR . '/' . $plugin_file ) ) {
+			$current_data    = get_file_data( WP_PLUGIN_DIR . '/' . $plugin_file, array( 'Version' => 'Version' ) );
+			$blocked_version = ! empty( $current_data['Version'] ) ? $current_data['Version'] : '';
+		}
+
 		// Perform restoration
 		if ( is_dir( $plugin_dir_path ) ) {
 			CODESYNC_Manager::delete_directory_recursive( $plugin_dir_path );
@@ -881,7 +888,7 @@ class CODESYNC_Admin_AJAX {
 		if ( $restore ) {
 			// Delete the backup that was just restored
 			CODESYNC_Manager::delete_directory_recursive( $latest_backup_path );
-			
+
 			CODESYNC_Manager::log(
 				$repo_slug,
 				'restauracao',
@@ -889,7 +896,8 @@ class CODESYNC_Admin_AJAX {
 				__( 'Rollback realizado com sucesso.', 'codesync-manager-for-github' )
 			);
 
-			// Force update check to sync versions
+			// Mark the rolled-back version so the webhook won't re-install it.
+			$managed[ $repo_slug ]['rollback_blocked_version'] = $blocked_version;
 			$managed[ $repo_slug ]['status'] = 'atualizacao_disponivel';
 			CODESYNC_Manager::update_option_no_autoload( CODESYNC_Manager::OPTION_PLUGINS, $managed );
 

@@ -159,6 +159,17 @@ class CODESYNC_Webhook {
 					return new WP_REST_Response( array( 'message' => 'Pacote já atualizado.' ), 200 );
 				}
 
+				// Version was manually rolled back — skip silently until a new version is released.
+				if ( 'codesync_rollback_blocked' === $error_code ) {
+					CODESYNC_Manager::log(
+						$repo_slug,
+						'sistema',
+						'aviso',
+						$update_result->get_error_message()
+					);
+					return new WP_REST_Response( array( 'message' => $update_result->get_error_message() ), 200 );
+				}
+
 				CODESYNC_Manager::log(
 					$repo_slug,
 					'sistema',

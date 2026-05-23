@@ -873,13 +873,38 @@ class CODESYNC_Updater {
 			}
 			$target_release = $releases[0];
 
+			$latest_version = ltrim( $target_release['tag_name'], 'vV' );
+
+			// Block re-installation of a version that was explicitly rolled back.
+			$blocked_version = isset( $plugin_data['rollback_blocked_version'] ) ? $plugin_data['rollback_blocked_version'] : '';
+			if ( ! empty( $blocked_version ) && version_compare( $latest_version, $blocked_version, '==' ) ) {
+				return new WP_Error(
+					'codesync_rollback_blocked',
+					/* translators: %s: version number */
+					sprintf( __( 'Versão %s foi revertida manualmente. O webhook não irá reinstalá-la.', 'codesync-manager-for-github' ), $latest_version )
+				);
+			}
+
+			// If a different version is coming in, clear the rollback block.
+			if ( ! empty( $blocked_version ) ) {
+				$managed_ref = $is_theme
+					? get_option( CODESYNC_Manager::OPTION_THEMES, array() )
+					: get_option( CODESYNC_Manager::OPTION_PLUGINS, array() );
+				if ( isset( $managed_ref[ $repo_slug ] ) ) {
+					unset( $managed_ref[ $repo_slug ]['rollback_blocked_version'] );
+					CODESYNC_Manager::update_option_no_autoload(
+						$is_theme ? CODESYNC_Manager::OPTION_THEMES : CODESYNC_Manager::OPTION_PLUGINS,
+						$managed_ref
+					);
+				}
+			}
+
 			// If not force reinstall, check whether the latest version is actually newer.
 			if ( ! $force_reinstall && $is_plugin ) {
 				$plugin_file = isset( $plugin_data['plugin_file'] ) ? $plugin_data['plugin_file'] : '';
 				if ( ! empty( $plugin_file ) && file_exists( WP_PLUGIN_DIR . '/' . $plugin_file ) ) {
 					$file_data         = get_file_data( WP_PLUGIN_DIR . '/' . $plugin_file, array( 'Version' => 'Version' ) );
 					$installed_version = ! empty( $file_data['Version'] ) ? $file_data['Version'] : '0.0.0';
-					$latest_version    = ltrim( $target_release['tag_name'], 'vV' );
 					if ( version_compare( $latest_version, $installed_version, '<=' ) ) {
 						return new WP_Error(
 							'codesync_already_updated',
