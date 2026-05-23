@@ -1413,3 +1413,7 @@
 	color: #fff !important;
 }
 
+.codesync-checker-container li {
+	margin-bottom: 0 !important;
+}
+
