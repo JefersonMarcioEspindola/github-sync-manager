@@ -91,15 +91,15 @@ class CODESYNC_Admin {
 			'url'    => admin_url( 'admin-ajax.php' ),
 			'nonce'  => wp_create_nonce( 'codesync_admin_nonce' ),
 			'texts'  => array(
-				'confirm_stop'          => __( 'O plugin continuará instalado, mas deixará de receber atualizações automáticas. Deseja continuar?', 'codesync-manager-for-github' ),
+				'confirm_stop'          => __( 'O pacote continuará instalado, mas deixará de receber atualizações automáticas. Deseja continuar?', 'codesync-manager-for-github' ),
 				'installing'            => __( 'Baixando e instalando...', 'codesync-manager-for-github' ),
 				'searching'             => __( 'Pesquisando repositórios...', 'codesync-manager-for-github' ),
 				'comm_fail'             => __( 'Falha na comunicação.', 'codesync-manager-for-github' ),
 				/* translators: %s: repository name */
-				'confirm_install'       => __( 'Deseja baixar e instalar o plugin do repositório %s?', 'codesync-manager-for-github' ),
+				'confirm_install'       => __( 'Deseja baixar e instalar o pacote do repositório %s?', 'codesync-manager-for-github' ),
 				/* translators: %s: error message */
 				'install_error'         => __( 'Erro na Instalação: %s', 'codesync-manager-for-github' ),
-				'install_fail'          => __( 'Falha na comunicação de rede ao tentar instalar o plugin.', 'codesync-manager-for-github' ),
+				'install_fail'          => __( 'Falha na comunicação de rede ao tentar instalar o pacote.', 'codesync-manager-for-github' ),
 				'remove_error'          => __( 'Erro ao excluir gerenciamento.', 'codesync-manager-for-github' ),
 				'scan_fail'             => __( 'Falha na comunicação de rede durante o escaneamento.', 'codesync-manager-for-github' ),
 				'prompt_copied'         => __( 'Prompt de IA copiado para a área de transferência com sucesso!', 'codesync-manager-for-github' ),
@@ -109,39 +109,39 @@ class CODESYNC_Admin {
 				'repos_load_error'      => __( 'Erro de conexão ao buscar repositórios.', 'codesync-manager-for-github' ),
 				'no_repos_found'        => __( 'Nenhum repositório encontrado na sua conta do GitHub.', 'codesync-manager-for-github' ),
 				'already_managed'       => __( 'Já Gerenciado', 'codesync-manager-for-github' ),
-				'install_btn'           => __( 'Instalar Plugin', 'codesync-manager-for-github' ),
+				'install_btn'           => __( 'Instalar', 'codesync-manager-for-github' ),
 				'no_desc'               => __( 'Sem descrição no repositório.', 'codesync-manager-for-github' ),
 				/* translators: %s: date and time */
 				'updated_lbl'           => __( 'Atualizado: %s', 'codesync-manager-for-github' ),
 				'private_lbl'           => __( 'Privado', 'codesync-manager-for-github' ),
 				'public_lbl'            => __( 'Público', 'codesync-manager-for-github' ),
-				'no_managed'            => __( 'Nenhum plugin gerenciado ainda. Acesse a aba "Adicionar Plugin" para começar.', 'codesync-manager-for-github' ),
-				'confirm_disconnect'    => __( 'Tem certeza de que deseja desconectar sua conta GitHub? Os plugins continuarão instalados, mas não receberão notificações de atualização.', 'codesync-manager-for-github' ),
+				'no_managed'            => __( 'Nenhum pacote gerenciado ainda. Acesse a aba "Adicionar Pacote" para começar.', 'codesync-manager-for-github' ),
+				'confirm_disconnect'    => __( 'Tem certeza de que deseja desconectar sua conta GitHub? Os pacotes continuarão instalados, mas não receberão notificações de atualização.', 'codesync-manager-for-github' ),
 				/* translators: 1: repository name, 2: version number */
-				'confirm_prompt'        => __( 'Aja como um desenvolvedor experiente em WordPress e Git. Meu repositório do plugin \'%1$s\' não possui releases publicadas no GitHub. Crie um guia passo a passo conciso em Markdown para eu publicar a release \'v%2$s\' desse plugin, explicando como gerar o arquivo ZIP correto (apenas a pasta do plugin, sem os arquivos de versionamento do Git) e como criar a Release no GitHub usando a interface web ou GitHub CLI. Inclua boas práticas de versionamento SemVer.', 'codesync-manager-for-github' ),
+				'confirm_prompt'        => __( 'Aja como um desenvolvedor experiente em WordPress e Git. Meu repositório do pacote \'%1$s\' não possui releases publicadas no GitHub. Crie um guia passo a passo conciso em Markdown para eu publicar a release \'v%2$s\' desse pacote, explicando como gerar o arquivo ZIP correto e como criar a Release no GitHub usando a interface web ou GitHub CLI. Inclua boas práticas de versionamento SemVer.', 'codesync-manager-for-github' ),
 				'req_failed'            => __( 'Falha na requisição. Verifique sua conexão de rede.', 'codesync-manager-for-github' ),
 				/* translators: %s: repository name */
 				'force_update_confirm'  => __( 'Isso irá baixar e reinstalar a última versão do repositório %s, sobrescrevendo a versão atual. Continuar?', 'codesync-manager-for-github' ),
 				/* translators: %s: version number */
-				'force_update_ok'       => __( 'Plugin reinstalado com sucesso! (Versão %s)', 'codesync-manager-for-github' ),
+				'force_update_ok'       => __( 'Pacote reinstalado com sucesso! (Versão %s)', 'codesync-manager-for-github' ),
 				/* translators: %s: error message */
 				'force_update_err'      => __( 'Erro ao reinstalar: %s', 'codesync-manager-for-github' ),
 				'force_update_fail'     => __( 'Falha na comunicação ao tentar reinstalar.', 'codesync-manager-for-github' ),
 				'force_update_btn'      => __( 'Atualizar', 'codesync-manager-for-github' ),
 				'force_updating'        => __( 'Reinstalando...', 'codesync-manager-for-github' ),
-				'sync_success_title'    => __( '&#x2705; Plugin Sincronizado com Sucesso!', 'codesync-manager-for-github' ),
+				'sync_success_title'    => __( '&#x2705; Pacote Sincronizado com Sucesso!', 'codesync-manager-for-github' ),
 				/* translators: 1: plugin name, 2: version number */
-				'sync_success_msg'      => __( 'O plugin <strong>%1$s</strong> já estava instalado no seu WordPress. O código foi atualizado e agora está sincronizado e sendo gerenciado (Versão %2$s).', 'codesync-manager-for-github' ),
-				'install_success_title' => __( '&#x2705; Plugin Instalado com Sucesso!', 'codesync-manager-for-github' ),
+				'sync_success_msg'      => __( 'O pacote <strong>%1$s</strong> já estava instalado no seu WordPress. O código foi atualizado e agora está sincronizado e sendo gerenciado (Versão %2$s).', 'codesync-manager-for-github' ),
+				'install_success_title' => __( '&#x2705; Pacote Instalado com Sucesso!', 'codesync-manager-for-github' ),
 				/* translators: 1: plugin name, 2: version number */
-				'install_success_msg'   => __( 'O plugin <strong>%1$s</strong> (Versão %2$s) foi baixado e gravado localmente.', 'codesync-manager-for-github' ),
-				'activate_btn'          => __( 'Ativar Plugin Agora', 'codesync-manager-for-github' ),
+				'install_success_msg'   => __( 'O pacote <strong>%1$s</strong> (Versão %2$s) foi baixado e gravado localmente.', 'codesync-manager-for-github' ),
+				'activate_btn'          => __( 'Ativar Agora', 'codesync-manager-for-github' ),
 				/* translators: %s: error message */
 				'scan_error'            => __( 'Erro ao verificar: %s', 'codesync-manager-for-github' ),
 				'checking_repo'         => __( 'Verificando estrutura do repositório...', 'codesync-manager-for-github' ),
 				/* translators: 1: plugin name, 2: version number */
-				'plugin_detected'       => __( 'Plugin <strong>%1$s</strong> (Versão %2$s) detectado automaticamente.', 'codesync-manager-for-github' ),
-				'plugin_not_detected'   => __( 'Nenhum plugin WordPress válido foi encontrado automaticamente. Selecione a pasta base e a origem abaixo para instalar.', 'codesync-manager-for-github' ),
+				'plugin_detected'       => __( 'Pacote <strong>%1$s</strong> (Versão %2$s) detectado automaticamente.', 'codesync-manager-for-github' ),
+				'plugin_not_detected'   => __( 'Nenhum pacote válido foi encontrado automaticamente. Selecione a pasta base e a origem abaixo para instalar.', 'codesync-manager-for-github' ),
 				'advanced_options'      => __( 'Opções Avançadas', 'codesync-manager-for-github' ),
 				'select_source'         => __( 'Origem (Release ou Ramo):', 'codesync-manager-for-github' ),
 				'select_folder'         => __( 'Pasta Base do Plugin:', 'codesync-manager-for-github' ),
@@ -358,9 +358,15 @@ class CODESYNC_Admin {
 				<div class="codesync-modal-body">
 					<!-- Conteúdo dinâmico via JS -->
 				</div>
-				<div class="codesync-modal-footer">
-					<button type="button" class="button codesync-modal-btn-cancel"><?php esc_html_e( 'Cancelar', 'codesync-manager-for-github' ); ?></button>
-					<button type="button" class="button button-primary codesync-modal-btn-install" disabled><?php esc_html_e( 'Instalar', 'codesync-manager-for-github' ); ?></button>
+				<div class="codesync-modal-footer" style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+					<div>
+						<button type="button" class="button codesync-btn-copy-md" style="display:none;"><i data-lucide="copy" class="codesync-icon" style="width:14px;height:14px;"></i> <?php esc_html_e( 'Copiar Markdown', 'codesync-manager-for-github' ); ?></button>
+					</div>
+					<div>
+						<button type="button" class="button codesync-modal-btn-cancel"><?php esc_html_e( 'Cancelar', 'codesync-manager-for-github' ); ?></button>
+						<button type="button" class="button button-primary codesync-modal-btn-install codesync-btn-confirm-install" style="display:none;"><?php esc_html_e( 'Confirmar Instalação', 'codesync-manager-for-github' ); ?></button>
+						<button type="button" class="button button-primary codesync-modal-btn-install codesync-btn-force-install" style="display:none; background:#ef4444; border-color:#dc2626; text-shadow:none;"><?php esc_html_e( 'Instalar mesmo assim (Não Recomendado)', 'codesync-manager-for-github' ); ?></button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -402,65 +408,54 @@ class CODESYNC_Admin {
 			</div>
 		</div>
 
-		<!-- Modal CodeSync Checker -->
-		<div id="codesync-checker-modal" class="codesync-modal-wrapper" style="display: none;">
-			<div class="codesync-modal-backdrop"></div>
-			<div class="codesync-modal-container" style="max-width: 700px; width: 90%;">
-				<div class="codesync-modal-header">
-					<h3 class="codesync-modal-title"><i data-lucide="shield-check" class="codesync-icon"></i> <?php esc_html_e( 'CodeSync Checker', 'codesync-manager-for-github' ); ?></h3>
-					<button type="button" class="codesync-modal-close" aria-label="<?php esc_attr_e( 'Fechar', 'codesync-manager-for-github' ); ?>">&times;</button>
+		<!-- Template CodeSync Checker UI -->
+		<script type="text/template" id="tmpl-codesync-checker-ui">
+			<div class="codesync-checker-container" style="margin-top: 20px; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;">
+				<div class="codesync-checker-intro" style="padding: 15px 20px; border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
+					<h4 style="margin:0 0 5px 0; font-size: 15px;"><i data-lucide="shield-check" class="codesync-icon" style="vertical-align: middle;"></i> <?php esc_html_e( 'Validação de Segurança e Estrutura', 'codesync-manager-for-github' ); ?></h4>
+					<p style="margin:0; color: #64748b; font-size: 13px;"><?php esc_html_e( 'Analisando o código do repositório antes da instalação...', 'codesync-manager-for-github' ); ?></p>
 				</div>
-				<div class="codesync-modal-body" style="background: #f9fafb; padding: 0;">
-					<div class="codesync-checker-intro" style="padding: 20px; border-bottom: 1px solid #e2e8f0;">
-						<h4 id="codesync-checker-repo-name" style="margin-top:0; font-size: 16px;"></h4>
-						<p style="margin-bottom:0; color: #64748b; font-size: 13px;"><?php esc_html_e( 'Analisando qualidade, segurança e estrutura...', 'codesync-manager-for-github' ); ?></p>
-					</div>
-					
-					<ul id="codesync-checker-steps" style="list-style: none; margin: 0; padding: 0;">
-						<!-- Passo 1 -->
-						<li class="codesync-checker-step" data-step="download">
-							<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
-								<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
-								<strong style="flex: 1;"><?php esc_html_e( 'Download & Extração', 'codesync-manager-for-github' ); ?></strong>
-								<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
-							</div>
-							<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
-						</li>
-						<!-- Passo 2 -->
-						<li class="codesync-checker-step" data-step="headers">
-							<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
-								<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
-								<strong style="flex: 1;"><?php esc_html_e( 'Estrutura & Cabeçalhos', 'codesync-manager-for-github' ); ?></strong>
-								<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
-							</div>
-							<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
-						</li>
-						<!-- Passo 3 -->
-						<li class="codesync-checker-step" data-step="security">
-							<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
-								<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
-								<strong style="flex: 1;"><?php esc_html_e( 'Segurança & SQL', 'codesync-manager-for-github' ); ?></strong>
-								<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
-							</div>
-							<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
-						</li>
-						<!-- Passo 4 -->
-						<li class="codesync-checker-step" data-step="deprecated">
-							<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
-								<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
-								<strong style="flex: 1;"><?php esc_html_e( 'Deprecated & Assets', 'codesync-manager-for-github' ); ?></strong>
-								<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
-							</div>
-							<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
-						</li>
-					</ul>
-				</div>
-				<div class="codesync-modal-footer" style="display:flex; justify-content:space-between;">
-					<button type="button" class="button codesync-btn-copy-md" style="display:none;"><i data-lucide="copy" class="codesync-icon" style="width:14px;height:14px;"></i> <?php esc_html_e( 'Copiar Markdown', 'codesync-manager-for-github' ); ?></button>
-					<button type="button" class="button button-primary codesync-modal-btn-cancel"><?php esc_html_e( 'Fechar', 'codesync-manager-for-github' ); ?></button>
-				</div>
+				
+				<ul id="codesync-checker-steps" style="list-style: none; margin: 0; padding: 0;">
+					<!-- Passo 1 -->
+					<li class="codesync-checker-step" data-step="download">
+						<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
+							<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
+							<strong style="flex: 1;"><?php esc_html_e( 'Download & Estrutura Base', 'codesync-manager-for-github' ); ?></strong>
+							<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
+						</div>
+						<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
+					</li>
+					<!-- Passo 2 -->
+					<li class="codesync-checker-step" data-step="headers">
+						<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
+							<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
+							<strong style="flex: 1;"><?php esc_html_e( 'Sintaxe & Compatibilidade', 'codesync-manager-for-github' ); ?></strong>
+							<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
+						</div>
+						<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
+					</li>
+					<!-- Passo 3 -->
+					<li class="codesync-checker-step" data-step="security">
+						<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
+							<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
+							<strong style="flex: 1;"><?php esc_html_e( 'Segurança & SQL', 'codesync-manager-for-github' ); ?></strong>
+							<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
+						</div>
+						<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
+					</li>
+					<!-- Passo 4 -->
+					<li class="codesync-checker-step" data-step="deprecated">
+						<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
+							<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
+							<strong style="flex: 1;"><?php esc_html_e( 'Desempenho & Obsoletos', 'codesync-manager-for-github' ); ?></strong>
+							<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
+						</div>
+						<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
+					</li>
+				</ul>
 			</div>
-		</div>
+		</script>
 		<?php
 	}
 
@@ -641,9 +636,7 @@ class CODESYNC_Admin {
 						<i data-lucide="cloud-upload" class="codesync-icon"></i>
 						<?php esc_html_e( 'Atualizar', 'codesync-manager-for-github' ); ?>
 					</button>
-					<button type="button" class="button codesync-btn-inspect" data-repo="<?php echo esc_attr( $repo ); ?>" title="<?php esc_attr_e( 'Inspecionar Código (CodeSync Checker)', 'codesync-manager-for-github' ); ?>">
-						<i data-lucide="shield-check" class="codesync-icon"></i>
-					</button>
+
 					<?php if ( $has_rollback ) : ?>
 					<button type="button" class="button codesync-btn-rollback" data-repo="<?php echo esc_attr( $repo ); ?>">
 						<i data-lucide="rotate-ccw" class="codesync-icon"></i>
