@@ -144,10 +144,7 @@ class CODESYNC_Checker {
 		WP_Filesystem();
 		global $wp_filesystem;
 
-		// Intercept WP_Upgrader download logic
-		add_filter( 'http_request_args', array( 'CODESYNC_GitHub_API', 'inject_auth_header' ), 10, 2 );
-		$download_file = download_url( $zip_url, 300 );
-		remove_filter( 'http_request_args', array( 'CODESYNC_GitHub_API', 'inject_auth_header' ), 10 );
+		$download_file = $api->download_package( $zip_url );
 
 		if ( is_wp_error( $download_file ) ) {
 			wp_send_json_error( array( 'message' => 'Erro ao baixar repositório: ' . $download_file->get_error_message() ) );
