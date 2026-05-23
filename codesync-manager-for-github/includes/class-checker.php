@@ -202,7 +202,7 @@ class CODESYNC_Checker {
 
 		// Check for Theme (style.css)
 		if ( file_exists( $base_path . '/style.css' ) ) {
-			$data = get_file_data( $base_path . '/style.css', array( 'ThemeName' => 'Theme Name', 'RequiresPHP' => 'Requires PHP' ) );
+			$data = get_file_data( $base_path . '/style.css', array( 'ThemeName' => 'Theme Name', 'RequiresPHP' => 'Requires PHP', 'RequiresWP' => 'Requires at least' ) );
 			if ( ! empty( $data['ThemeName'] ) ) {
 				$type = 'theme';
 				$headers = $data;
@@ -214,7 +214,7 @@ class CODESYNC_Checker {
 			$php_files = glob( $base_path . '/*.php' );
 			if ( is_array( $php_files ) ) {
 				foreach ( $php_files as $file ) {
-					$data = get_file_data( $file, array( 'PluginName' => 'Plugin Name', 'RequiresPHP' => 'Requires PHP', 'TextDomain' => 'Text Domain' ) );
+					$data = get_file_data( $file, array( 'PluginName' => 'Plugin Name', 'RequiresPHP' => 'Requires PHP', 'RequiresWP' => 'Requires at least', 'TextDomain' => 'Text Domain' ) );
 					if ( ! empty( $data['PluginName'] ) ) {
 						$type = 'plugin';
 						$main_file = $file;
@@ -234,6 +234,12 @@ class CODESYNC_Checker {
 				$warnings[] = __( '"Requires PHP" header is missing. It is a good practice to define it.', 'codesync-manager-for-github' );
 			} else {
 				$passed[] = sprintf( __( 'PHP requirement defined: %s', 'codesync-manager-for-github' ), $headers['RequiresPHP'] );
+			}
+
+			if ( empty( $headers['RequiresWP'] ) ) {
+				$warnings[] = __( '"Requires at least" (WordPress version) header is missing.', 'codesync-manager-for-github' );
+			} else {
+				$passed[] = sprintf( __( 'Requires at least (WordPress) defined: %s', 'codesync-manager-for-github' ), $headers['RequiresWP'] );
 			}
 
 			if ( 'plugin' === $type && empty( $headers['TextDomain'] ) ) {
@@ -268,10 +274,17 @@ class CODESYNC_Checker {
 		$found_shell = false;
 		$found_base64 = false;
 		$found_unprepared_sql = false;
+		$missing_abspath = false;
+		$missing_abspath_count = 0;
+		$found_forbidden = false;
 
 		foreach ( $php_files as $file ) {
 			$content = file_get_contents( $file );
 			$rel_path = str_replace( $base_path, '', $file );
+
+			if ( ! preg_match( '/defined\s*\(\s*[\'"]ABSPATH[\'"]\s*\)|die|exit/i', $content ) ) {
+				$missing_abspath_count++;
+			}
 
 			if ( preg_match( '/\beval\s*\(/i', $content ) ) {
 				$errors[] = sprintf( __( 'Use of eval() function detected in %s. This is a severe security risk.', 'codesync-manager-for-github' ), $rel_path );
@@ -280,6 +293,17 @@ class CODESYNC_Checker {
 			if ( preg_match( '/\b(shell_exec|system|exec|passthru)\s*\(/i', $content ) ) {
 				$errors[] = sprintf( __( 'Use of operating system functions detected in %s.', 'codesync-manager-for-github' ), $rel_path );
 				$found_shell = true;
+			}
+			if ( preg_match( '/\b(proc_open|popen|extract|move_uploaded_file)\s*\(/i', $content, $matches ) ) {
+				$errors[] = sprintf( __( 'Use of highly discouraged/forbidden function "%s()" detected in %s.', 'codesync-manager-for-github' ), $matches[1], $rel_path );
+				$found_forbidden = true;
+			}
+			if ( preg_match( '/\bALLOW_UNFILTERED_UPLOADS\b/i', $content ) ) {
+				$errors[] = sprintf( __( 'ALLOW_UNFILTERED_UPLOADS constant detected in %s. This is a severe security risk.', 'codesync-manager-for-github' ), $rel_path );
+				$found_forbidden = true;
+			}
+			if ( preg_match( '/\bwp_redirect\s*\(/i', $content ) ) {
+				$warnings[] = sprintf( __( 'Use of wp_redirect() detected in %s. Prefer wp_safe_redirect() to avoid Open Redirect vulnerabilities.', 'codesync-manager-for-github' ), $rel_path );
 			}
 			// basic unprepared SQL check (not perfect, but catches obvious mistakes)
 			if ( preg_match( '/\$wpdb->query\s*\(\s*["\'][^"\']*(\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*|{\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*})[^"\']*["\']\s*\)/i', $content ) ) {
@@ -292,8 +316,14 @@ class CODESYNC_Checker {
 			}
 		}
 
-		if ( ! $found_eval && ! $found_shell ) {
-			$passed[] = __( 'No remote execution function (eval, shell_exec) detected.', 'codesync-manager-for-github' );
+		if ( $missing_abspath_count > 0 ) {
+			$warnings[] = sprintf( __( 'Direct file access not prevented in %d PHP file(s). Consider adding "if (!defined(\'ABSPATH\')) exit;" to block direct URL access.', 'codesync-manager-for-github' ), $missing_abspath_count );
+		} else {
+			$passed[] = __( 'All PHP files seem to prevent direct access (ABSPATH check).', 'codesync-manager-for-github' );
+		}
+
+		if ( ! $found_eval && ! $found_shell && ! $found_forbidden ) {
+			$passed[] = __( 'No remote execution or forbidden functions detected.', 'codesync-manager-for-github' );
 		}
 		if ( ! $found_unprepared_sql ) {
 			$passed[] = __( 'No obvious use of SQL query without prepare detected.', 'codesync-manager-for-github' );
@@ -319,21 +349,35 @@ class CODESYNC_Checker {
 		$warnings = array();
 		$errors = array();
 
-		// Check large files
+		// Check large files and unwanted files
 		$iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $base_path ) );
 		$has_large_file = false;
+		$unwanted_found = array();
+
 		foreach ( $iterator as $file ) {
 			if ( ! $file->isDir() ) {
 				$size_mb = $file->getSize() / 1048576; // bytes to MB
+				$rel_path = str_replace( $base_path, '', $file->getPathname() );
+				$filename = strtolower( $file->getFilename() );
+
 				if ( $size_mb > 10 ) {
-					$rel_path = str_replace( $base_path, '', $file->getPathname() );
 					$warnings[] = sprintf( __( 'The file "%s" is too large (%.2f MB). Consider optimizing assets.', 'codesync-manager-for-github' ), $rel_path, $size_mb );
 					$has_large_file = true;
+				}
+
+				if ( preg_match( '/^(\.ds_store|node_modules|\.git|\.env|.*\.exe|.*\.sh)$/i', $filename ) || strpos( $rel_path, '/node_modules/' ) !== false || strpos( $rel_path, '/.git/' ) !== false ) {
+					$unwanted_found[] = $rel_path;
 				}
 			}
 		}
 		if ( ! $has_large_file ) {
 			$passed[] = __( 'The repository does not contain massive files (>10MB).', 'codesync-manager-for-github' );
+		}
+		
+		if ( ! empty( $unwanted_found ) ) {
+			$warnings[] = sprintf( __( 'Found development/unwanted files (e.g., %s). Consider removing them from release builds.', 'codesync-manager-for-github' ), esc_html( $unwanted_found[0] ) );
+		} else {
+			$passed[] = __( 'No unwanted development files (.git, node_modules, .DS_Store) detected.', 'codesync-manager-for-github' );
 		}
 
 		// Check deprecated functions in PHP
