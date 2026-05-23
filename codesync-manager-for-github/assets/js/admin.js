@@ -243,6 +243,7 @@ jQuery(document).ready(function($) {
 	var installRepo = '';
 	var installIsDone = false;
 	var installIsUpdate = false;
+	var originalFooterHtml = $modalFooter.html();
 
 	function hideModal() {
 		$modal.removeClass('codesync-modal-open');
@@ -581,6 +582,7 @@ jQuery(document).ready(function($) {
 		installRepo = repo;
 		installIsDone = false;
 
+		$modalFooter.html(originalFooterHtml);
 		$modal.find('.codesync-modal-title').text(codesync_ajax.texts.install_btn || 'Install Package');
 		$modalFooter.find('.codesync-modal-btn-cancel').show().prop('disabled', false);
 		$modalFooter.find('.codesync-btn-confirm-install, .codesync-btn-force-install, .codesync-btn-copy-md').hide();
@@ -885,6 +887,7 @@ jQuery(document).ready(function($) {
 		installRepo = repo;
 		installIsDone = false;
 
+		$modalFooter.html(originalFooterHtml);
 		$modal.find('.codesync-modal-title').text(codesync_ajax.texts.update_package);
 		$modalFooter.find('.codesync-modal-btn-cancel').show().prop('disabled', false);
 		$modalFooter.find('.codesync-btn-confirm-install, .codesync-btn-force-install, .codesync-btn-copy-md, .codesync-btn-check-plugin').hide();
