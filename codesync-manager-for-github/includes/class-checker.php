@@ -35,7 +35,7 @@ class CODESYNC_Checker {
 	private static function get_api() {
 		$token = get_option( CODESYNC_Manager::OPTION_TOKEN );
 		if ( empty( $token ) ) {
-			return new WP_Error( 'no_token', __( 'Token GitHub ausente.', 'codesync-manager-for-github' ) );
+			return new WP_Error( 'no_token', __( 'GitHub Token missing.', 'codesync-manager-for-github' ) );
 		}
 		$decrypted = CODESYNC_Encryption::decrypt( $token );
 		if ( is_wp_error( $decrypted ) ) {
@@ -175,7 +175,7 @@ class CODESYNC_Checker {
 			'session_id' => $session_id,
 			'base_path'  => $inspect_dir,
 			'result'     => self::format_result(
-				array( __( 'Download do repositório concluído.', 'codesync-manager-for-github' ), __( 'Pacote ZIP extraído em ambiente isolado.', 'codesync-manager-for-github' ) )
+				array( __( 'Repository download completed.', 'codesync-manager-for-github' ), __( 'ZIP package extracted in isolated environment.', 'codesync-manager-for-github' ) )
 			)
 		) );
 	}
@@ -225,20 +225,20 @@ class CODESYNC_Checker {
 		}
 
 		if ( 'unknown' === $type ) {
-			$errors[] = __( 'Não foi possível identificar o pacote como Plugin ou Tema (falta cabeçalho válido).', 'codesync-manager-for-github' );
+			$errors[] = __( 'Could not identify the package as Plugin or Theme (missing valid headers).', 'codesync-manager-for-github' );
 		} else {
-			$passed[] = sprintf( __( 'Identificado como %s válido ("%s").', 'codesync-manager-for-github' ), ucfirst( $type ), ( 'theme' === $type ? $headers['ThemeName'] : $headers['PluginName'] ) );
+			$passed[] = sprintf( __( 'Identified as a valid %s ("%s").', 'codesync-manager-for-github' ), ucfirst( $type ), ( 'theme' === $type ? $headers['ThemeName'] : $headers['PluginName'] ) );
 			
 			if ( empty( $headers['RequiresPHP'] ) ) {
-				$warnings[] = __( 'Cabeçalho "Requires PHP" está ausente. É uma boa prática defini-lo.', 'codesync-manager-for-github' );
+				$warnings[] = __( '"Requires PHP" header is missing. It is a good practice to define it.', 'codesync-manager-for-github' );
 			} else {
-				$passed[] = sprintf( __( 'Requisito de PHP definido: %s', 'codesync-manager-for-github' ), $headers['RequiresPHP'] );
+				$passed[] = sprintf( __( 'PHP requirement defined: %s', 'codesync-manager-for-github' ), $headers['RequiresPHP'] );
 			}
 
 			if ( 'plugin' === $type && empty( $headers['TextDomain'] ) ) {
-				$warnings[] = __( 'Cabeçalho "Text Domain" ausente. Traduções podem falhar.', 'codesync-manager-for-github' );
+				$warnings[] = __( '"Text Domain" header missing. Translations may fail.', 'codesync-manager-for-github' );
 			} elseif ( 'plugin' === $type ) {
-				$passed[] = __( 'Text Domain definido.', 'codesync-manager-for-github' );
+				$passed[] = __( 'Text Domain defined.', 'codesync-manager-for-github' );
 			}
 		}
 
@@ -273,31 +273,31 @@ class CODESYNC_Checker {
 			$rel_path = str_replace( $base_path, '', $file );
 
 			if ( preg_match( '/\beval\s*\(/i', $content ) ) {
-				$errors[] = sprintf( __( 'Uso da função eval() detectado em %s. Isso é um risco severo de segurança.', 'codesync-manager-for-github' ), $rel_path );
+				$errors[] = sprintf( __( 'Use of eval() function detected in %s. This is a severe security risk.', 'codesync-manager-for-github' ), $rel_path );
 				$found_eval = true;
 			}
 			if ( preg_match( '/\b(shell_exec|system|exec|passthru)\s*\(/i', $content ) ) {
-				$errors[] = sprintf( __( 'Uso de funções de sistema operacional detectado em %s.', 'codesync-manager-for-github' ), $rel_path );
+				$errors[] = sprintf( __( 'Use of operating system functions detected in %s.', 'codesync-manager-for-github' ), $rel_path );
 				$found_shell = true;
 			}
 			// basic unprepared SQL check (not perfect, but catches obvious mistakes)
 			if ( preg_match( '/\$wpdb->query\s*\(\s*["\'][^"\']*(\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*|{\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*})[^"\']*["\']\s*\)/i', $content ) ) {
-				$warnings[] = sprintf( __( 'Possível query direta sem $wpdb->prepare detectada em %s. Risco de SQL Injection.', 'codesync-manager-for-github' ), $rel_path );
+				$warnings[] = sprintf( __( 'Possible direct query without $wpdb->prepare detected in %s. SQL Injection risk.', 'codesync-manager-for-github' ), $rel_path );
 				$found_unprepared_sql = true;
 			}
 			// raw global accesses
 			if ( preg_match( '/echo\s+(?:\$_POST|\$_GET|\$_REQUEST)/i', $content ) ) {
-				$errors[] = sprintf( __( 'Saída (echo) de variáveis superglobais diretamente sem escape detectado em %s (Risco de XSS).', 'codesync-manager-for-github' ), $rel_path );
+				$errors[] = sprintf( __( 'Output (echo) of superglobal variables directly without escaping detected in %s (XSS risk).', 'codesync-manager-for-github' ), $rel_path );
 			}
 		}
 
 		if ( ! $found_eval && ! $found_shell ) {
-			$passed[] = __( 'Nenhuma função de execução remota (eval, shell_exec) detectada.', 'codesync-manager-for-github' );
+			$passed[] = __( 'No remote execution function (eval, shell_exec) detected.', 'codesync-manager-for-github' );
 		}
 		if ( ! $found_unprepared_sql ) {
-			$passed[] = __( 'Nenhum uso óbvio de query SQL sem prepare detectado.', 'codesync-manager-for-github' );
+			$passed[] = __( 'No obvious use of SQL query without prepare detected.', 'codesync-manager-for-github' );
 		}
-		$passed[] = __( 'Análise de segurança básica finalizada.', 'codesync-manager-for-github' );
+		$passed[] = __( 'Basic security analysis finished.', 'codesync-manager-for-github' );
 
 		wp_send_json_success( array(
 			'result' => self::format_result( $passed, $warnings, $errors )
@@ -326,13 +326,13 @@ class CODESYNC_Checker {
 				$size_mb = $file->getSize() / 1048576; // bytes to MB
 				if ( $size_mb > 10 ) {
 					$rel_path = str_replace( $base_path, '', $file->getPathname() );
-					$warnings[] = sprintf( __( 'O arquivo "%s" é muito grande (%.2f MB). Considere otimizar os assets.', 'codesync-manager-for-github' ), $rel_path, $size_mb );
+					$warnings[] = sprintf( __( 'The file "%s" is too large (%.2f MB). Consider optimizing assets.', 'codesync-manager-for-github' ), $rel_path, $size_mb );
 					$has_large_file = true;
 				}
 			}
 		}
 		if ( ! $has_large_file ) {
-			$passed[] = __( 'O repositório não contém arquivos massivos (>10MB).', 'codesync-manager-for-github' );
+			$passed[] = __( 'The repository does not contain massive files (>10MB).', 'codesync-manager-for-github' );
 		}
 
 		// Check deprecated functions in PHP
@@ -343,13 +343,13 @@ class CODESYNC_Checker {
 			$rel_path = str_replace( $base_path, '', $file );
 
 			if ( preg_match( '/\b(mysql_connect|mysql_query|create_function|wp_reset_query)\s*\(/i', $content, $matches ) ) {
-				$warnings[] = sprintf( __( 'Uso de função defasada "%s" detectado em %s.', 'codesync-manager-for-github' ), $matches[1], $rel_path );
+				$warnings[] = sprintf( __( 'Use of deprecated function "%s" detected in %s.', 'codesync-manager-for-github' ), $matches[1], $rel_path );
 				$deprecated_found = true;
 			}
 		}
 
 		if ( ! $deprecated_found ) {
-			$passed[] = __( 'Nenhuma função PHP/WordPress altamente depreciada foi detectada.', 'codesync-manager-for-github' );
+			$passed[] = __( 'No highly deprecated PHP/WordPress functions detected.', 'codesync-manager-for-github' );
 		}
 
 		wp_send_json_success( array(
@@ -373,7 +373,7 @@ class CODESYNC_Checker {
 		}
 
 		wp_send_json_success( array(
-			'result' => self::format_result( array( __( 'Arquivos temporários removidos do servidor com segurança.', 'codesync-manager-for-github' ) ) )
+			'result' => self::format_result( array( __( 'Temporary files safely removed from server.', 'codesync-manager-for-github' ) ) )
 		) );
 	}
 }

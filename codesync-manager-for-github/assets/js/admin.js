@@ -569,7 +569,7 @@ jQuery(document).ready(function($) {
 		e.preventDefault();
 		
 		if ($(this).hasClass('codesync-btn-force-install')) {
-			if (!confirm('Este pacote apresentou falhas críticas na verificação. Instalar mesmo assim não é recomendado e pode quebrar o seu site. Tem certeza?')) {
+			if (!confirm('This package presented critical failures in the validation. Installing anyway is not recommended and might break your site. Are you sure?')) {
 				return;
 			}
 		}
@@ -1096,7 +1096,7 @@ jQuery(document).ready(function($) {
 
 	function runCheckerPipeline(repoSlug) {
 		checkerLogs = [];
-		checkerLogs.push('# Relatório CodeSync Checker: ' + repoSlug);
+		checkerLogs.push('# CodeSync Checker Report: ' + repoSlug);
 		checkerLogs.push('');
 
 		// Use selected ref if available
@@ -1147,7 +1147,7 @@ jQuery(document).ready(function($) {
 		e.preventDefault();
 		var text = checkerLogs.join('\n');
 		navigator.clipboard.writeText(text).then(function() {
-			alert('Relatório copiado para a área de transferência!');
+			alert('Report copied to clipboard!');
 		});
 	});
 

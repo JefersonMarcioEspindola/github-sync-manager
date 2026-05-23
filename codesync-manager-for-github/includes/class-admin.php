@@ -91,63 +91,63 @@ class CODESYNC_Admin {
 			'url'    => admin_url( 'admin-ajax.php' ),
 			'nonce'  => wp_create_nonce( 'codesync_admin_nonce' ),
 			'texts'  => array(
-				'confirm_stop'          => __( 'O pacote continuará instalado, mas deixará de receber atualizações automáticas. Deseja continuar?', 'codesync-manager-for-github' ),
-				'installing'            => __( 'Baixando e instalando...', 'codesync-manager-for-github' ),
-				'searching'             => __( 'Pesquisando repositórios...', 'codesync-manager-for-github' ),
-				'comm_fail'             => __( 'Falha na comunicação.', 'codesync-manager-for-github' ),
+				'confirm_stop'          => __( 'The package will remain installed, but will no longer receive automatic updates. Do you wish to continue?', 'codesync-manager-for-github' ),
+				'installing'            => __( 'Downloading and installing...', 'codesync-manager-for-github' ),
+				'searching'             => __( 'Searching repositories...', 'codesync-manager-for-github' ),
+				'comm_fail'             => __( 'Communication failure.', 'codesync-manager-for-github' ),
 				/* translators: %s: repository name */
-				'confirm_install'       => __( 'Deseja baixar e instalar o pacote do repositório %s?', 'codesync-manager-for-github' ),
+				'confirm_install'       => __( 'Do you want to download and install the package from the %s repository?', 'codesync-manager-for-github' ),
 				/* translators: %s: error message */
-				'install_error'         => __( 'Erro na Instalação: %s', 'codesync-manager-for-github' ),
-				'install_fail'          => __( 'Falha na comunicação de rede ao tentar instalar o pacote.', 'codesync-manager-for-github' ),
-				'remove_error'          => __( 'Erro ao excluir gerenciamento.', 'codesync-manager-for-github' ),
-				'scan_fail'             => __( 'Falha na comunicação de rede durante o escaneamento.', 'codesync-manager-for-github' ),
-				'prompt_copied'         => __( 'Prompt de IA copiado para a área de transferência com sucesso!', 'codesync-manager-for-github' ),
-				'prompt_copy_fail'      => __( 'Não foi possível copiar o prompt automaticamente. Por favor, copie manualmente.', 'codesync-manager-for-github' ),
-				'save_locale_error'     => __( 'Erro ao salvar o idioma.', 'codesync-manager-for-github' ),
-				'loading_repos'         => __( 'Carregando seus repositórios do GitHub...', 'codesync-manager-for-github' ),
-				'repos_load_error'      => __( 'Erro de conexão ao buscar repositórios.', 'codesync-manager-for-github' ),
-				'no_repos_found'        => __( 'Nenhum repositório encontrado na sua conta do GitHub.', 'codesync-manager-for-github' ),
-				'already_managed'       => __( 'Já Gerenciado', 'codesync-manager-for-github' ),
-				'install_btn'           => __( 'Instalar', 'codesync-manager-for-github' ),
-				'no_desc'               => __( 'Sem descrição no repositório.', 'codesync-manager-for-github' ),
+				'install_error'         => __( 'Installation Error: %s', 'codesync-manager-for-github' ),
+				'install_fail'          => __( 'Network communication failure while trying to install the package.', 'codesync-manager-for-github' ),
+				'remove_error'          => __( 'Error removing management.', 'codesync-manager-for-github' ),
+				'scan_fail'             => __( 'Network communication failure during scan.', 'codesync-manager-for-github' ),
+				'prompt_copied'         => __( 'AI Prompt copied to clipboard successfully!', 'codesync-manager-for-github' ),
+				'prompt_copy_fail'      => __( 'Could not copy the prompt automatically. Please copy it manually.', 'codesync-manager-for-github' ),
+				'save_locale_error'     => __( 'Error saving language.', 'codesync-manager-for-github' ),
+				'loading_repos'         => __( 'Loading your GitHub repositories...', 'codesync-manager-for-github' ),
+				'repos_load_error'      => __( 'Connection error fetching repositories.', 'codesync-manager-for-github' ),
+				'no_repos_found'        => __( 'No repositories found in your GitHub account.', 'codesync-manager-for-github' ),
+				'already_managed'       => __( 'Already Managed', 'codesync-manager-for-github' ),
+				'install_btn'           => __( 'Install', 'codesync-manager-for-github' ),
+				'no_desc'               => __( 'No description in the repository.', 'codesync-manager-for-github' ),
 				/* translators: %s: date and time */
-				'updated_lbl'           => __( 'Atualizado: %s', 'codesync-manager-for-github' ),
-				'private_lbl'           => __( 'Privado', 'codesync-manager-for-github' ),
-				'public_lbl'            => __( 'Público', 'codesync-manager-for-github' ),
-				'no_managed'            => __( 'Nenhum pacote gerenciado ainda. Acesse a aba "Adicionar Pacote" para começar.', 'codesync-manager-for-github' ),
-				'confirm_disconnect'    => __( 'Tem certeza de que deseja desconectar sua conta GitHub? Os pacotes continuarão instalados, mas não receberão notificações de atualização.', 'codesync-manager-for-github' ),
+				'updated_lbl'           => __( 'Updated: %s', 'codesync-manager-for-github' ),
+				'private_lbl'           => __( 'Private', 'codesync-manager-for-github' ),
+				'public_lbl'            => __( 'Public', 'codesync-manager-for-github' ),
+				'no_managed'            => __( 'No managed packages yet. Access the "Add Package" tab to get started.', 'codesync-manager-for-github' ),
+				'confirm_disconnect'    => __( 'Are you sure you want to disconnect your GitHub account? Packages will remain installed, but will not receive update notifications.', 'codesync-manager-for-github' ),
 				/* translators: 1: repository name, 2: version number */
-				'confirm_prompt'        => __( 'Aja como um desenvolvedor experiente em WordPress e Git. Meu repositório do pacote \'%1$s\' não possui releases publicadas no GitHub. Crie um guia passo a passo conciso em Markdown para eu publicar a release \'v%2$s\' desse pacote, explicando como gerar o arquivo ZIP correto e como criar a Release no GitHub usando a interface web ou GitHub CLI. Inclua boas práticas de versionamento SemVer.', 'codesync-manager-for-github' ),
-				'req_failed'            => __( 'Falha na requisição. Verifique sua conexão de rede.', 'codesync-manager-for-github' ),
+				'confirm_prompt'        => __( 'Act as an experienced WordPress and Git developer. My package repository \'%1$s\' has no published releases on GitHub. Create a concise step-by-step guide in Markdown for me to publish release \'v%2$s\' of this package, explaining how to generate the correct ZIP file and how to create the Release on GitHub using the web interface or GitHub CLI. Include SemVer best practices.', 'codesync-manager-for-github' ),
+				'req_failed'            => __( 'Request failed. Check your network connection.', 'codesync-manager-for-github' ),
 				/* translators: %s: repository name */
-				'force_update_confirm'  => __( 'Isso irá baixar e reinstalar a última versão do repositório %s, sobrescrevendo a versão atual. Continuar?', 'codesync-manager-for-github' ),
+				'force_update_confirm'  => __( 'This will download and reinstall the latest version from the %s repository, overwriting the current version. Continue?', 'codesync-manager-for-github' ),
 				/* translators: %s: version number */
-				'force_update_ok'       => __( 'Pacote reinstalado com sucesso! (Versão %s)', 'codesync-manager-for-github' ),
+				'force_update_ok'       => __( 'Package reinstalled successfully! (Version %s)', 'codesync-manager-for-github' ),
 				/* translators: %s: error message */
-				'force_update_err'      => __( 'Erro ao reinstalar: %s', 'codesync-manager-for-github' ),
-				'force_update_fail'     => __( 'Falha na comunicação ao tentar reinstalar.', 'codesync-manager-for-github' ),
-				'force_update_btn'      => __( 'Atualizar', 'codesync-manager-for-github' ),
-				'force_updating'        => __( 'Reinstalando...', 'codesync-manager-for-github' ),
-				'sync_success_title'    => __( '&#x2705; Pacote Sincronizado com Sucesso!', 'codesync-manager-for-github' ),
+				'force_update_err'      => __( 'Error reinstalling: %s', 'codesync-manager-for-github' ),
+				'force_update_fail'     => __( 'Communication failure while trying to reinstall.', 'codesync-manager-for-github' ),
+				'force_update_btn'      => __( 'Update', 'codesync-manager-for-github' ),
+				'force_updating'        => __( 'Reinstalling...', 'codesync-manager-for-github' ),
+				'sync_success_title'    => __( '&#x2705; Package Synchronized Successfully!', 'codesync-manager-for-github' ),
 				/* translators: 1: plugin name, 2: version number */
-				'sync_success_msg'      => __( 'O pacote <strong>%1$s</strong> já estava instalado no seu WordPress. O código foi atualizado e agora está sincronizado e sendo gerenciado (Versão %2$s).', 'codesync-manager-for-github' ),
-				'install_success_title' => __( '&#x2705; Pacote Instalado com Sucesso!', 'codesync-manager-for-github' ),
+				'sync_success_msg'      => __( 'The package <strong>%1$s</strong> was already installed on your WordPress. The code has been updated and is now synchronized and being managed (Version %2$s).', 'codesync-manager-for-github' ),
+				'install_success_title' => __( '&#x2705; Package Installed Successfully!', 'codesync-manager-for-github' ),
 				/* translators: 1: plugin name, 2: version number */
-				'install_success_msg'   => __( 'O pacote <strong>%1$s</strong> (Versão %2$s) foi baixado e gravado localmente.', 'codesync-manager-for-github' ),
-				'activate_btn'          => __( 'Ativar Agora', 'codesync-manager-for-github' ),
+				'install_success_msg'   => __( 'The package <strong>%1$s</strong> (Version %2$s) was downloaded and saved locally.', 'codesync-manager-for-github' ),
+				'activate_btn'          => __( 'Activate Now', 'codesync-manager-for-github' ),
 				/* translators: %s: error message */
-				'scan_error'            => __( 'Erro ao verificar: %s', 'codesync-manager-for-github' ),
-				'checking_repo'         => __( 'Verificando estrutura do repositório...', 'codesync-manager-for-github' ),
+				'scan_error'            => __( 'Error scanning: %s', 'codesync-manager-for-github' ),
+				'checking_repo'         => __( 'Checking repository structure...', 'codesync-manager-for-github' ),
 				/* translators: 1: plugin name, 2: version number */
-				'plugin_detected'       => __( 'Pacote <strong>%1$s</strong> (Versão %2$s) detectado automaticamente.', 'codesync-manager-for-github' ),
-				'plugin_not_detected'   => __( 'Nenhum pacote válido foi encontrado automaticamente. Selecione a pasta base e a origem abaixo para instalar.', 'codesync-manager-for-github' ),
-				'advanced_options'      => __( 'Opções Avançadas', 'codesync-manager-for-github' ),
-				'select_source'         => __( 'Origem (Release ou Ramo):', 'codesync-manager-for-github' ),
-				'select_folder'         => __( 'Pasta Base do Plugin:', 'codesync-manager-for-github' ),
-				'select_folder_desc'    => __( 'Indique a subpasta do repositório onde os arquivos do plugin de fato residem (a pasta que contém o arquivo PHP principal). O gerenciador extrairá apenas essa pasta, descartando arquivos externos. Isso permite sincronizar diretamente o código-fonte, eliminando a necessidade de gerar arquivos ZIP ou criar releases manuais no GitHub para atualizar o plugin!', 'codesync-manager-for-github' ),
-				'root_folder'           => __( 'Pasta Raiz', 'codesync-manager-for-github' ),
-				'close_btn'             => __( 'Fechar', 'codesync-manager-for-github' ),
+				'plugin_detected'       => __( 'Package <strong>%1$s</strong> (Version %2$s) automatically detected.', 'codesync-manager-for-github' ),
+				'plugin_not_detected'   => __( 'No valid package was automatically found. Select the base folder and source below to install.', 'codesync-manager-for-github' ),
+				'advanced_options'      => __( 'Advanced Options', 'codesync-manager-for-github' ),
+				'select_source'         => __( 'Source (Release or Branch):', 'codesync-manager-for-github' ),
+				'select_folder'         => __( 'Package Base Folder:', 'codesync-manager-for-github' ),
+				'select_folder_desc'    => __( 'Indicate the subfolder of the repository where the package files actually reside (the folder containing the main PHP or style.css file). The manager will extract only this folder, discarding external files. This allows directly syncing the source code without generating ZIPs or manual releases!', 'codesync-manager-for-github' ),
+				'root_folder'           => __( 'Root Folder', 'codesync-manager-for-github' ),
+				'close_btn'             => __( 'Close', 'codesync-manager-for-github' ),
 			),
 		) );
 	}
@@ -180,7 +180,7 @@ class CODESYNC_Admin {
 							<span class="codesync-username">@<?php echo esc_html( $connected_user['username'] ); ?></span>
 							<span class="codesync-pulse-badge">
 								<span class="codesync-pulse"></span>
-								<?php esc_html_e( 'Conectado', 'codesync-manager-for-github' ); ?>
+								<?php esc_html_e( 'Connected', 'codesync-manager-for-github' ); ?>
 							</span>
 						</div>
 					</div>
@@ -189,23 +189,23 @@ class CODESYNC_Admin {
 
 			<?php if ( ! empty( $security_error ) ) : ?>
 				<div class="notice notice-error codesync-notice-blocking">
-					<p><strong><?php esc_html_e( 'Erro de Segurança:', 'codesync-manager-for-github' ); ?></strong> <?php echo esc_html( $security_error ); ?></p>
+					<p><strong><?php esc_html_e( 'Security Error:', 'codesync-manager-for-github' ); ?></strong> <?php echo esc_html( $security_error ); ?></p>
 				</div>
 			<?php else : ?>
 
 				<?php if ( ! $token_exists ) : ?>
 					<!-- Activation screen -->
 					<div class="codesync-card codesync-login-card">
-						<h2><?php esc_html_e( 'Conectar Conta GitHub', 'codesync-manager-for-github' ); ?></h2>
-						<p><?php esc_html_e( 'Para começar a gerenciar seus plugins hospedados no GitHub, conecte uma conta utilizando um Personal Access Token (PAT) com as devidas permissões.', 'codesync-manager-for-github' ); ?></p>
+						<h2><?php esc_html_e( 'Connect GitHub Account', 'codesync-manager-for-github' ); ?></h2>
+						<p><?php esc_html_e( 'To start managing your GitHub hosted packages, connect an account using a Personal Access Token (PAT) with the proper permissions.', 'codesync-manager-for-github' ); ?></p>
 						
 						<div class="codesync-help-box">
-							<p><strong><?php esc_html_e( 'Qual tipo de token criar?', 'codesync-manager-for-github' ); ?></strong></p>
+							<p><strong><?php esc_html_e( 'Which type of token to create?', 'codesync-manager-for-github' ); ?></strong></p>
 							<ul>
-								<li><strong><?php esc_html_e( 'Classic PAT:', 'codesync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Crie um token com o escopo ', 'codesync-manager-for-github' ); ?><code>repo</code> (<?php esc_html_e( 'para repositórios privados e públicos', 'codesync-manager-for-github' ); ?>) <?php esc_html_e( 'ou ', 'codesync-manager-for-github' ); ?><code>public_repo</code> (<?php esc_html_e( 'somente para públicos', 'codesync-manager-for-github' ); ?>).</li>
-								<li><strong><?php esc_html_e( 'Fine-Grained PAT (Novo):', 'codesync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Selecione permissão de leitura e gravação para "Contents" e "Metadata" nos repositórios que deseja gerenciar.', 'codesync-manager-for-github' ); ?></li>
+								<li><strong><?php esc_html_e( 'Classic PAT:', 'codesync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Create a token with the scope ', 'codesync-manager-for-github' ); ?><code>repo</code> (<?php esc_html_e( 'for private and public repositories', 'codesync-manager-for-github' ); ?>) <?php esc_html_e( 'or ', 'codesync-manager-for-github' ); ?><code>public_repo</code> (<?php esc_html_e( 'only for public ones', 'codesync-manager-for-github' ); ?>).</li>
+								<li><strong><?php esc_html_e( 'Fine-Grained PAT (Novo):', 'codesync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Select Read and Write access for "Contents" and "Metadata" on the repositories you want to manage.', 'codesync-manager-for-github' ); ?></li>
 							</ul>
-							<p>👉 <a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Clique aqui para criar seu Token no GitHub', 'codesync-manager-for-github' ); ?></a></p>
+							<p>👉 <a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Click here to create your GitHub Token', 'codesync-manager-for-github' ); ?></a></p>
 						</div>
 
 						<form id="codesync-connect-form">
@@ -214,7 +214,7 @@ class CODESYNC_Admin {
 								<input type="password" id="codesync_pat_token" name="codesync_pat_token" class="regular-text" required placeholder="github_pat_..." autocomplete="off" />
 							</div>
 							<div class="codesync-submit-btn-row">
-								<button type="submit" class="button button-primary button-large"><?php esc_html_e( 'Conectar Conta', 'codesync-manager-for-github' ); ?></button>
+								<button type="submit" class="button button-primary button-large"><?php esc_html_e( 'Connect Account', 'codesync-manager-for-github' ); ?></button>
 								<span class="spinner codesync-spinner"></span>
 							</div>
 							<div class="codesync-error-message" style="display:none;"></div>
@@ -223,10 +223,10 @@ class CODESYNC_Admin {
 				<?php else : ?>
 					<!-- Admin core view -->
 					<h2 class="nav-tab-wrapper codesync-tabs-nav">
-						<a href="#codesync-tab-plugins" class="nav-tab nav-tab-active"><?php esc_html_e( 'Pacotes Gerenciados', 'codesync-manager-for-github' ); ?></a>
-						<a href="#codesync-tab-add" class="nav-tab" id="codesync-trigger-add-tab"><?php esc_html_e( 'Adicionar Pacote', 'codesync-manager-for-github' ); ?></a>
-						<a href="#codesync-tab-logs" class="nav-tab"><?php esc_html_e( 'Histórico de Logs', 'codesync-manager-for-github' ); ?></a>
-						<a href="#codesync-tab-config" class="nav-tab"><?php esc_html_e( 'Configurações', 'codesync-manager-for-github' ); ?></a>
+						<a href="#codesync-tab-plugins" class="nav-tab nav-tab-active"><?php esc_html_e( 'Managed Packages', 'codesync-manager-for-github' ); ?></a>
+						<a href="#codesync-tab-add" class="nav-tab" id="codesync-trigger-add-tab"><?php esc_html_e( 'Add Package', 'codesync-manager-for-github' ); ?></a>
+						<a href="#codesync-tab-logs" class="nav-tab"><?php esc_html_e( 'Logs History', 'codesync-manager-for-github' ); ?></a>
+						<a href="#codesync-tab-config" class="nav-tab"><?php esc_html_e( 'Settings', 'codesync-manager-for-github' ); ?></a>
 					</h2>
 
 					<!-- Tab content: Plugins -->
@@ -234,11 +234,11 @@ class CODESYNC_Admin {
 						<div class="codesync-action-bar">
 							<button type="button" class="button button-primary" id="codesync-btn-scan-now">
 								<i data-lucide="search" class="codesync-icon"></i>
-								<?php esc_html_e( 'Verificar atualizações agora', 'codesync-manager-for-github' ); ?>
+								<?php esc_html_e( 'Check for updates now', 'codesync-manager-for-github' ); ?>
 							</button>
 							<button type="button" class="button" id="codesync-btn-update-all" style="margin-left: 10px;">
 								<i data-lucide="layers" class="codesync-icon"></i>
-								<?php esc_html_e( 'Atualizar Todos', 'codesync-manager-for-github' ); ?>
+								<?php esc_html_e( 'Update All', 'codesync-manager-for-github' ); ?>
 							</button>
 							<span class="spinner codesync-spinner" id="codesync-scan-spinner"></span>
 						</div>
@@ -252,14 +252,14 @@ class CODESYNC_Admin {
 					<div id="codesync-tab-add" class="codesync-tab-content">
 						<div class="codesync-info-notice" style="margin-bottom: 20px; margin-top: 0;">
 							<i data-lucide="info" class="codesync-icon"></i>
-							<p><?php esc_html_e( 'Exibindo repositórios do GitHub. Você pode instalar tanto Plugins quanto Temas.', 'codesync-manager-for-github' ); ?></p>
+							<p><?php esc_html_e( 'Displaying GitHub repositories. You can install both Plugins and Themes.', 'codesync-manager-for-github' ); ?></p>
 						</div>
 
 						<div class="codesync-filter-bar">
 							<input type="text" id="codesync-repo-search" placeholder="<?php esc_attr_e( 'Buscar repositório por nome...', 'codesync-manager-for-github' ); ?>" autocomplete="off" />
 							<button type="button" class="button" id="codesync-btn-reload-repos">
 								<i data-lucide="refresh-cw" class="codesync-icon"></i>
-								<?php esc_html_e( 'Recarregar Repositórios', 'codesync-manager-for-github' ); ?>
+								<?php esc_html_e( 'Reload Repositories', 'codesync-manager-for-github' ); ?>
 							</button>
 							<span class="spinner codesync-spinner" id="codesync-repos-spinner"></span>
 						</div>
@@ -281,11 +281,11 @@ class CODESYNC_Admin {
 					<!-- Tab content: Settings/Config -->
 					<div id="codesync-tab-config" class="codesync-tab-content">
 						<div class="codesync-card codesync-settings-card">
-							<h2><?php esc_html_e( 'Configurações do Sync Manager', 'codesync-manager-for-github' ); ?></h2>
+							<h2><?php esc_html_e( 'Sync Manager Settings', 'codesync-manager-for-github' ); ?></h2>
 							<table class="form-table" role="presentation">
 								<tbody>
 									<tr>
-										<th scope="row"><?php esc_html_e( 'Conta Conectada', 'codesync-manager-for-github' ); ?></th>
+										<th scope="row"><?php esc_html_e( 'Connected Account', 'codesync-manager-for-github' ); ?></th>
 										<td>
 											<div class="codesync-profile-detail">
 												<img src="<?php echo esc_url( $connected_user['avatar_url'] ); ?>" class="codesync-profile-avatar" alt="Avatar" />
@@ -298,27 +298,27 @@ class CODESYNC_Admin {
 										</td>
 									</tr>
 									<tr>
-										<th scope="row"><?php esc_html_e( 'Token Armazenado', 'codesync-manager-for-github' ); ?></th>
+										<th scope="row"><?php esc_html_e( 'Stored Token', 'codesync-manager-for-github' ); ?></th>
 										<td>
 											<code><?php echo esc_html( CODESYNC_Encryption::mask_token( CODESYNC_Encryption::decrypt( get_option( CODESYNC_Manager::OPTION_TOKEN ) ) ) ); ?></code>
 										</td>
 									</tr>
 									<tr>
-										<th scope="row"><?php esc_html_e( 'Idioma do Plugin', 'codesync-manager-for-github' ); ?></th>
+										<th scope="row"><?php esc_html_e( 'Plugin Language', 'codesync-manager-for-github' ); ?></th>
 										<td>
 											<?php $selected_locale = get_option( 'codesync_locale', 'pt_BR' ); ?>
 											<select id="codesync_locale" name="codesync_locale" style="min-width: 200px;">
-												<option value="pt_BR" <?php selected( $selected_locale, 'pt_BR' ); ?>><?php esc_html_e( 'Português (Brasil)', 'codesync-manager-for-github' ); ?></option>
+												<option value="pt_BR" <?php selected( $selected_locale, 'pt_BR' ); ?>><?php esc_html_e( 'Portuguese (Brazil)', 'codesync-manager-for-github' ); ?></option>
 												<option value="en_US" <?php selected( $selected_locale, 'en_US' ); ?>><?php esc_html_e( 'English (US)', 'codesync-manager-for-github' ); ?></option>
-												<option value="es_ES" <?php selected( $selected_locale, 'es_ES' ); ?>><?php esc_html_e( 'Español', 'codesync-manager-for-github' ); ?></option>
+												<option value="es_ES" <?php selected( $selected_locale, 'es_ES' ); ?>><?php esc_html_e( 'Spanish', 'codesync-manager-for-github' ); ?></option>
 											</select>
-											<p class="description"><?php esc_html_e( 'Selecione o idioma da interface do CodeSync Manager for GitHub.', 'codesync-manager-for-github' ); ?></p>
+											<p class="description"><?php esc_html_e( 'Select the interface language for CodeSync Manager for GitHub.', 'codesync-manager-for-github' ); ?></p>
 										</td>
 									</tr>
 									<tr>
-										<th scope="row"><?php esc_html_e( 'Agendamento Automático', 'codesync-manager-for-github' ); ?></th>
+										<th scope="row"><?php esc_html_e( 'Automatic Scheduling', 'codesync-manager-for-github' ); ?></th>
 										<td>
-											<p><?php esc_html_e( 'As verificações de atualizações ocorrem automaticamente 2 vezes ao dia (Twice Daily) através do WP-Cron nativo.', 'codesync-manager-for-github' ); ?></p>
+											<p><?php esc_html_e( 'Update checks occur automatically twice daily via native WP-Cron.', 'codesync-manager-for-github' ); ?></p>
 										</td>
 									</tr>
 									<tr>
@@ -326,9 +326,9 @@ class CODESYNC_Admin {
 										<td>
 											<button type="button" class="button button-secondary" id="codesync-btn-webhook-info">
 												<i data-lucide="zap" class="codesync-icon"></i>
-												<?php esc_html_e( 'Configurar Webhook', 'codesync-manager-for-github' ); ?>
+												<?php esc_html_e( 'Setup Webhook', 'codesync-manager-for-github' ); ?>
 											</button>
-											<p class="description"><?php esc_html_e( 'Receba atualizações instantâneas via Webhooks do GitHub.', 'codesync-manager-for-github' ); ?></p>
+											<p class="description"><?php esc_html_e( 'Receive instant updates via GitHub Webhooks.', 'codesync-manager-for-github' ); ?></p>
 										</td>
 									</tr>
 								</tbody>
@@ -336,7 +336,7 @@ class CODESYNC_Admin {
 
 							<div class="codesync-settings-actions">
 								<button type="button" class="button button-link-delete" id="codesync-btn-disconnect">
-									<?php esc_html_e( 'Desconectar conta GitHub', 'codesync-manager-for-github' ); ?>
+									<?php esc_html_e( 'Disconnect GitHub account', 'codesync-manager-for-github' ); ?>
 								</button>
 								<span class="spinner codesync-spinner" id="codesync-disconnect-spinner"></span>
 							</div>
@@ -352,20 +352,20 @@ class CODESYNC_Admin {
 			<div class="codesync-modal-backdrop"></div>
 			<div class="codesync-modal-container">
 				<div class="codesync-modal-header">
-					<h3 class="codesync-modal-title"><?php esc_html_e( 'Instalar Pacote', 'codesync-manager-for-github' ); ?></h3>
-					<button type="button" class="codesync-modal-close" aria-label="<?php esc_attr_e( 'Fechar', 'codesync-manager-for-github' ); ?>">&times;</button>
+					<h3 class="codesync-modal-title"><?php esc_html_e( 'Install Package', 'codesync-manager-for-github' ); ?></h3>
+					<button type="button" class="codesync-modal-close" aria-label="<?php esc_attr_e( 'Close', 'codesync-manager-for-github' ); ?>">&times;</button>
 				</div>
 				<div class="codesync-modal-body">
 					<!-- Conteúdo dinâmico via JS -->
 				</div>
 				<div class="codesync-modal-footer" style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
 					<div>
-						<button type="button" class="button codesync-btn-copy-md" style="display:none;"><i data-lucide="copy" class="codesync-icon" style="width:14px;height:14px;"></i> <?php esc_html_e( 'Copiar Markdown', 'codesync-manager-for-github' ); ?></button>
+						<button type="button" class="button codesync-btn-copy-md" style="display:none;"><i data-lucide="copy" class="codesync-icon" style="width:14px;height:14px;"></i> <?php esc_html_e( 'Copy Markdown', 'codesync-manager-for-github' ); ?></button>
 					</div>
 					<div>
-						<button type="button" class="button codesync-modal-btn-cancel"><?php esc_html_e( 'Cancelar', 'codesync-manager-for-github' ); ?></button>
-						<button type="button" class="button button-primary codesync-modal-btn-install codesync-btn-confirm-install" style="display:none;"><?php esc_html_e( 'Confirmar Instalação', 'codesync-manager-for-github' ); ?></button>
-						<button type="button" class="button button-primary codesync-modal-btn-install codesync-btn-force-install" style="display:none; background:#ef4444; border-color:#dc2626; text-shadow:none;"><?php esc_html_e( 'Instalar mesmo assim (Não Recomendado)', 'codesync-manager-for-github' ); ?></button>
+						<button type="button" class="button codesync-modal-btn-cancel"><?php esc_html_e( 'Cancel', 'codesync-manager-for-github' ); ?></button>
+						<button type="button" class="button button-primary codesync-modal-btn-install codesync-btn-confirm-install" style="display:none;"><?php esc_html_e( 'Confirm Installation', 'codesync-manager-for-github' ); ?></button>
+						<button type="button" class="button button-primary codesync-modal-btn-install codesync-btn-force-install" style="display:none; background:#ef4444; border-color:#dc2626; text-shadow:none;"><?php esc_html_e( 'Install Anyway (Not Recommended)', 'codesync-manager-for-github' ); ?></button>
 					</div>
 				</div>
 			</div>
@@ -376,11 +376,12 @@ class CODESYNC_Admin {
 			<div class="codesync-modal-backdrop"></div>
 			<div class="codesync-modal-container">
 				<div class="codesync-modal-header">
-					<h3 class="codesync-modal-title"><?php esc_html_e( 'Configuração de Webhook', 'codesync-manager-for-github' ); ?></h3>
-					<button type="button" class="codesync-modal-close" aria-label="<?php esc_attr_e( 'Fechar', 'codesync-manager-for-github' ); ?>">&times;</button>
+					<h3 class="codesync-modal-title"><?php esc_html_e( 'Webhook Configuration', 'codesync-manager-for-github' ); ?></h3>
+					<button type="button" class="codesync-modal-close" aria-label="<?php esc_attr_e( 'Close', 'codesync-manager-for-github' ); ?>">&times;</button>
 				</div>
 				<div class="codesync-modal-body">
-					<p><?php esc_html_e( 'Configure um Webhook no GitHub (em Settings > Webhooks do repositório) para ser notificado de atualizações instantaneamente.', 'codesync-manager-for-github' ); ?></p>
+					<p><?php esc_html_e( 'Configure a Webhook on GitHub (under repository Settings > Webhooks) to be notified of updates instantly.', 'codesync-manager-for-github' ); ?></p>
+					<p>👉 <a href="https://github.com" id="codesync-webhook-direct-link" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Click here to go to Webhooks settings on GitHub', 'codesync-manager-for-github' ); ?></a></p>
 					
 					<div class="codesync-form-group">
 						<label><strong><?php esc_html_e( 'Payload URL:', 'codesync-manager-for-github' ); ?></strong></label>
@@ -400,10 +401,10 @@ class CODESYNC_Admin {
 					</div>
 
 					<p><strong><?php esc_html_e( 'Content type:', 'codesync-manager-for-github' ); ?></strong> <code>application/json</code></p>
-					<p><strong><?php esc_html_e( 'Events:', 'codesync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Selecione "Let me select individual events" e marque', 'codesync-manager-for-github' ); ?> <strong>Pushes</strong> <?php esc_html_e( 'e', 'codesync-manager-for-github' ); ?> <strong>Releases</strong>.</p>
+					<p><strong><?php esc_html_e( 'Events:', 'codesync-manager-for-github' ); ?></strong> <?php esc_html_e( 'Select "Let me select individual events" and check', 'codesync-manager-for-github' ); ?> <strong>Pushes</strong> <?php esc_html_e( 'and', 'codesync-manager-for-github' ); ?> <strong>Releases</strong>.</p>
 				</div>
 				<div class="codesync-modal-footer">
-					<button type="button" class="button button-primary codesync-modal-btn-cancel"><?php esc_html_e( 'Entendi', 'codesync-manager-for-github' ); ?></button>
+					<button type="button" class="button button-primary codesync-modal-btn-cancel"><?php esc_html_e( 'Understood', 'codesync-manager-for-github' ); ?></button>
 				</div>
 			</div>
 		</div>
@@ -412,8 +413,8 @@ class CODESYNC_Admin {
 		<script type="text/template" id="tmpl-codesync-checker-ui">
 			<div class="codesync-checker-container" style="margin-top: 20px; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;">
 				<div class="codesync-checker-intro" style="padding: 15px 20px; border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
-					<h4 style="margin:0 0 5px 0; font-size: 15px;"><i data-lucide="shield-check" class="codesync-icon" style="vertical-align: middle;"></i> <?php esc_html_e( 'Validação de Segurança e Estrutura', 'codesync-manager-for-github' ); ?></h4>
-					<p style="margin:0; color: #64748b; font-size: 13px;"><?php esc_html_e( 'Analisando o código do repositório antes da instalação...', 'codesync-manager-for-github' ); ?></p>
+					<h4 style="margin:0 0 5px 0; font-size: 15px;"><i data-lucide="shield-check" class="codesync-icon" style="vertical-align: middle;"></i> <?php esc_html_e( 'Security & Structure Validation', 'codesync-manager-for-github' ); ?></h4>
+					<p style="margin:0; color: #64748b; font-size: 13px;"><?php esc_html_e( 'Analyzing repository code before installation...', 'codesync-manager-for-github' ); ?></p>
 				</div>
 				
 				<ul id="codesync-checker-steps" style="list-style: none; margin: 0; padding: 0;">
@@ -421,7 +422,7 @@ class CODESYNC_Admin {
 					<li class="codesync-checker-step" data-step="download">
 						<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
 							<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
-							<strong style="flex: 1;"><?php esc_html_e( 'Download & Estrutura Base', 'codesync-manager-for-github' ); ?></strong>
+							<strong style="flex: 1;"><?php esc_html_e( 'Download & Base Structure', 'codesync-manager-for-github' ); ?></strong>
 							<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
 						</div>
 						<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
@@ -430,7 +431,7 @@ class CODESYNC_Admin {
 					<li class="codesync-checker-step" data-step="headers">
 						<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
 							<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
-							<strong style="flex: 1;"><?php esc_html_e( 'Sintaxe & Compatibilidade', 'codesync-manager-for-github' ); ?></strong>
+							<strong style="flex: 1;"><?php esc_html_e( 'Syntax & Compatibility', 'codesync-manager-for-github' ); ?></strong>
 							<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
 						</div>
 						<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
@@ -439,7 +440,7 @@ class CODESYNC_Admin {
 					<li class="codesync-checker-step" data-step="security">
 						<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
 							<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
-							<strong style="flex: 1;"><?php esc_html_e( 'Segurança & SQL', 'codesync-manager-for-github' ); ?></strong>
+							<strong style="flex: 1;"><?php esc_html_e( 'Security & SQL', 'codesync-manager-for-github' ); ?></strong>
 							<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
 						</div>
 						<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
@@ -448,7 +449,7 @@ class CODESYNC_Admin {
 					<li class="codesync-checker-step" data-step="deprecated">
 						<div class="codesync-checker-step-header" style="padding: 15px 20px; display: flex; align-items: center; cursor: pointer; border-bottom: 1px solid #e2e8f0; background: #fff;">
 							<span class="codesync-checker-step-icon" style="margin-right: 15px; color: #cbd5e1;"><i data-lucide="circle-dashed" class="codesync-icon"></i></span>
-							<strong style="flex: 1;"><?php esc_html_e( 'Desempenho & Obsoletos', 'codesync-manager-for-github' ); ?></strong>
+							<strong style="flex: 1;"><?php esc_html_e( 'Performance & Deprecated', 'codesync-manager-for-github' ); ?></strong>
 							<i data-lucide="chevron-down" class="codesync-icon" style="color:#94a3b8;"></i>
 						</div>
 						<div class="codesync-checker-step-body" style="display: none; padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #475569;"></div>
@@ -468,7 +469,7 @@ class CODESYNC_Admin {
 		$managed = array_merge( $managed_plugins, $managed_themes );
 		if ( empty( $managed ) || ! is_array( $managed ) ) {
 			?>
-			<p class="codesync-no-plugins-msg"><?php esc_html_e( 'Nenhum plugin gerenciado ainda. Acesse a aba "Adicionar Plugin" para começar.', 'codesync-manager-for-github' ); ?></p>
+			<p class="codesync-no-plugins-msg"><?php esc_html_e( 'No packages managed yet. Go to the "Add Package" tab to get started.', 'codesync-manager-for-github' ); ?></p>
 			<?php
 			return;
 		}
@@ -634,17 +635,17 @@ class CODESYNC_Admin {
 				<div class="codesync-plugin-card-actions">
 					<button type="button" class="button button-primary codesync-btn-force-update" data-repo="<?php echo esc_attr( $repo ); ?>" <?php disabled( $status !== 'atualizacao_disponivel' ); ?>>
 						<i data-lucide="cloud-upload" class="codesync-icon"></i>
-						<?php esc_html_e( 'Atualizar', 'codesync-manager-for-github' ); ?>
+						<?php esc_html_e( 'Update', 'codesync-manager-for-github' ); ?>
 					</button>
 
 					<?php if ( $has_rollback ) : ?>
 					<button type="button" class="button codesync-btn-rollback" data-repo="<?php echo esc_attr( $repo ); ?>">
 						<i data-lucide="rotate-ccw" class="codesync-icon"></i>
-						<?php esc_html_e( 'Fazer Rollback', 'codesync-manager-for-github' ); ?>
+						<?php esc_html_e( 'Rollback', 'codesync-manager-for-github' ); ?>
 					</button>
 					<?php endif; ?>
 					<button type="button" class="button button-link-delete codesync-btn-remove" data-repo="<?php echo esc_attr( $repo ); ?>">
-						<?php esc_html_e( 'Parar de gerenciar', 'codesync-manager-for-github' ); ?>
+						<?php esc_html_e( 'Stop managing', 'codesync-manager-for-github' ); ?>
 					</button>
 				</div>
 			</div>
