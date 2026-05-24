@@ -196,14 +196,79 @@ class CODESYNC_GitHub_API {
 		// Secondary check: use the Languages API to detect PHP presence.
 		// Only check up to 30 repos to avoid excessive API calls.
 		$pending_checks = array_slice( $pending_checks, 0, 30 );
-
+		$requests = array();
+		$headers = $this->get_request_args()['headers'];
+		
 		foreach ( $pending_checks as $repo ) {
 			$owner = isset( $repo['owner']['login'] ) ? $repo['owner']['login'] : '';
 			if ( empty( $owner ) ) {
 				continue;
 			}
+			$url  = sprintf( '%s/repos/%s/%s/languages', self::API_URL, rawurlencode( $owner ), rawurlencode( $repo['name'] ) );
+			$requests[ $repo['full_name'] ] = array(
+				'url'     => $url,
+				'headers' => $headers,
+				'type'    => 'GET',
+			);
+		}
 
-			$php_pct = $this->get_repo_php_percentage( $owner, $repo['name'] );
+		$responses = array();
+		if ( ! empty( $requests ) ) {
+			try {
+				if ( class_exists( '\WpOrg\Requests\Requests' ) && method_exists( '\WpOrg\Requests\Requests', 'request_multiple' ) ) {
+					$responses = \WpOrg\Requests\Requests::request_multiple( $requests );
+				} elseif ( class_exists( 'Requests' ) && method_exists( 'Requests', 'request_multiple' ) ) {
+					$responses = Requests::request_multiple( $requests );
+				} else {
+					// Fallback to sequential
+					foreach ( $requests as $key => $req ) {
+						$resp = wp_remote_get( $req['url'], array( 'headers' => $req['headers'] ) );
+						if ( ! is_wp_error( $resp ) ) {
+							$responses[ $key ] = (object) array(
+								'status_code' => wp_remote_retrieve_response_code( $resp ),
+								'body'        => wp_remote_retrieve_body( $resp ),
+							);
+						}
+					}
+				}
+			} catch ( Exception $e ) {
+				// Fallback to sequential if parallel fails (e.g. cURL multi not supported)
+				foreach ( $requests as $key => $req ) {
+					$resp = wp_remote_get( $req['url'], array( 'headers' => $req['headers'] ) );
+					if ( ! is_wp_error( $resp ) ) {
+						$responses[ $key ] = (object) array(
+							'status_code' => wp_remote_retrieve_response_code( $resp ),
+							'body'        => wp_remote_retrieve_body( $resp ),
+						);
+					}
+				}
+			}
+		}
+
+		foreach ( $pending_checks as $repo ) {
+			$full_name = $repo['full_name'];
+			$php_pct   = 0.0;
+			
+			if ( isset( $responses[ $full_name ] ) && ! is_wp_error( $responses[ $full_name ] ) && ! ( $responses[ $full_name ] instanceof Exception ) ) {
+				$resp = $responses[ $full_name ];
+				$status_code = isset( $resp->status_code ) ? $resp->status_code : 0;
+				if ( 200 === $status_code ) {
+					$languages = json_decode( $resp->body, true );
+					if ( is_array( $languages ) && ! empty( $languages ) ) {
+						$total_bytes = array_sum( $languages );
+						if ( $total_bytes > 0 ) {
+							$php_bytes = 0;
+							foreach ( $languages as $lang => $bytes ) {
+								if ( strcasecmp( $lang, 'PHP' ) === 0 ) {
+									$php_bytes = (int) $bytes;
+									break;
+								}
+							}
+							$php_pct = ( $php_bytes / $total_bytes ) * 100.0;
+						}
+					}
+				}
+			}
 
 			if ( $php_pct >= 5.0 ) {
 				$repos[] = array(
@@ -214,7 +279,7 @@ class CODESYNC_GitHub_API {
 					'private'     => (bool) $repo['private'],
 					'updated_at'  => $repo['updated_at'],
 					'html_url'    => $repo['html_url'],
-					'owner'       => $owner,
+					'owner'       => isset( $repo['owner']['login'] ) ? $repo['owner']['login'] : '',
 					'language'    => isset( $repo['language'] ) ? $repo['language'] : '',
 				);
 			}
