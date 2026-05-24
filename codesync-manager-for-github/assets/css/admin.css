@@ -1307,6 +1307,7 @@
 	-webkit-user-select: none;
 	white-space: nowrap;
 	overflow: hidden;
+	margin: 0 !important;
 }
 
 .codesync-folder-item:hover {
