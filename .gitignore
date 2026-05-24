@@ -1,5 +1,2 @@
-# Ignore packaged releases folder
-/releases/
-
 # macOS
 .DS_Store

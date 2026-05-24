@@ -354,12 +354,13 @@ jQuery(document).ready(function($) {
 							}
 							var selectedAttr = isSelected ? ' selected' : '';
 							var prefix = src.is_branch ? '🌿 ' : '🏷️ ';
-							bodyHtml += '<option value="' + src.ref + '"' + selectedAttr + '>' + prefix + src.name + '</option>';
+							bodyHtml += '<option value="' + src.ref + '"' + selectedAttr + ' data-is-branch="' + (src.is_branch ? '1' : '0') + '">' + prefix + src.name + '</option>';
 						});
 					} else {
-						bodyHtml += '<option value="' + data.default_branch + '" selected>🌿 ' + data.default_branch + '</option>';
+						bodyHtml += '<option value="' + data.default_branch + '" selected data-is-branch="1">🌿 ' + data.default_branch + '</option>';
 					}
 					bodyHtml += '    </select>';
+					bodyHtml += '    <p class="codesync-modal-ref-desc codesync-field-description"></p>';
 					bodyHtml += '  </div>';
 
 					// ── Package Type select ─────────────────────────────────
@@ -494,9 +495,24 @@ jQuery(document).ready(function($) {
 						});
 					});
 
+					// Initialize source description
+					function updateSourceDescription() {
+						var $select = $modalBody.find('#codesync-modal-ref');
+						var $desc = $modalBody.find('.codesync-modal-ref-desc');
+						var $selectedOpt = $select.find('option:selected');
+						var isBranch = $selectedOpt.data('is-branch') === 1 || $selectedOpt.attr('data-is-branch') === '1';
+						if (isBranch) {
+							$desc.html(codesync_ajax.texts.source_branch_desc || '🌿 Sincronização via Ramo (Branch): As atualizações do site ocorrerão automaticamente a cada novo commit/push na branch selecionada (via Webhook), sem precisar incrementar a versão ou criar novas releases no GitHub.');
+						} else {
+							$desc.html(codesync_ajax.texts.source_release_desc || '🏷️ Sincronização via Release: Atualizações dependem de novas versões estáveis. O site só receberá notificações de atualização após você criar e publicar uma nova Release com tag de versão superior no GitHub.');
+						}
+					}
+					updateSourceDescription();
+
 					// ── Origin select change → reload verify ───────────────
 					$modalBody.find('#codesync-modal-ref').on('change', function() {
 						var selectedRef = $(this).val();
+						updateSourceDescription();
 						$('.codesync-folder-dropdown').hide();
 						$('.codesync-folder-trigger').attr('aria-expanded', 'false')
 							.find('.codesync-folder-trigger-chevron').removeClass('codesync-chevron-up');

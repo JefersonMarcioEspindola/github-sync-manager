@@ -14,130 +14,23 @@ msgstr ""
 msgid "Você não tem permissão para acessar esta página."
 msgstr "No tiene permiso para acceder a esta página."
 
-msgid "Erro de Segurança:"
-msgstr "Error de Seguridad:"
-
-msgid "Conectar Conta GitHub"
-msgstr "Conectar Cuenta de GitHub"
-
-msgid ""
-"Para começar a gerenciar seus plugins hospedados no GitHub, conecte uma "
-"conta utilizando um Personal Access Token (PAT) com as devidas permissões."
-msgstr ""
-"Para comenzar a administrar sus complementos alojados en GitHub, conecte "
-"una cuenta utilizando un Token de Acceso Personal (PAT) con los permisos "
-"adecuados."
-
-msgid "Qual tipo de token criar?"
-msgstr "¿Qué tipo de token crear?"
-
 msgid "Classic PAT:"
 msgstr "Classic PAT:"
-
-msgid "Crie um token com o escopo "
-msgstr "Cree un token con el alcance "
-
-msgid "para repositórios privados e públicos"
-msgstr "para repositorios privados y públicos"
-
-msgid "ou "
-msgstr "o "
-
-msgid "somente para públicos"
-msgstr "solo para públicos"
 
 msgid "Fine-Grained PAT (Novo):"
 msgstr "Fine-Grained PAT (Nuevo):"
 
-msgid ""
-"Selecione permissão de leitura e gravação para \"Contents\" e \"Metadata\" "
-"nos repositórios que deseja gerenciar."
-msgstr ""
-"Seleccione permisos de lectura y escritura para \"Contents\" y \"Metadata\" "
-"en los repositorios que desea administrar."
-
-msgid "Clique aqui para criar seu Token no GitHub"
-msgstr "Haga clic aquí para crear su Token en GitHub"
-
 msgid "GitHub Personal Access Token (PAT)"
 msgstr "Token de Acceso Personal de GitHub (PAT)"
-
-msgid "Conectar Conta"
-msgstr "Conectar Cuenta"
-
-msgid "Plugins Gerenciados"
-msgstr "Plugins Administrados"
-
-msgid "Adicionar Plugin"
-msgstr "Añadir Plugin"
-
-msgid "Histórico de Logs"
-msgstr "Historial de Logs"
-
-msgid "Configurações"
-msgstr "Configuraciones"
-
-msgid "Verificar atualizações agora"
-msgstr "Buscar actualizaciones ahora"
-
-msgid ""
-"Exibindo apenas repositórios com código PHP principal ou com nome/descrição "
-"relacionados a plugins WordPress."
-msgstr ""
-"Mostrando solo repositorios con código PHP principal o con "
-"nombre/descripción relacionados con plugins de WordPress."
 
 msgid "Buscar repositório por nome..."
 msgstr "Buscar repositorio por nombre..."
 
-msgid "Recarregar Repositórios"
-msgstr "Recargar Repositorios"
-
-msgid "Conta Conectada"
-msgstr "Cuenta Conectada"
-
 msgid "Tipo de Token: %s"
 msgstr "Tipo de Token: %s"
 
-msgid "Token Armazenado"
-msgstr "Token Almacenado"
-
-msgid "Idioma do Plugin"
-msgstr "Idioma del Plugin"
-
-msgid "Português (Brasil)"
-msgstr "Português (Brasil)"
-
 msgid "English (US)"
 msgstr "English (US)"
-
-msgid "Español"
-msgstr "Español"
-
-msgid "Agendamento Automático"
-msgstr "Programación Automática"
-
-msgid ""
-"O sistema verifica se há atualizações disponíveis para os plugins de forma "
-"automática duas vezes ao dia."
-msgstr ""
-"El sistema verifica las actualizaciones disponibles para los plugins de "
-"forma automática dos veces al día."
-
-msgid ""
-"As verificações automáticas dependem de tráfego no site. Para sites de "
-"produção, recomenda-se desabilitar o WP-Cron no wp-config.php e agendar uma "
-"tarefa cron real no servidor chamando wp-cron.php."
-msgstr ""
-"Las verificaciones automáticas dependen del tráfico del sitio. Para sitios "
-"de producción, se recomienda deshabilitar WP-Cron en wp-config.php y "
-"programar una tarea cron real en el servidor llamando a wp-cron.php."
-
-msgid "Desconectar conta GitHub"
-msgstr "Desconectar cuenta de GitHub"
-
-msgid "Parar de gerenciar"
-msgstr "Dejar de administrar"
 
 msgid "Atualizado"
 msgstr "Actualizado"
@@ -214,113 +107,11 @@ msgstr "Idioma no válido."
 msgid "Idioma atualizado com sucesso!"
 msgstr "¡Idioma actualizado con éxito!"
 
-msgid ""
-"O plugin continuará instalado, mas deixará de receber atualizações "
-"automáticas. Deseja continuar?"
-msgstr ""
-"El plugin continuará instalado, pero dejará de recibir actualizaciones "
-"automáticas. ¿Desea continuar?"
-
-msgid "Baixando e instalando..."
-msgstr "Descargando e instalando..."
-
-msgid "Pesquisando repositórios..."
-msgstr "Buscando repositorios..."
-
 msgid "Verificação concluída!"
 msgstr "¡Verificación completada!"
 
 msgid "Verificação manual executada para todos os plugins gerenciados."
 msgstr "Verificación manual ejecutada para todos los plugins administrados."
-
-msgid "Falha na requisição. Verifique sua conexão de rede."
-msgstr "La solicitud falló. Por favor, compruebe su conexión de red."
-
-msgid ""
-"O plugin <strong>%1$s</strong> (Versão %2$s) foi baixado e gravado "
-"localmente."
-msgstr ""
-"El plugin <strong>%1$s</strong> (Versión %2$s) fue descargado y guardado "
-"localmente."
-
-msgid "Ativar Plugin Agora"
-msgstr "Activar plugin ahora"
-
-msgid "Erro ao verificar: %s"
-msgstr "Error al comprobar: %s"
-
-msgid "Falha na comunicação."
-msgstr "La comunicación falló."
-
-msgid "Deseja baixar e instalar o plugin do repositório %s?"
-msgstr "¿Desea descargar e instalar el plugin del repositorio %s?"
-
-msgid "Erro na Instalação: %s"
-msgstr "Error en la instalación: %s"
-
-msgid "Falha na comunicação de rede ao tentar instalar o plugin."
-msgstr "Fallo de comunicación de red al intentar instalar el plugin."
-
-msgid "Erro ao excluir gerenciamento."
-msgstr "Error al aliminar la gestión."
-
-msgid "Falha na comunicação de rede durante o escaneamento."
-msgstr "Fallo de comunicación de red durante el escaneo."
-
-msgid "Prompt de IA copiado para a área de transferência com sucesso!"
-msgstr "¡El prompt de IA se copió al portapapeles con éxito!"
-
-msgid ""
-"Não foi possível copiar o prompt automaticamente. Por favor, copie "
-"manualmente."
-msgstr "No se pudo copiar el prompt automáticamente. Por favor, cópielo manualmente."
-
-msgid "Erro ao salvar o idioma."
-msgstr "Error al guardar el idioma."
-
-msgid "Carregando seus repositórios do GitHub..."
-msgstr "Cargando sus repositorios de GitHub..."
-
-msgid "Erro de conexão ao buscar repositórios."
-msgstr "Error de conexión al buscar repositorios."
-
-msgid "Nenhum repositório encontrado na sua conta do GitHub."
-msgstr "No se encontraron repositorios en su cuenta de GitHub."
-
-msgid "Já Gerenciado"
-msgstr "Ya gestionado"
-
-msgid "Instalar Plugin"
-msgstr "Instalar plugin"
-
-msgid "Sem descrição no repositório."
-msgstr "Sin descripción en el repositorio."
-
-msgid "Atualizado: %s"
-msgstr "Actualizado: %s"
-
-msgid "Privado"
-msgstr "Privado"
-
-msgid "Público"
-msgstr "Público"
-
-msgid ""
-"Nenhum plugin gerenciado ainda. Acesse a aba \"Adicionar Plugin\" para "
-"começar."
-msgstr ""
-"Ningún plugin administrado todavía. Acceda a la pestaña \"Añadir plugin\" "
-"para comenzar."
-
-msgid ""
-"Tem certeza de que deseja desconectar sua conta GitHub? Os plugins "
-"continuarão instalados, mas não receberão notificações de atualização."
-msgstr ""
-"¿Está seguro de que desea desconectar su cuenta de GitHub? Los plugins "
-"seguirán instalados pero no recibirán notificaciones de actualización."
-
-msgid "Conectado"
-msgstr "Conectado"
 
 msgid "Sucesso"
 msgstr "Éxito"
@@ -355,39 +146,8 @@ msgstr "Datos inválidos devueltos para la subcarpeta %s."
 msgid "Conteúdo inválido ou formato inesperado para o arquivo %s."
 msgstr "Contenido inválido o formato inesperado para el archivo %s."
 
-msgid "Verificando estrutura do repositório..."
-msgstr "Verificando la estructura del repositorio..."
-
-msgid "Plugin <strong>%1$s</strong> (Versão %2$s) detectado automaticamente."
-msgstr "Plugin <strong>%1$s</strong> (Versión %2$s) detectado automáticamente."
-
-msgid ""
-"Nenhum plugin WordPress válido foi encontrado automaticamente. Selecione a "
-"pasta base e a origem abaixo para instalar."
-msgstr ""
-"No se encontró ningún plugin de WordPress válido automáticamente. "
-"Seleccione la carpeta base y el origen a continuación para instalar."
-
-msgid "Opções Avançadas"
-msgstr "Opciones Avanzadas"
-
-msgid "Origem (Release ou Ramo):"
-msgstr "Origen (Release o Rama):"
-
-msgid "Pasta Base do Plugin:"
-msgstr "Carpeta Base del Plugin:"
-
-msgid "Pasta Raiz"
-msgstr "Carpeta Raíz"
-
-msgid "Fechar"
-msgstr "Cerrar"
-
 msgid "Pasta: %s"
 msgstr "Carpeta: %s"
-
-msgid "Pasta base configurada para este plugin."
-msgstr "Carpeta base configurada para este plugin."
 
 msgid "Falha ao buscar a estrutura de pastas do repositório (%d)."
 msgstr "Fallo al buscar la estructura de carpetas del repositorio (%d)."
@@ -404,103 +164,11 @@ msgstr "Ningún plugin detectado automáticamente."
 msgid "Sync Manager"
 msgstr "Sync Manager"
 
-msgid ""
-"Aja como um desenvolvedor experiente em WordPress e Git. Meu repositório do "
-"plugin '%1$s' não possui releases publicadas no GitHub. Crie um guia passo "
-"a passo conciso em Markdown para eu publicar a release 'v%2$s' desse "
-"plugin, explicando como gerar o arquivo ZIP correto (apenas a pasta do "
-"plugin, sem os arquivos de versionamento do Git) e como criar a Release no "
-"GitHub usando a interface web ou GitHub CLI. Inclua boas práticas de "
-"versionamento SemVer."
-msgstr ""
-"Actúa como un desarrollador experimentado en WordPress y Git. Mi "
-"repositorio del plugin '%1$s' no tiene releases publicadas en GitHub. Crea "
-"una guía paso a paso concisa en Markdown para que publique la release "
-"'v%2$s' de este plugin, explicando cómo generar el archivo ZIP correcto "
-"(solo la carpeta del plugin, sin los archivos de control de versiones de "
-"Git) y cómo crear la Release en GitHub usando la interfaz web o GitHub CLI. "
-"Incluye buenas prácticas de versión de SemVer."
-
-msgid ""
-"Isso irá baixar e reinstalar a última versão do repositório %s, "
-"sobrescrevendo a versão atual. Continuar?"
-msgstr ""
-"Esto descargará y reinstalará la última versión del repositorio %s, "
-"sobrescribiendo la versión actual. ¿Continuar?"
-
 msgid "Plugin reinstalado com sucesso! (Versão %s)"
 msgstr "¡Plugin reinstalado con éxito! (Versión %s)"
 
-msgid "Erro ao reinstalar: %s"
-msgstr "Error al reinstalar: %s"
-
-msgid "Falha na comunicação ao tentar reinstalar."
-msgstr "Fallo de comunicación al intentar reinstalar."
-
-msgid "Atualizar"
-msgstr "Actualizar"
-
-msgid "Reinstalando..."
-msgstr "Reinstalando..."
-
-msgid "&#x2705; Plugin Instalado com Sucesso!"
-msgstr "¡&#x2705; Plugin instalado con éxito!"
-
-msgid ""
-"Indique a subpasta do repositório onde os arquivos do plugin de fato "
-"residem (a pasta que contém o arquivo PHP principal). O gerenciador "
-"extrairá apenas essa pasta, descartando arquivos externos. Isso permite "
-"sincronizar diretamente o código-fonte, eliminando a necessidade de gerar "
-"arquivos ZIP ou criar releases manuais no GitHub para atualizar o plugin!"
-msgstr ""
-"Indique la subcarpeta del repositorio donde residen los archivos del plugin "
-"(la carpeta que contiene el archivo PHP principal). El administrador "
-"extraerá solo esta carpeta, descartando archivos externos. ¡Esto permite "
-"sincronizar el código fuente directamente, eliminando la necesidad de "
-"generar archivos ZIP o crear releases manuales en GitHub para actualizar el "
-"plugin!"
-
-msgid "Sync Manager for GitHub"
-msgstr "Sync Manager for GitHub"
-
-msgid "Configurações do Sync Manager"
-msgstr "Configuraciones de Sync Manager"
-
-msgid "Selecione o idioma da interface do Sync Manager for GitHub."
-msgstr "Seleccione el idioma de la interfaz de Sync Manager for GitHub."
-
-msgid "Cancelar"
-msgstr "Cancelar"
-
-msgid "Instalar"
-msgstr "Instalar"
-
-msgid "Instalado:"
-msgstr "Instalado:"
-
-msgid "Disponível:"
-msgstr "Disponible:"
-
 msgid "Última verificação: %s"
 msgstr "Última comprobación: %s"
-
-msgid "Nenhuma atividade registrada ainda."
-msgstr "Ninguna actividad registrada todavía."
-
-msgid "Data/Hora"
-msgstr "Fecha/Hora"
-
-msgid "Repositório"
-msgstr "Repositorio"
-
-msgid "Ação"
-msgstr "Acción"
-
-msgid "Resultado"
-msgstr "Resultado"
-
-msgid "Mensagem"
-msgstr "Mensaje"
 
 msgid "Sem permissões adequadas."
 msgstr "Sin permisos adecuados."
@@ -542,44 +210,14 @@ msgstr "No se encontró ninguna release o rama disponible."
 msgid "Nenhum ZIP de pacote de download encontrado."
 msgstr "No se encontró ningún paquete ZIP de descarga."
 
-msgid ""
-"A instalação do plugin falhou. Se o problema persistir, adicione "
-"define('FS_METHOD', 'direct'); ao wp-config.php antes do require_once "
-"ABSPATH."
-msgstr ""
-"La instalación del plugin falló. Si el problema persiste, añada "
-"define('FS_METHOD', 'direct'); al wp-config.php antes de require_once "
-"ABSPATH."
-
-msgid ""
-"O plugin foi extraído, mas o WordPress não conseguiu indexar o arquivo "
-"principal. Ative-o manualmente no painel Plugins."
-msgstr ""
-"El plugin se extrajo, pero WordPress no pudo indexar el archivo principal. "
-"Actívelo manualmente en el panel de Plugins."
-
-msgid "Plugin instalado com sucesso (Versão %s)."
-msgstr "Plugin instalado con éxito (Versión %s)."
-
-msgid "Plugin instalado com sucesso!"
-msgstr "¡Plugin instalado con éxito!"
-
 msgid "Ação inválida."
 msgstr "Acción no válida."
-
-msgid "Parou de gerenciar o repositório. O plugin continua instalado no WordPress."
-msgstr ""
-"Se dejó de administrar el repositorio. El plugin sigue instalado en "
-"WordPress."
 
 msgid "Gerenciamento removido com sucesso!"
 msgstr "¡Gestión eliminada con éxito!"
 
 msgid "Repositório não encontrado."
 msgstr "Repositorio no encontrado."
-
-msgid "Nenhum plugin gerenciado para verificar."
-msgstr "Ningún plugin administrado para verificar."
 
 msgid "Diretório ou arquivo principal do plugin não encontrado localmente."
 msgstr "Directorio o archivo principal del plugin no encontrado localmente."
@@ -598,13 +236,6 @@ msgstr "No se encontró ninguna release en el repositorio."
 
 msgid "Nenhum pacote ZIP encontrado para download."
 msgstr "No se encontró ningún paquete ZIP de descarga."
-
-msgid ""
-"A reinstalação falhou. Tente novamente ou verifique as permissões do "
-"servidor."
-msgstr ""
-"La reinstalación falló. Intente de nuevo o verifique los permisos del "
-"servidor."
 
 msgid "Plugin reinstalado com sucesso via força (Versão %s)."
 msgstr "Plugin reinstalado con éxito (Versión %s)."
@@ -632,9 +263,7 @@ msgid "Erro ao decodificar componentes da criptografia."
 msgstr "Error al decodificar los componentes de encriptación."
 
 msgid "Falha na descriptografia do token (chave incorreta ou integridade violada)."
-msgstr ""
-"Fallo en la desencriptación del token (clave incorrecta o integridad "
-"violada)."
+msgstr "Falla en el descifrado del token (clave incorrecta o integridad violada)."
 
 msgid "Resposta inválida das releases."
 msgstr "Respuesta no válida de las releases."
@@ -696,25 +325,8 @@ msgstr "Error al resolver un slug válido para el plugin."
 msgid "Falha ao renomear o diretório temporário do plugin para o slug canônico."
 msgstr "Fallo al renombrar el directorio temporal del plugin al canónico."
 
-msgid ""
-"Falha ao criar cópia de segurança do plugin existente. Atualização "
-"cancelada por segurança."
-msgstr ""
-"Fallo al crear una copia de seguridad del plugin existente. Actualización "
-"cancelada por seguridad."
-
 msgid "Atualização falhou. Backup restaurado com sucesso."
 msgstr "La actualización falló. Copia de seguridad restaurada con éxito."
-
-msgid ""
-"Atualização falhou e houve erro ao restaurar o backup. O plugin pode ter "
-"sido removido."
-msgstr ""
-"La actualización falló y hubo un error al restaurar la copia de seguridad. "
-"El plugin puede haber sido eliminado."
-
-msgid "Plugin atualizado com sucesso usando o fluxo nativo."
-msgstr "Plugin actualizado con éxito usando el flujo nativo."
 
 msgid ""
 "Plugin ativado. Diretórios temporários protegidos e WP-Cron agendado com "
@@ -737,12 +349,6 @@ msgstr ""
 msgid "O subdiretório especificado \"%s\" não foi encontrado no repositório."
 msgstr "El subdirectorio especificado \"%s\" no fue encontrado en el repositorio."
 
-msgid "&#x2705; Plugin Sincronizado com Sucesso!"
-msgstr "&#x2705; ¡Plugin Sincronizado con Éxito!"
-
-msgid "O plugin <strong>%1$s</strong> já estava instalado no seu WordPress. O código foi atualizado e agora está sincronizado e sendo gerenciado (Versão %2$s)."
-msgstr "El plugin <strong>%1$s</strong> ya estaba instalado en tu WordPress. El código ha sido actualizado y ahora está sincronizado y administrado (Versión %2$s)."
-
 msgid "Plugin Validation"
 msgstr "Validación del Plugin"
 
@@ -755,8 +361,12 @@ msgstr "Verificar Plugin (Opcional)"
 msgid "Checking..."
 msgstr "Verificando..."
 
-msgid "This package presented critical failures in the validation. Installing anyway is not recommended and might break your site. Are you sure?"
-msgstr "Este paquete presentó fallas críticas en la validación. Instalarlo de todos modos no es recomendable y podría romper tu sitio. ¿Estás seguro?"
+msgid ""
+"This package presented critical failures in the validation. Installing "
+"anyway is not recommended and might break your site. Are you sure?"
+msgstr ""
+"Este paquete presentó fallas críticas en la validación. Instalarlo de todos "
+"modos no es recomendable y podría romper tu sitio. ¿Estás seguro?"
 
 msgid "Webhook Active"
 msgstr "Webhook Activo"
@@ -779,8 +389,12 @@ msgstr "Desconectar"
 msgid "Connected since %s · Auto-sync active"
 msgstr "Conectado desde %s · Sincronización automática activa"
 
-msgid "Are you sure you want to disconnect the webhook for %s? The webhook on GitHub will remain, but the connection status will be reset here."
-msgstr "¿Estás seguro que deseas desconectar el webhook de %s? El webhook en GitHub permanecerá, pero el estado de conexión será reiniciado aquí."
+msgid ""
+"Are you sure you want to disconnect the webhook for %s? The webhook on "
+"GitHub will remain, but the connection status will be reset here."
+msgstr ""
+"¿Estás seguro que deseas desconectar el webhook de %s? El webhook en GitHub "
+"permanecerá, pero el estado de conexión será reiniciado aquí."
 
 msgid "Communication error. Try again."
 msgstr "Error de comunicación. Inténtalo de nuevo."
@@ -795,13 +409,19 @@ msgid "Failed to load logs."
 msgstr "Error al cargar los registros."
 
 msgid "Showing 20 most recent entries — older logs not displayed."
-msgstr "Mostrando las 20 entradas más recientes — los registros antiguos no se muestran."
+msgstr ""
+"Mostrando las 20 entradas más recientes — los registros antiguos no se "
+"muestran."
 
 msgid "Plugin Version"
 msgstr "Versión del Plugin"
 
-msgid "WordPress does not allow a plugin to activate another plugin. Click the button below to activate it — auto-sync will start right after."
-msgstr "WordPress no permite que un plugin active otro plugin. Haz clic en el botón abajo para activarlo — la sincronización automática comenzará justo después."
+msgid ""
+"WordPress does not allow a plugin to activate another plugin. Click the "
+"button below to activate it — auto-sync will start right after."
+msgstr ""
+"WordPress no permite que un plugin active otro plugin. Haz clic en el botón "
+"abajo para activarlo — la sincronización automática comenzará justo después."
 
 msgid "Recent Activity"
 msgstr "Actividad Reciente"
@@ -830,14 +450,632 @@ msgstr "Error al descargar el repositorio: %s"
 msgid "Erro ao extrair pacote: %s"
 msgstr "Error al extraer el paquete: %s"
 
-msgid "The package <strong>%1$s</strong> (Version %2$s) was downloaded and saved on your WordPress."
-msgstr "El paquete <strong>%1$s</strong> (Versión %2$s) fue descargado y guardado en tu WordPress."
+msgid ""
+"The package <strong>%1$s</strong> (Version %2$s) was downloaded and saved "
+"on your WordPress."
+msgstr ""
+"El paquete <strong>%1$s</strong> (Versión %2$s) fue descargado y guardado "
+"en tu WordPress."
 
-msgid "Parou de gerenciar o repositório. O plugin continua instalado no WordPress."
-msgstr "Se dejó de gestionar el repositorio. El plugin sigue instalado en WordPress."
+msgid "A instalação do pacote falhou. Detalhes: "
+msgstr ""
 
-msgid "Falha na descriptografia do token (chave incorreta ou integridade violada)."
-msgstr "Falla en el descifrado del token (clave incorrecta o integridad violada)."
+msgid "Tema gerenciado adicionado com sucesso."
+msgstr ""
 
-msgid "Cron automático executou a verificação periódica de atualizações e limpeza."
-msgstr "El cron automático ejecutó la verificación periódica de actualizaciones y limpieza."
+msgid "Tema gerenciado com sucesso!"
+msgstr ""
+
+msgid ""
+"Plugin instalado com sucesso, mas não foi possível localizar seu arquivo "
+"principal no WordPress."
+msgstr ""
+
+msgid "Plugin gerenciado adicionado com sucesso."
+msgstr ""
+
+msgid "Plugin gerenciado com sucesso!"
+msgstr ""
+
+msgid "Parou de gerenciar o repositório. O pacote continua instalado no WordPress."
+msgstr ""
+
+msgid "Nenhum pacote gerenciado para verificar."
+msgstr ""
+
+msgid "Diretório do tema não encontrado localmente."
+msgstr ""
+
+msgid "Arquivo do plugin desconhecido."
+msgstr ""
+
+msgid "Rollback não suportado para plugins de arquivo único."
+msgstr ""
+
+msgid "Diretório de backup não encontrado."
+msgstr ""
+
+msgid "Nenhum backup recente encontrado para restauração."
+msgstr ""
+
+msgid "Rollback realizado com sucesso."
+msgstr ""
+
+msgid "Rollback concluído com sucesso. A versão anterior foi restaurada."
+msgstr ""
+
+msgid "Falha ao realizar o rollback. O backup não pôde ser copiado."
+msgstr ""
+
+msgid "Erro ao restaurar os arquivos. Verifique as permissões do diretório."
+msgstr ""
+
+msgid "Webhook verificado com sucesso! Ping recebido."
+msgstr ""
+
+msgid "Ping não recebido. Tente novamente."
+msgstr ""
+
+msgid "Webhook desconectado. O status será redefinido."
+msgstr ""
+
+msgid ""
+"The package will remain installed, but will no longer receive automatic "
+"updates. Do you wish to continue?"
+msgstr ""
+
+msgid "Downloading and installing..."
+msgstr ""
+
+msgid "Searching repositories..."
+msgstr ""
+
+msgid "Communication failure."
+msgstr ""
+
+msgid "Do you want to download and install the package from the %s repository?"
+msgstr ""
+
+msgid "Installation Error: %s"
+msgstr ""
+
+msgid "Network communication failure while trying to install the package."
+msgstr ""
+
+msgid "Error removing management."
+msgstr ""
+
+msgid "Network communication failure during scan."
+msgstr ""
+
+msgid "AI Prompt copied to clipboard successfully!"
+msgstr ""
+
+msgid "Could not copy the prompt automatically. Please copy it manually."
+msgstr ""
+
+msgid "Error saving language."
+msgstr ""
+
+msgid "Loading your GitHub repositories..."
+msgstr ""
+
+msgid "Connection error fetching repositories."
+msgstr ""
+
+msgid "No repositories found in your GitHub account."
+msgstr ""
+
+msgid "Already Managed"
+msgstr ""
+
+msgid "Install"
+msgstr ""
+
+msgid "No description in the repository."
+msgstr ""
+
+msgid "Updated: %s"
+msgstr ""
+
+msgid "Private"
+msgstr ""
+
+msgid "Public"
+msgstr ""
+
+msgid "No managed packages yet. Access the \"Add Package\" tab to get started."
+msgstr ""
+
+msgid ""
+"Are you sure you want to disconnect your GitHub account? Packages will "
+"remain installed, but will not receive update notifications."
+msgstr ""
+
+msgid ""
+"Act as an experienced WordPress and Git developer. My package repository "
+"'%1$s' has no published releases on GitHub. Create a concise step-by-step "
+"guide in Markdown for me to publish release 'v%2$s' of this package, "
+"explaining how to generate the correct ZIP file and how to create the "
+"Release on GitHub using the web interface or GitHub CLI. Include SemVer "
+"best practices."
+msgstr ""
+
+msgid "Request failed. Check your network connection."
+msgstr ""
+
+msgid ""
+"This will download and reinstall the latest version from the %s repository, "
+"overwriting the current version. Continue?"
+msgstr ""
+
+msgid "Package reinstalled successfully! (Version %s)"
+msgstr ""
+
+msgid "Error reinstalling: %s"
+msgstr ""
+
+msgid "Communication failure while trying to reinstall."
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Reinstalling..."
+msgstr ""
+
+msgid "&#x2705; Package Synchronized Successfully!"
+msgstr ""
+
+msgid ""
+"The package <strong>%1$s</strong> was already installed on your WordPress. "
+"The code has been updated and is now synchronized and being managed "
+"(Version %2$s)."
+msgstr ""
+
+msgid "&#x2705; Package Installed Successfully!"
+msgstr ""
+
+msgid "Activate Now"
+msgstr ""
+
+msgid "Error scanning: %s"
+msgstr ""
+
+msgid "Checking repository structure..."
+msgstr ""
+
+msgid "Package <strong>%1$s</strong> (Version %2$s) automatically detected."
+msgstr ""
+
+msgid ""
+"No valid package was automatically found. Select the base folder and source "
+"below to install."
+msgstr ""
+
+msgid "Advanced Options"
+msgstr ""
+
+msgid "Source (Release or Branch):"
+msgstr ""
+
+msgid ""
+"Sincronização via Ramo (Branch): As atualizações do site ocorrerão "
+"automaticamente a cada novo commit/push na branch selecionada (via "
+"Webhook), sem precisar incrementar a versão ou criar novas releases no "
+"GitHub."
+msgstr ""
+"Sincronización vía Rama (Branch): Las actualizaciones del sitio se "
+"realizarán automáticamente con cada nuevo commit/push en la rama "
+"seleccionada (vía Webhook), sin necesidad de incrementar la versión ni "
+"crear nuevas releases en GitHub."
+
+msgid ""
+"Sincronização via Release: Atualizações dependem de novas versões estáveis. "
+"O site só receberá notificações de atualização após você criar e publicar "
+"uma nova Release com tag de versão superior no GitHub."
+msgstr ""
+"Sincronización vía Release: Las actualizaciones dependen de nuevas "
+"versiones estables. El sitio solo recibirá notificaciones de actualización "
+"después de que cree y publique una nueva Release con una etiqueta de "
+"versión superior en GitHub."
+
+msgid "Package Base Folder:"
+msgstr ""
+
+msgid ""
+"Indicate the subfolder of the repository where the package files actually "
+"reside (the folder containing the main PHP or style.css file). The manager "
+"will extract only this folder, discarding external files. This allows "
+"directly syncing the source code without generating ZIPs or manual releases!"
+msgstr ""
+
+msgid "Root Folder"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "CodeSync Manager for GitHub"
+msgstr ""
+
+msgid "Connected"
+msgstr ""
+
+msgid "Security Error:"
+msgstr ""
+
+msgid "Connect GitHub Account"
+msgstr ""
+
+msgid ""
+"To start managing your GitHub hosted packages, connect an account using a "
+"Personal Access Token (PAT) with the proper permissions."
+msgstr ""
+
+msgid "Which type of token to create?"
+msgstr ""
+
+msgid "Create a token with the scope "
+msgstr ""
+
+msgid "for private and public repositories"
+msgstr ""
+
+msgid "or "
+msgstr ""
+
+msgid "only for public ones"
+msgstr ""
+
+msgid ""
+"Select Read and Write access for \"Contents\" and \"Metadata\" on the "
+"repositories you want to manage."
+msgstr ""
+
+msgid "Click here to create your GitHub Token"
+msgstr ""
+
+msgid "Connect Account"
+msgstr ""
+
+msgid "Managed Packages"
+msgstr ""
+
+msgid "Add Package"
+msgstr ""
+
+msgid "Logs History"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Check for updates now"
+msgstr ""
+
+msgid "Update All"
+msgstr ""
+
+msgid "Displaying GitHub repositories. You can install both Plugins and Themes."
+msgstr ""
+
+msgid "Reload Repositories"
+msgstr ""
+
+msgid "Sync Manager Settings"
+msgstr ""
+
+msgid "Connected Account"
+msgstr ""
+
+msgid "Stored Token"
+msgstr ""
+
+msgid "Plugin Language"
+msgstr ""
+
+msgid "Portuguese (Brazil)"
+msgstr ""
+
+msgid "Spanish"
+msgstr ""
+
+msgid "Select the interface language for CodeSync Manager for GitHub."
+msgstr ""
+
+msgid "Automatic Scheduling"
+msgstr ""
+
+msgid "Update checks occur automatically twice daily via native WP-Cron."
+msgstr ""
+
+msgid "Disconnect GitHub account"
+msgstr ""
+
+msgid "Install Package"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Copy Markdown"
+msgstr ""
+
+msgid "Confirm Installation"
+msgstr ""
+
+msgid "Install Anyway"
+msgstr ""
+
+msgid "Loading connection info..."
+msgstr ""
+
+msgid "Follow these steps to configure a Webhook and receive updates instantly:"
+msgstr ""
+
+msgid "Step 1:"
+msgstr ""
+
+msgid "Go to Webhooks settings on GitHub"
+msgstr ""
+
+msgid "and click \"Add webhook\"."
+msgstr ""
+
+msgid "Payload URL:"
+msgstr ""
+
+msgid "Content type:"
+msgstr ""
+
+msgid "Secret:"
+msgstr ""
+
+msgid "Step 2:"
+msgstr ""
+
+msgid "Under \"Which events would you like to trigger this webhook?\", select:"
+msgstr ""
+
+msgid "\"Let me select individual events.\""
+msgstr ""
+
+msgid "Check"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+msgid "Uncheck everything else."
+msgstr ""
+
+msgid "Step 3:"
+msgstr ""
+
+msgid "Click \"Add webhook\" at the bottom of the page."
+msgstr ""
+
+msgid "Security & Structure Validation"
+msgstr ""
+
+msgid "Analyzing repository code before installation..."
+msgstr ""
+
+msgid "Download & Base Structure"
+msgstr ""
+
+msgid "Syntax & Compatibility"
+msgstr ""
+
+msgid "Security & SQL"
+msgstr ""
+
+msgid "Performance & Deprecated"
+msgstr ""
+
+msgid "No packages managed yet. Go to the \"Add Package\" tab to get started."
+msgstr ""
+
+msgid "Installed:"
+msgstr ""
+
+msgid "Available:"
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Plugin"
+msgstr ""
+
+msgid "Pasta base configurada para este pacote."
+msgstr ""
+
+msgid "Rollback"
+msgstr ""
+
+msgid "Stop managing"
+msgstr ""
+
+msgid "No activity registered yet."
+msgstr ""
+
+msgid "Date/Time"
+msgstr ""
+
+msgid "Repository"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Result"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "GitHub Token missing."
+msgstr ""
+
+msgid "Repository download completed."
+msgstr ""
+
+msgid "ZIP package extracted in isolated environment."
+msgstr ""
+
+msgid "Could not identify the package as Plugin or Theme (missing valid headers)."
+msgstr ""
+
+msgid "Identified as a valid %1$s (\"%2$s\")."
+msgstr ""
+
+msgid "\"Requires PHP\" header is missing. It is a good practice to define it."
+msgstr ""
+
+msgid "PHP requirement defined: %s"
+msgstr ""
+
+msgid "\"Requires at least\" (WordPress version) header is missing."
+msgstr ""
+
+msgid "Requires at least (WordPress) defined: %s"
+msgstr ""
+
+msgid "\"Text Domain\" header missing. Translations may fail."
+msgstr ""
+
+msgid "Text Domain defined."
+msgstr ""
+
+msgid "Use of eval() function detected in %s. This is a severe security risk."
+msgstr ""
+
+msgid "Use of operating system functions detected in %s."
+msgstr ""
+
+msgid "Use of highly discouraged/forbidden function \"%1$s()\" detected in %2$s."
+msgstr ""
+
+msgid "%1$s constant detected in %2$s. This is a severe security risk."
+msgstr ""
+
+msgid ""
+"Use of wp_redirect() detected in %s. Prefer wp_safe_redirect() to avoid "
+"Open Redirect vulnerabilities."
+msgstr ""
+
+msgid ""
+"Possible direct query without $wpdb->prepare detected in %s. SQL Injection "
+"risk."
+msgstr ""
+
+msgid ""
+"Output (echo) of superglobal variables directly without escaping detected "
+"in %s (XSS risk)."
+msgstr ""
+
+msgid ""
+"Direct file access not prevented in %d PHP file(s). Consider adding \"if "
+"(!defined('ABSPATH')) exit;\" to block direct URL access."
+msgstr ""
+
+msgid "All PHP files seem to prevent direct access (ABSPATH check)."
+msgstr ""
+
+msgid "No remote execution or forbidden functions detected."
+msgstr ""
+
+msgid "No obvious use of SQL query without prepare detected."
+msgstr ""
+
+msgid "Basic security analysis finished."
+msgstr ""
+
+msgid "The file \"%1$s\" is too large (%2$.2f MB). Consider optimizing assets."
+msgstr ""
+
+msgid "The repository does not contain massive files (>10MB)."
+msgstr ""
+
+msgid ""
+"Found development/unwanted files (e.g., %s). Consider removing them from "
+"release builds."
+msgstr ""
+
+msgid "No unwanted development files (.git, node_modules, .DS_Store) detected."
+msgstr ""
+
+msgid "Use of deprecated function \"%1$s\" detected in %2$s."
+msgstr ""
+
+msgid "No highly deprecated PHP/WordPress functions detected."
+msgstr ""
+
+msgid "Temporary files safely removed from server."
+msgstr ""
+
+msgid ""
+"O ZIP baixado não contém um tema WordPress válido (cabeçalho \"Theme "
+"Name:\" ausente no style.css)."
+msgstr ""
+
+msgid ""
+"Não foi possível encontrar um arquivo style.css de tema válido dentro do "
+"ZIP extraído."
+msgstr ""
+
+msgid "Este plugin requer PHP versão %1$s ou superior. Sua versão atual é %2$s."
+msgstr ""
+
+msgid ""
+"O pacote requer PHP %1$s e o servidor possui %2$s. Deseja forçar a "
+"instalação por sua conta e risco?"
+msgstr ""
+
+msgid ""
+"Aviso: Pacote atualizado manualmente (ignorado verificação de PHP), mas "
+"requer PHP %1$s e o servidor roda %2$s."
+msgstr ""
+
+msgid ""
+"Falha ao criar cópia de segurança do plugin/tema existente. Atualização "
+"cancelada por segurança."
+msgstr ""
+
+msgid ""
+"Atualização falhou e houve erro ao restaurar o backup. O pacote pode ter "
+"sido removido."
+msgstr ""
+
+msgid ""
+"Pacote atualizado com sucesso usando o fluxo nativo. Backup salvo para "
+"rollback."
+msgstr ""
+
+msgid "Repositório não encontrado na lista gerenciada."
+msgstr ""
+
+msgid "Versão %s foi revertida manualmente. O webhook não irá reinstalá-la."
+msgstr ""
+
+msgid "O pacote já está na versão mais recente (%s)."
+msgstr ""
+
+msgid "A reinstalação falhou. Verifique as permissões do servidor."
+msgstr ""
+
+msgid ""
+"Webhook de push recebido. Cache limpo. Aguardando nova release para "
+"atualização automática."
+msgstr ""
+
+msgid "Webhook recebido mas pacote já está na versão mais recente."
+msgstr ""
+
+msgid "Webhook recebido mas atualização automática falhou: %s"
+msgstr ""
+
+msgid "Webhook recebido. Pacote atualizado automaticamente para a versão %s."
+msgstr ""

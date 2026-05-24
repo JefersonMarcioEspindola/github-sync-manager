@@ -126,6 +126,8 @@ class CODESYNC_Admin_UI {
 				'plugin_not_detected'   => __( 'No valid package was automatically found. Select the base folder and source below to install.', 'codesync-manager-for-github' ),
 				'advanced_options'      => __( 'Advanced Options', 'codesync-manager-for-github' ),
 				'select_source'         => __( 'Source (Release or Branch):', 'codesync-manager-for-github' ),
+				'source_branch_desc'    => __( 'Sincronização via Ramo (Branch): As atualizações do site ocorrerão automaticamente a cada novo commit/push na branch selecionada (via Webhook), sem precisar incrementar a versão ou criar novas releases no GitHub.', 'codesync-manager-for-github' ),
+				'source_release_desc'   => __( 'Sincronização via Release: Atualizações dependem de novas versões estáveis. O site só receberá notificações de atualização após você criar e publicar uma nova Release com tag de versão superior no GitHub.', 'codesync-manager-for-github' ),
 				'select_folder'         => __( 'Package Base Folder:', 'codesync-manager-for-github' ),
 				'select_folder_desc'    => __( 'Indicate the subfolder of the repository where the package files actually reside (the folder containing the main PHP or style.css file). The manager will extract only this folder, discarding external files. This allows directly syncing the source code without generating ZIPs or manual releases!', 'codesync-manager-for-github' ),
 				'root_folder'           => __( 'Root Folder', 'codesync-manager-for-github' ),
@@ -706,7 +708,8 @@ class CODESYNC_Admin_UI {
 						<?php esc_html_e( 'Rollback', 'codesync-manager-for-github' ); ?>
 					</button>
 					<?php endif; ?>
-					<button type="button" class="button button-link-delete codesync-btn-remove" data-repo="<?php echo esc_attr( $repo ); ?>">
+					<button type="button" class="button codesync-btn-remove" data-repo="<?php echo esc_attr( $repo ); ?>">
+						<i data-lucide="trash-2" class="codesync-icon"></i>
 						<?php esc_html_e( 'Stop managing', 'codesync-manager-for-github' ); ?>
 					</button>
 				</div>
