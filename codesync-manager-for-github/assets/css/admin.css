@@ -225,13 +225,28 @@
 	font-size: 14px;
 	height: auto !important;
 	border: 1px solid var(--codesync-border) !important;
-	border-radius: 6px !important;
+	border-radius: 8px !important;
 	color: var(--codesync-text) !important;
 	background: var(--codesync-bg) !important;
 	transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.codesync-form-group input:focus {
+#codesync_locale {
+	width: 100%;
+	max-width: 250px !important;
+	box-sizing: border-box;
+	padding: 8px 30px 8px 12px !important;
+	font-size: 14px;
+	height: auto !important;
+	border: 1px solid var(--codesync-border) !important;
+	border-radius: 8px !important;
+	color: var(--codesync-text) !important;
+	background-color: var(--codesync-bg) !important;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.codesync-form-group input:focus,
+#codesync_locale:focus {
 	border-color: var(--codesync-primary) !important;
 	box-shadow: 0 0 0 3px rgba(40, 89, 255, 0.12) !important;
 	outline: none !important;
@@ -434,6 +449,16 @@
 	padding-top: 4px;
 }
 
+.codesync-plugin-card-actions .button {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.codesync-plugin-card-actions .button .codesync-icon {
+	margin: 0 !important;
+}
+
 .codesync-no-plugins-msg {
 	text-align: center;
 	padding: 40px 20px;
@@ -495,6 +520,13 @@
 
 .codesync-btn-remove {
 	text-decoration: none !important;
+	transition: all 0.2s ease !important;
+}
+
+.codesync-btn-remove:hover {
+	background-color: #fef2f2 !important;
+	color: #dc2626 !important;
+	border-color: #fca5a5 !important;
 }
 
 /* ========================
@@ -515,7 +547,7 @@
 	line-height: 1;
 	height: auto;
 	border: 1px solid var(--codesync-border) !important;
-	border-radius: 6px !important;
+	border-radius: 8px !important;
 	color: var(--codesync-text) !important;
 	background: var(--codesync-bg) !important;
 	transition: border-color 0.2s, box-shadow 0.2s;
@@ -1401,9 +1433,9 @@
 }
 
 /* Enforce plugin primary button colors to avoid external theme/builder overrides (like Bricks) */
-.codesync-wrap .button-primary,
-.codesync-modal-wrapper .button-primary,
-.codesync-modal-wrapper a.button-primary {
+.codesync-wrap .button-primary:not([disabled]),
+.codesync-modal-wrapper .button-primary:not([disabled]),
+.codesync-modal-wrapper a.button-primary:not([disabled]) {
 	background: var(--codesync-primary) !important;
 	border-color: var(--codesync-primary) !important;
 	color: #fff !important;
@@ -1411,12 +1443,12 @@
 	box-shadow: none !important;
 }
 
-.codesync-wrap .button-primary:hover,
-.codesync-wrap .button-primary:focus,
-.codesync-modal-wrapper .button-primary:hover,
-.codesync-modal-wrapper .button-primary:focus,
-.codesync-modal-wrapper a.button-primary:hover,
-.codesync-modal-wrapper a.button-primary:focus {
+.codesync-wrap .button-primary:not([disabled]):hover,
+.codesync-wrap .button-primary:not([disabled]):focus,
+.codesync-modal-wrapper .button-primary:not([disabled]):hover,
+.codesync-modal-wrapper .button-primary:not([disabled]):focus,
+.codesync-modal-wrapper a.button-primary:not([disabled]):hover,
+.codesync-modal-wrapper a.button-primary:not([disabled]):focus {
 	background: var(--codesync-primary-hov) !important;
 	border-color: var(--codesync-primary-hov) !important;
 	color: #fff !important;
