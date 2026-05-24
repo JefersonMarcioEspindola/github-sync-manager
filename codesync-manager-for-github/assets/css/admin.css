@@ -235,7 +235,7 @@
 	width: 100%;
 	max-width: 250px !important;
 	box-sizing: border-box;
-	padding: 0 10px !important;
+	padding: 0 30px 0 12px !important;
 	font-size: 13px !important;
 	height: 36px !important;
 	line-height: 36px !important;
@@ -244,8 +244,8 @@
 	color: var(--codesync-text) !important;
 	background-color: var(--codesync-bg) !important;
 	transition: border-color 0.2s, box-shadow 0.2s;
-	-webkit-appearance: menulist !important;
-	appearance: menulist !important;
+	-webkit-appearance: none !important;
+	appearance: none !important;
 	vertical-align: middle !important;
 }
 
@@ -1062,7 +1062,7 @@
 .codesync-modal-field select {
 	width: 100%;
 	max-width: 100%;
-	padding: 0 10px;
+	padding: 0 30px 0 10px;
 	font-size: 13px;
 	border-radius: 6px;
 	border: 1px solid var(--codesync-border);
@@ -1071,9 +1071,8 @@
 	background-color: var(--codesync-bg);
 	color: var(--codesync-text);
 	transition: border-color 0.2s, box-shadow 0.2s;
-	/* Force vertical centering of text+emoji in all browsers */
-	-webkit-appearance: menulist;
-	appearance: menulist;
+	-webkit-appearance: none;
+	appearance: none;
 	vertical-align: middle;
 }
 
