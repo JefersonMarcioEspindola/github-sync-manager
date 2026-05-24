@@ -243,6 +243,10 @@
 	border-radius: 6px !important;
 	color: var(--codesync-text) !important;
 	background-color: var(--codesync-bg) !important;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23050507' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") !important;
+	background-repeat: no-repeat !important;
+	background-position: right 10px center !important;
+	background-size: 16px 16px !important;
 	transition: border-color 0.2s, box-shadow 0.2s;
 	-webkit-appearance: none !important;
 	appearance: none !important;
@@ -1069,6 +1073,10 @@
 	height: 36px;
 	line-height: 36px;
 	background-color: var(--codesync-bg);
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23050507' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	background-size: 16px 16px;
 	color: var(--codesync-text);
 	transition: border-color 0.2s, box-shadow 0.2s;
 	-webkit-appearance: none;
@@ -1213,7 +1221,7 @@
 	color: var(--codesync-text);
 	background: var(--codesync-bg);
 	border: 1px solid var(--codesync-border);
-	border-radius: 8px;
+	border-radius: 6px;
 	cursor: pointer;
 	transition: border-color 0.2s, box-shadow 0.2s;
 	text-align: left;
@@ -1242,7 +1250,7 @@
 	font-size: 16px !important;
 	width: 16px !important;
 	height: 16px !important;
-	color: var(--codesync-muted);
+	color: var(--codesync-text);
 	transition: transform 0.2s ease;
 	flex-shrink: 0;
 }
